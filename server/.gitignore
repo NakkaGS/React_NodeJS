@@ -9,6 +9,8 @@ __pycache__/
 /.pnp
 .pnp.js
 
+.env
+
 # Django Key - used in python-decouple
 backend/backend/settings.py
 backend/.env
