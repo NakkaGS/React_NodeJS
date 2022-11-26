@@ -55,7 +55,7 @@ function ProductScreen({ match }) {
     fetchProduct() */
 
   }, [dispatch, id, match, history, ])
-
+  
   return(
     <div>
       <Link to="/" className="btn btn-light- my-3">Go Back</Link>

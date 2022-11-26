@@ -1,6 +1,11 @@
-const mongoose = require("mongoose");
+//To read .env
+require('dotenv').config();
 
-var mongoDBURL = 'mongodb+srv://gabriel:gabriel@cluster0.f7bm1im.mongodb.net/mern-ecommerce'
+//MongoDB URL
+var mongoDBURL = process.env.MONGODBURL
+
+//Mongoose - connect with MongoDB
+const mongoose = require("mongoose");
 
 mongoose.connect(mongoDBURL , {useUnifiedTopology:true , useNewUrlParser:true})
 

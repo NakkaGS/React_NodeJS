@@ -41,10 +41,22 @@ export const listProducts = () => async (dispatch) => { //it is a action
 
 //////////////////////////////////////////////
 export const listProductDetails = (id) => async (dispatch) => { //it is a action
+
     try {
+
+        const config = {
+            headers: { //It just worked like this for PUT. Axious is in x-www-form-urlencoded
+                "Content-Type": "application/x-www-form-urlencoded",
+            }
+        }
+
         dispatch({ type: PRODUCT_DETAILS_REQUEST })
-            const { data } = await axios.post(`/api/products/getproductbyid/`, { id })
-            console.log(data)
+            const { data } = await axios.post(
+                '/api/products/getproductbyid', 
+                { productid: id },
+                config
+                )
+                  
 
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,
