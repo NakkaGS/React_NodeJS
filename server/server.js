@@ -33,3 +33,5 @@ const port = process.env.PORT || 8000;
 app.listen(8000, function () {
     console.log('Node JS Server Started on Port 8000!');
    });
+
+module.exports = app
