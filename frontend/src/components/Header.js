@@ -12,10 +12,9 @@ function Header() {
     <header>
       <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="">MERN</Navbar.Brand>
+          <Navbar.Brand href="/">MERN</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#cart">Cart</Nav.Link>
-            <Nav.Link href="#product">Product</Nav.Link>
+            <Nav.Link href="/product/create">Create Product</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

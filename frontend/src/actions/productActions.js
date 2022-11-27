@@ -41,6 +41,7 @@ export const listProducts = () => async (dispatch) => { //it is a action
 
 //////////////////////////////////////////////
 export const listProductDetails = (id) => async (dispatch) => { //it is a action
+    console.log(id)
 
     try {
 
@@ -73,28 +74,23 @@ export const listProductDetails = (id) => async (dispatch) => { //it is a action
     }
 }
 
-export const createProduct = () => async(dispatch, getState) => {
+export const createProduct = (productCreate) => async(dispatch, getState) => {
     try {
         dispatch({
             type: PRODUCT_CREATE_REQUEST,
         })
-
-        const {
-            userLogin: { userInfo }
-        } = getState()
+        console.log(productCreate)
 
         const config = {
-            headers: {
-                'Content-type': 'application/json',
-                accept: 'application/json',
-                Authorization: `Bearer ${userInfo?.token}`
+            headers: { //It just worked like this for PUT. Axious is in x-www-form-urlencoded
+                "Content-Type": "application/x-www-form-urlencoded",
             }
         }
 
         //in the backend, there is a url (API) that it gets the data from the user
         const { data } = await axios.post(
             `/api/products/create/`,
-            {}, //post needs to send something
+            { product: productCreate }, //post needs to send something
             config
         )
 

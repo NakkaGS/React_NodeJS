@@ -44,4 +44,30 @@ router.post("/getproductbyid", (req, res) => {
   
 });
 
+//Create a product
+router.post("/create", (req, res) => {
+
+    const {product} = req.body
+
+    console.log(product);
+
+    const productModel = new Product({
+        name : product.name , 
+        price : product.price,
+        description : product.description,
+        countInStock : product.countInStock ,
+        category : product.category
+
+    })
+
+    productModel.save(err=>{
+        if(err){
+            return res.status(400).json({ message: 'Something went wrong' });
+        }else{
+            res.send('Product Added Successfully')
+        }
+    })
+  
+});
+
 module.exports = router
