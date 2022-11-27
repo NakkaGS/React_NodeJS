@@ -1,4 +1,10 @@
 {
+  "scripts": {
+		"start": "npm install && node app.js",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"db-init": "npx sequelize-cli init",
+		"db-migrate": "npx sequelize-cli db:migrate"
+	},
   "dependencies": {
     "bootstrap": "^5.2.3",
     "cors": "^2.8.5",
@@ -10,9 +16,9 @@
     "react-router-dom": "^6.4.3",
     "router": "^1.3.7"
   },
-  "name": "mern-ecommerce",
+  "name": "server",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server/server.js",
   "engines": {
     "node": "16.17.1"
   },
