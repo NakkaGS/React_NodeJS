@@ -1,10 +1,4 @@
 {
-  "scripts": {
-		"start": "npm install && node app.js",
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"db-init": "npx sequelize-cli init",
-		"db-migrate": "npx sequelize-cli db:migrate"
-	},
   "dependencies": {
     "bootstrap": "^5.2.3",
     "cors": "^2.8.5",
@@ -18,7 +12,7 @@
   },
   "name": "server",
   "version": "1.0.0",
-  "main": "server/server.js",
+  "main": "/server.js",
   "engines": {
     "node": "16.17.1"
   },
