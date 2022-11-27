@@ -18,6 +18,18 @@ app.get("/", (req, res) => {
     res.send("This is from backend")
 })
 
+//This is for the production part
+if(process.env.NODE_ENV === 'production')
+{
+    app.use('/' , express.static('client/build'))
+    app.get('*' , (req,res)=>{
+        res.sendFile(path.resolve(__dirname , 'client/build/index.html'))
+    })
+}
+
+//if it not in production
+const port = process.env.PORT || 8000;
+
 app.listen(8000, function () {
     console.log('Node JS Server Started on Port 8000!');
    });
