@@ -49,7 +49,7 @@ router.post("/create", (req, res) => {
 
     const {product} = req.body
 
-    console.log(product);
+    //console.log(product);
 
     const productModel = new Product({
         name : product.name , 

@@ -22,7 +22,7 @@ export const listProducts = () => async (dispatch) => { //it is a action
     try {
         dispatch({ type: PRODUCT_LIST_REQUEST })
             const { data } = await axios.get(`/api/products/getallproducts`)
-            console.log(data)
+            //console.log(data)
 
         dispatch({
             type: PRODUCT_LIST_SUCCESS,
@@ -41,7 +41,7 @@ export const listProducts = () => async (dispatch) => { //it is a action
 
 //////////////////////////////////////////////
 export const listProductDetails = (id) => async (dispatch) => { //it is a action
-    console.log(id)
+    //console.log(id)
 
     try {
 
@@ -79,7 +79,7 @@ export const createProduct = (productCreate) => async(dispatch, getState) => {
         dispatch({
             type: PRODUCT_CREATE_REQUEST,
         })
-        console.log(productCreate)
+        //console.log(productCreate)
 
         const config = {
             headers: { //It just worked like this for PUT. Axious is in x-www-form-urlencoded
