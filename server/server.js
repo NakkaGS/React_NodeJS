@@ -14,10 +14,6 @@ var productsRoute = require('./routes/productRoute')
 //Create Route
 app.use('/api/products/' , productsRoute, cors())
 
-app.get("/", (req, res) => {
-    res.send("This is from backend")
-})
-
 //This is for the production part
 if(process.env.NODE_ENV === 'production')
 {
