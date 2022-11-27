@@ -1,32 +1,23 @@
 import React from 'react'
 
+//Router
+import { LinkContainer } from "react-router-bootstrap";
+
+//Boostrap Components
 import { Navbar, Nav, Container, Button, ButtonGroup } from "react-bootstrap"; //installed using the console
 
 
 function Header() {
   return (
     <header>
-      <Navbar bg="warning" variant="dark" expand="lg" collapseOnSelect>
+      <Navbar bg="dark" variant="dark">
         <Container>
-
-          <Navbar.Brand>ProShop</Navbar.Brand>
-
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-
-            <ButtonGroup className="me-2" aria-label="First group" >
-              <Button variant="light">Cart</Button> 
-              <Button variant="light">Product</Button>
-            </ButtonGroup>
-
-            </Nav>
-
-            
-          </Navbar.Collapse>
+          <Navbar.Brand href="">MERN</Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link href="#cart">Cart</Nav.Link>
+            <Nav.Link href="#product">Product</Nav.Link>
+          </Nav>
         </Container>
-
-
       </Navbar>
     </header>
   )

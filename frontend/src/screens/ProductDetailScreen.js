@@ -21,10 +21,6 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 
 
-//Axios
-//import axios from 'axios' //not been used after the Redux application
-//import products from "../products"; //used to read the products.js
-
 //it was necessary to add '?' every time that we want to get a attribute from the product
 
 function ProductScreen({ match }) {
@@ -35,24 +31,14 @@ function ProductScreen({ match }) {
 
   const productDetails = useSelector(state => state.productDetails)
   const { loading, error, product } = productDetails
-  
-  //const [product, setProduct] = useState([]) //not been used after the Redux application
+
 
   //using the useParams (using the new version)
   //useParams returns the key of the  current <Route> (App.js - <Route path='product/:id'...> in this case id)
   let { id } = useParams(match); //get the Product ID
-  //const product = products.find((p) => p._id === id); //find the related product using the id
 
   useEffect( () => {
     dispatch(listProductDetails(id))
-
-    //It is part is same as in the action (productActions) - This part is used when we don't have Redux (it get the data from the Django)
-/*     async function fetchProduct() {
-      const { data } = await axios.get(`/api/products/${id}`)
-      setProduct(data)
-    }
-
-    fetchProduct() */
 
   }, [dispatch, id, match, history, ])
   

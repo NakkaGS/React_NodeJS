@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import axios from 'axios'
 
 //Redux
 import { useDispatch, useSelector } from 'react-redux' 
@@ -8,10 +7,10 @@ import { useDispatch, useSelector } from 'react-redux'
 //Actions
 import { listProducts } from '../actions/productActions'
 
-
 //Boostrap Components
 import { Row, Col } from 'react-bootstrap'
 
+//Components
 import Product from '../components/Product'
 
 export default function HomeScreen(){

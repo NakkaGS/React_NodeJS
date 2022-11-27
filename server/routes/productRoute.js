@@ -29,7 +29,6 @@ router.get("/getallproducts", (req, res) => {
 
 //Get Product ID by POST using Body
 router.post("/getproductbyid", (req, res) => {
-    console.log(req)
 
     Product.find({_id : req.body.productid} , (err , docs)=>{
 
