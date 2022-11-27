@@ -36,11 +36,21 @@ export default function HomeScreen(){
         }) */
     }, [dispatch])
 
+    const result = products.map(element => {
+        return element + 1;
+      });
+
+    const check = Array.isArray(products)
+
+    console.log(result); // 👉️ [2, 3, 4]
+
     return(
     <div>
         <Row>
+            
 
             {products?.length && (products.map(product => {
+                
                 return ( 
                     <div className='col-md-3 m-3 card p-2' key={product._id}>
                         <Product product={product} />
