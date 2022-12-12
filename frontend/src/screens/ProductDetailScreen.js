@@ -20,10 +20,22 @@ import Rating from "../components/Rating";
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 
+//Constants
+import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
+
+//Axios
+//import axios from 'axios' //not been used after the Redux application
+//import products from "../products"; //used to read the products.js
 
 //it was necessary to add '?' every time that we want to get a attribute from the product
 
 function ProductScreen({ match }) {
+  
+  const [qty, setQty] = useState(1)
+
+  //it is for the review
+  const [rating, setRating] = useState(0)
+  const [comment, setComment] = useState('')
 
   let history = useNavigate() //for V6 it is useNavigate, NOT useHistory
 
@@ -31,30 +43,48 @@ function ProductScreen({ match }) {
 
   const productDetails = useSelector(state => state.productDetails)
   const { loading, error, product } = productDetails
-
+  //const [product, setProduct] = useState([]) //not been used after the Redux application
 
   //using the useParams (using the new version)
   //useParams returns the key of the  current <Route> (App.js - <Route path='product/:id'...> in this case id)
   let { id } = useParams(match); //get the Product ID
+  //const product = products.find((p) => p._id === id); //find the related product using the id
 
-  useEffect( () => {
+  useEffect(() => {
     dispatch(listProductDetails(id))
 
-  }, [dispatch, id, match, history, ])
-  
+    //It is part is same as in the action (productActions) - This part is used when we don't have Redux (it get the data from the Django)
+/*     async function fetchProduct() {
+      const { data } = await axios.get(`/api/products/${id}`)
+      setProduct(data)
+    }
+
+    fetchProduct() */
+
+  }, [dispatch, id, match, history])
+
+  const submitHandler = (e) => {
+      e.preventDefault()
+      
+  }
+
+  const addtoCardHandler = ( ) => {
+    history(`/cart/${id}?qty=${qty}`) //it is using useNavigate, it doesn't need push
+  }
+
   return(
     <div>
-      <Link to="/" className="btn btn-light- my-3">Go Back</Link>
+      <Link to="/" className="btn btn-light my-3">Go Back</Link>
 
       {loading ?
         <Loader/>
         : error
           ? <Message variant='danger'>{error}</Message>
-          :(
+          : (
             <div>
               <Row>
-                <Col md={6}>
-                  <Image src={product?.image} alt={product?.name} fluid />
+                <Col md={6} className="cardnktimage">
+                  <Image src={product?.image} alt={product?.name} fluid className="cardnktimage" style={{maxWidth: 250}}/>
                   {/* //it was necessary to add '?' every time that we want to get a attribute from the product */}
                 </Col>
       
@@ -110,15 +140,43 @@ function ProductScreen({ match }) {
                           <ListGroup.Item>
                             <Row>
                               <Col>Qty:</Col>
+                              <Col xs='auto' className='my-1'>
+
+                              <Form.Control
+                                  as='select'
+                                  value={qty} //it must have the same name as in the database attribute
+                                  onChange={(e) => setQty(e.target.value)}
+                                >
+                                  {
+                                    
+                                    [...Array(product?.countInStock).keys()].map((x) => (
+                                      <option key={x + 1} value={x + 1}>
+                                        {x + 1}
+                                      </option>
+                                    ))
+                                  }
+
+                                </Form.Control>
+                              </Col>
                             </Row>
                           </ListGroup.Item>
                         )                 
                       }
+                      <ListGroup.Item>
+                        <Button 
+                          onClick={addtoCardHandler}
+                          className='btn-block' 
+                          disabled={product?.countInStock === 0 || product?.countInStock < 0} 
+                          type='button'>
+                          Add to Cart
+                        </Button>
+                      </ListGroup.Item>
 
                     </ListGroup>
                   </Card>
                 </Col>
               </Row>
+
             </div>
           )
       }

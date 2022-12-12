@@ -13,14 +13,14 @@ import { Link } from 'react-router-dom'
 
 function Product({ product }) { //take the product in HomeScreen
   return (
-    <Card className='m-3 p-3 rounded'>
+    <Card className='mt-2 mb-2'>
         <Link to={`/product/${product._id}`}>
-            <Card.Img src={product.image} className='img-fruid'/>
+            <Card.Img src={product.image} className="site-img" fluid/>
         </Link> 
 
         <Card.Body>
           <Link to={`/product/${product._id}`}>
-            <Card.Title as="div">
+            <Card.Title as="div" className='text-center'>
               <strong> 
                 {product.name}
               </strong>
@@ -36,11 +36,11 @@ function Product({ product }) { //take the product in HomeScreen
 
         <Card.Text as='div'>
           <Row>
-            <Col>
+            <Col className='text-center'>
               <h3>${product.price}</h3>
             </Col>
 
-            <Col className="my-3">
+            <Col className="site-img">
               {product?.countInStock > 0 ? (<Badge bg="success">'In Stock'</Badge>) : (<Badge bg="danger">'Out of Stock'</Badge>)}
             </Col>
           </Row>       

@@ -4,6 +4,11 @@ import React, {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux' 
 //useSelector - allows us to used certain parts of the state/reducer
 
+import {
+    MDBContainer,
+    MDBRow,
+  } from "mdb-react-ui-kit";
+
 //Actions
 import { listProducts } from '../actions/productActions'
 
@@ -12,6 +17,7 @@ import { Row, Col } from 'react-bootstrap'
 
 //Components
 import Product from '../components/Product'
+import NewProductMDB from '../components/NewProductMDB'
 
 export default function HomeScreen(){
 
@@ -46,19 +52,20 @@ export default function HomeScreen(){
 
     return(
     <div>
-        <Row>
-            
-
+        <MDBRow>
             {products?.length && (products.map(product => {
                 
                 return ( 
-                    <div className='col-md-3 m-3 card p-2' key={product._id}>
-                        <Product product={product} />
+                    <div className='col-md-2 m-4' key={product._id}>
+                        <NewProductMDB product={product} />
                     </div>
                 )
-
+    
             })) }
-        </Row>
+
+        </MDBRow>
+
+
     </div>
     )
 }
