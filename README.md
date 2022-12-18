@@ -2,6 +2,10 @@
  
 E-Commerce - Frontend (React+Redux+Router+Axios) / Backend (Node.JS + MongoDB)
 
+![React+NodeJS Project](https://i.ibb.co/yXKBYHJ/2022-12-18-20-49-00-React-App.png)
+
+##### Project from K.Sathyaprakash Reddy - [Udemy Page](https://www.udemy.com/course/mern-stack-ecommerce-app-reactreduxnodeexpressmongo-db/)
+
 ## React (http://localhost:3000)
  
 Go to the frontend Folder
