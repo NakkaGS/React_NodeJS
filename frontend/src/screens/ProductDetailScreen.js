@@ -3,14 +3,14 @@
 import React, { useState, useEffect } from "react";
 
 //Router
-import { Link, useParams, useNavigate } from "react-router-dom"; //Library React Router Dom
-import { LinkContainer } from "react-router-bootstrap";
+import { Link, useParams } from "react-router-dom"; //Library React Router Dom
 
 //Redux
 import { useDispatch, useSelector } from 'react-redux'
 
 //Actions
 import { listProductDetails } from '../actions/productActions' //this is the reducer
+import { addToCart } from '../actions/cartActions' //this is the reducer
 
 //Bootstrap Components
 import { Row, Col, Image, ListGroup, Button, Card, Form } from "react-bootstrap"; //Library React Bootstrap
@@ -20,61 +20,30 @@ import Rating from "../components/Rating";
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 
-//Constants
-import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
-
-//Axios
-//import axios from 'axios' //not been used after the Redux application
-//import products from "../products"; //used to read the products.js
-
-//it was necessary to add '?' every time that we want to get a attribute from the product
-
 function ProductScreen({ match }) {
   
-  const [qty, setQty] = useState(1)
-
-  //it is for the review
-  const [rating, setRating] = useState(0)
-  const [comment, setComment] = useState('')
-
-  let history = useNavigate() //for V6 it is useNavigate, NOT useHistory
+  const [quantity, setQuantity] = useState(1)
 
   const dispatch = useDispatch()
 
   const productDetails = useSelector(state => state.productDetails)
   const { loading, error, product } = productDetails
-  //const [product, setProduct] = useState([]) //not been used after the Redux application
 
-  //using the useParams (using the new version)
-  //useParams returns the key of the  current <Route> (App.js - <Route path='product/:id'...> in this case id)
   let { id } = useParams(match); //get the Product ID
-  //const product = products.find((p) => p._id === id); //find the related product using the id
 
   useEffect(() => {
     dispatch(listProductDetails(id))
 
-    //It is part is same as in the action (productActions) - This part is used when we don't have Redux (it get the data from the Django)
-/*     async function fetchProduct() {
-      const { data } = await axios.get(`/api/products/${id}`)
-      setProduct(data)
-    }
+  }, [dispatch, id, match])
 
-    fetchProduct() */
-
-  }, [dispatch, id, match, history])
-
-  const submitHandler = (e) => {
+  const addtoCardHandler = (e) => {
       e.preventDefault()
-      
-  }
-
-  const addtoCardHandler = ( ) => {
-    history(`/cart/${id}?qty=${qty}`) //it is using useNavigate, it doesn't need push
+      dispatch(addToCart(product, quantity))
   }
 
   return(
     <div>
-      <Link to="/" className="btn btn-light my-3">Go Back</Link>
+      <Link to="/" className="btn btn-light m-3">Go Back</Link>
 
       {loading ?
         <Loader/>
@@ -83,12 +52,12 @@ function ProductScreen({ match }) {
           : (
             <div>
               <Row>
-                <Col md={6} className="cardnktimage">
-                  <Image src={product?.image} alt={product?.name} fluid className="cardnktimage" style={{maxWidth: 250}}/>
+                <Col md={2} className="m-5">
+                  <Image src={product?.image} alt={product?.name} fluid style={{maxWidth: 250}}/>
                   {/* //it was necessary to add '?' every time that we want to get a attribute from the product */}
                 </Col>
       
-                <Col md={3}>
+                <Col md={3} className="mx-5 w-50 newfont">
                   <ListGroup variant="flush">
 
                     <ListGroup.Item>
@@ -96,20 +65,25 @@ function ProductScreen({ match }) {
                     </ListGroup.Item>
         
                     <ListGroup.Item>
-                      <Rating value={product?.rating} text={`${product?.numReviews} reviews`} color={'#f8e825'} />
+                    
+                      <Rating value={Number(product.rating)} color={'#f8e825'} 
+                        text={(product.numReviews) > 0 
+                              ? (` ${Number(product?.numReviews)} reviews`) 
+                              : typeof(product?.numReviews)=== 'undefined' 
+                                ? (' 0 review') : (' 0 review')}  />
                     </ListGroup.Item>
         
                     <ListGroup.Item>
-                      Price: ${product?.price}
+                      <p><strong>Price:</strong> ${product?.price}</p>
                     </ListGroup.Item>
         
                     <ListGroup.Item>
-                      Description: {product?.description}
+                      <p><strong>Description:</strong> {product?.description}</p>
                     </ListGroup.Item>
                   </ListGroup>
                 </Col>
         
-                <Col md={3}>
+                <Col md={2}>
                   <Card>
                     <ListGroup variant="flush">
                       <ListGroup.Item>
@@ -140,12 +114,12 @@ function ProductScreen({ match }) {
                           <ListGroup.Item>
                             <Row>
                               <Col>Qty:</Col>
-                              <Col xs='auto' className='my-1'>
+                              <Col xs='6' className='my-1'>
 
                               <Form.Control
                                   as='select'
-                                  value={qty} //it must have the same name as in the database attribute
-                                  onChange={(e) => setQty(e.target.value)}
+                                  value={quantity} //it must have the same name as in the database attribute
+                                  onChange={(e) => setQuantity(e.target.value)}
                                 >
                                   {
                                     

@@ -44,14 +44,6 @@ export default function HomeScreen(){
         }) */
     }, [dispatch])
 
-    const result = products.map(element => {
-        return element + 1;
-      });
-
-    const check = Array.isArray(products)
-
-    console.log(result); // 👉️ [2, 3, 4]
-
     return(
     <div>
         <Row>
