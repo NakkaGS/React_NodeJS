@@ -17,6 +17,8 @@ import { Row, Col } from 'react-bootstrap'
 
 //Components
 import Product from '../components/Product'
+import Banner from '../components/Banner'
+import NewProductCard from '../components/NewProductCard'
 import NewProductMDB from '../components/NewProductMDB'
 
 export default function HomeScreen(){
@@ -52,20 +54,24 @@ export default function HomeScreen(){
 
     return(
     <div>
-        <MDBRow>
+        <Row>
+            <div id='products'>
+
             {products?.length && (products.map(product => {
                 
                 return ( 
-                    <div className='col-md-2 m-4' key={product._id}>
-                        <NewProductMDB product={product} />
+                    <div className='col' key={product._id}>
+                        <NewProductCard product={product} />
                     </div>
                 )
     
             })) }
 
-        </MDBRow>
+            </div>
 
-
+        </Row>
+        <Banner />
     </div>
+    
     )
 }
