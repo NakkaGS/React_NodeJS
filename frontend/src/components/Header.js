@@ -23,6 +23,7 @@ function Header() {
           </Nav>
 
           <Nav className="float-end">
+            <Nav.Link href='/login'>Login</Nav.Link>
             <Nav.Link href='/cart'>
               <i className="fas fa-shopping-cart"></i> Cart <Badge pill bg="light" text="dark">{cartItems.length}</Badge>
             </Nav.Link>

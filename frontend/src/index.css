@@ -173,3 +173,9 @@ button.light:hover {
     padding: 0 10px;
   }
 }
+
+input{
+  box-shadow: none !important;
+  margin-top: 10px !important;
+  border: 1px solid #000 !important;
+}
