@@ -21,6 +21,11 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 
 function ProductScreen({ match }) {
+
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
   
   const [quantity, setQuantity] = useState(1)
 
@@ -74,7 +79,7 @@ function ProductScreen({ match }) {
                     </ListGroup.Item>
         
                     <ListGroup.Item>
-                      <p><strong>Price:</strong> ${product?.price}</p>
+                      <p><strong>Price:</strong> {formatter.format(product.price)}</p>
                     </ListGroup.Item>
         
                     <ListGroup.Item>
@@ -93,7 +98,7 @@ function ProductScreen({ match }) {
                           </Col>
         
                           <Col>
-                            <strong>${product?.price}</strong>
+                            <strong>{formatter.format(product.price)}</strong>
                           </Col>
                         </Row>
                       </ListGroup.Item>

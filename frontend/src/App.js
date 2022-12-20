@@ -10,6 +10,7 @@ import Header from './components/Header';
 import HomeScreen from './screens/HomeScreen';
 import ProductDetailScreen from './screens/ProductDetailScreen';
 import ProductCreateScreen from './screens/ProductCreateScreen';
+import CartScreen from './screens/CartScreen';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path='/' element={<HomeScreen/>} exact/>
           <Route path='product/:id' element={<ProductDetailScreen/>} />
           <Route path='product/create' element={<ProductCreateScreen/>} />
+          <Route path='cart' element={<CartScreen/>}/>
 
         </Routes>
       </div>

@@ -29,6 +29,24 @@ button.normal:hover {
   color:#cce7d0
 }
 
+button.light {
+  height: 40px;
+  width: 120px;
+  font-size: 15px;
+  border-radius: 15px;
+  margin-top: 15px;
+  margin-bottom: 30px;
+  border: 0;
+  background-color: #58a074;
+  color: #fff;
+  font-weight: 500;
+}
+
+button.light:hover {
+  background-color: rgb(52,58,64);
+  color:#cce7d0
+}
+
 /*Products Cards*/
 
 #products {

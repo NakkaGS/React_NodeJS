@@ -1,5 +1,3 @@
-import axios from "axios";
-
 import { 
     CART_ADD_ITEM,
     CART_REMOVE_ITEM,
@@ -23,5 +21,14 @@ export const addToCart = (product, qty) => async (dispatch,getState) => { //it i
     )
 
     localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+
+}
+
+export const deleteFromCart = (product) => async (dispatch) => {
+
+    dispatch({type: CART_REMOVE_ITEM, 
+        payload:product
+        }
+    )
 
 }

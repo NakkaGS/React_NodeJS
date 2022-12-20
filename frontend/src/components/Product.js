@@ -11,6 +11,11 @@ import Rating from './Rating'
 
 import { Link } from 'react-router-dom'
 
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
+
 function Product({ product }) { //take the product in HomeScreen
   return (
     <Card className='mt-2 mb-2'>
@@ -37,7 +42,7 @@ function Product({ product }) { //take the product in HomeScreen
         <Card.Text as='div'>
           <Row>
             <Col className='text-center'>
-              <h3>${product.price}</h3>
+              <h3>{formatter.format(product.price)}</h3>
             </Col>
 
             <Col className="site-img">
