@@ -17,7 +17,7 @@ import {
 export const productListReducer = (state = { products:[]}, action ) => {
     switch(action.type){
         case PRODUCT_LIST_REQUEST: //it set the state loading to true and clear all the products
-            return {loading:true, products: []}
+            return {loading: true, products: []}
         
         case PRODUCT_LIST_SUCCESS: //if the connection is OK, it gets all the product and reset the loading 
             return {loading: false, products: action.payload}
