@@ -1,11 +1,33 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from "react";
+
+import { useDispatch, useSelector } from 'react-redux'
+import { registerNewUser } from '../actions/userActions'
+
+//Router
+import { useNavigate } from "react-router-dom";
 
 function RegisterScreen() {
+
+    
 
     const[name,setName] = useState('')
     const[email,setEmail] = useState('')
     const[password, setPassword] = useState('')
     const[confirmPassword,setConfirmPassword] = useState('')
+
+    const dispatch = useDispatch();
+
+    const registerUser = useSelector(state => state.registerUser)
+    const { loading, error, success } = registerUser
+
+    let history = useNavigate(); //for V6 it is useNavigate, NOT useHistory
+
+    useEffect(() => {
+        if (success) {
+            console.log("hier")
+            history('/')
+        }
+        }, [dispatch, success]);
 
     function register(e) {
 
@@ -17,6 +39,7 @@ function RegisterScreen() {
             password: password
         }
         if(password === confirmPassword){
+            dispatch(registerNewUser(user))
 
         } else {
             alert('Passwords not matched')

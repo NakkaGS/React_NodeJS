@@ -2,6 +2,8 @@
 const express = require("express")
 const app = express()
 
+
+
 //Cors - Cross-Origin Resource Sharing 
 var cors = require('cors')
 
@@ -10,9 +12,14 @@ var dbconnection = require('./db')
 
 //Routes
 var productsRoute = require('./routes/productRoute')
+var userRoute = require('./routes/userRoute')
+
+app.use(express.json());
+app.use(cors())
 
 //Create Route
-app.use('/api/products/' , productsRoute, cors())
+app.use('/api/products/' , productsRoute)
+app.use('/api/users/', userRoute)
 
 //This is for the production part
 if(process.env.NODE_ENV === 'production')

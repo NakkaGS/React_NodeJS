@@ -8,12 +8,15 @@ import {    productListReducer,
 
 import {cartReducer} from './reducers/cartReducers'
 
+import { registerNewUserReducer } from './reducers/userReducer'
+
 //every time that one of the items on the left is call (in the screen, component), it calls the reducer 
 const reducer = combineReducers({
     productList: productListReducer,
     productDetails: productDetailsReducer,
     productCreate: productCreateReducer,
-    cart: cartReducer
+    cart: cartReducer,
+    registerUser : registerNewUserReducer,
 
 })
 
