@@ -3,9 +3,8 @@ import React from 'react'
 //Boostrap Components
 import { Badge } from 'react-bootstrap'
 
+//React Router Dom
 import { Link } from 'react-router-dom'
-
-
 
 function NewProductCard({ product }) {
 

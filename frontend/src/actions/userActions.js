@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+import { CART_CLEAR_ITEMS } from '../constants/cartConstants'
+
 import { CREATE_USER_REQUEST, 
     CREATE_USER_SUCCESS, 
     CREATE_USER_FAIL,
@@ -7,7 +9,7 @@ import { CREATE_USER_REQUEST,
     USER_LOGIN_REQUEST,
     USER_LOGIN_SUCCESS,
     USER_LOGIN_FAIL,
-    USER_LOGIN_RESET,
+    USER_LOGOUT,
 
 } from '../constants/userConstants'
 
@@ -48,7 +50,7 @@ export const registerNewUser = (user) => async (dispatch) => {
     }    
 }
 
-export const loginUser = (user) => async (dispatch) => {
+export const loginUser = (user) => async (dispatch, getState) => {
 
     try {
         dispatch({
@@ -62,7 +64,7 @@ export const loginUser = (user) => async (dispatch) => {
         }
 
         //in the backend, there is a url (API) that it gets the data from the user
-        await axios.post(
+        const { data } = await axios.post(
             `/api/users/login/`, 
             {user : user},
             config,
@@ -70,8 +72,10 @@ export const loginUser = (user) => async (dispatch) => {
 
         dispatch({
             type: USER_LOGIN_SUCCESS,
-
+            payload: data
         })
+
+        localStorage.setItem('userInfo', JSON.stringify(getState().userLogin.userInfo))
         
     } catch (error) {
 
@@ -83,4 +87,12 @@ export const loginUser = (user) => async (dispatch) => {
                 : error.message,
         })
     }    
+}
+
+export const logout = () => (dispatch) => {
+    localStorage.removeItem('userInfo')
+    localStorage.removeItem('cartItems')
+
+    dispatch({type: USER_LOGOUT})
+    dispatch({type: CART_CLEAR_ITEMS})
 }

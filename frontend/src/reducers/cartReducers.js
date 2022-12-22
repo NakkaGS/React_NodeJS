@@ -1,5 +1,7 @@
 import { 
-    CART_ADD_ITEM, CART_REMOVE_ITEM,
+    CART_ADD_ITEM, 
+    CART_REMOVE_ITEM, 
+    CART_CLEAR_ITEMS
 
 } from '../constants/cartConstants'
 
@@ -8,7 +10,7 @@ export const cartReducer = (state = { cartItems:[] }, action) => {
 
         case CART_ADD_ITEM:
             //check if it already has a item with the same id and then just add the quantity
-            const alreadyExist = state.cartItems.find(item => item._id === action.payload._id)
+            const alreadyExist = state.cartItems.find(item => item?._id === action?.payload._id)
 
             if(alreadyExist){
                 return {
@@ -25,12 +27,14 @@ export const cartReducer = (state = { cartItems:[] }, action) => {
         }
 
         case CART_REMOVE_ITEM:
-
             return {
                 ...state,
                 cartItems: state.cartItems.filter(item => {return item._id !== action.payload._id})
             }
             
+        case CART_CLEAR_ITEMS:
+            return {}
+
         default:
             return state;
     }

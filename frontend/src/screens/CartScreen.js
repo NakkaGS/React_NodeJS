@@ -1,7 +1,9 @@
 import React from 'react'
 
+//Redux
 import { useSelector, useDispatch } from 'react-redux'
 
+//Actions
 import { addToCart, deleteFromCart } from '../actions/cartActions' //this is the reducer
 
 function CartScreen() {
@@ -11,7 +13,7 @@ function CartScreen() {
 
     const dispatch = useDispatch()
 
-    var subtotal = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0)
+    var subtotal = cartItems?.reduce((acc, item) => acc + (item.price * item.quantity), 0)
 
     const formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
@@ -35,7 +37,7 @@ function CartScreen() {
                         </thead>
 
                         <tbody>
-                            {cartItems.map(item=> {
+                            {cartItems?.map(item=> {
                                 return (
                                     <tr key={item._id} >
                                         <td>{item.name}</td>
@@ -55,7 +57,7 @@ function CartScreen() {
                     </table>
 
                     <hr/>
-                    <h3 className='m-3'>Subtotal: {formatter.format(subtotal)}</h3>
+                    <h3 className='m-3'>Subtotal: {typeof(subtotal) !== "undefined" ? (formatter.format(subtotal)) : "$0" }</h3>
                     
                     <hr/>
                         <button className='light'>Pay</button>

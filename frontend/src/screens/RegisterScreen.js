@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 
+//Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { registerNewUser } from '../actions/userActions'
 
 //Router
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+
+//Actions
+import { registerNewUser } from '../actions/userActions'
 
 function RegisterScreen() {
-
-    
 
     const[name,setName] = useState('')
     const[email,setEmail] = useState('')
@@ -17,20 +18,19 @@ function RegisterScreen() {
 
     const dispatch = useDispatch();
 
-    const registerUser = useSelector(state => state.registerUser)
-    const { loading, error, success } = registerUser
+    const userRegister = useSelector(state => state.userRegister)
+    const { loading, error, success } = userRegister
 
     let history = useNavigate(); //for V6 it is useNavigate, NOT useHistory
 
     useEffect(() => {
         if (success) {
-            console.log("hier")
+            console.log("Hier")
             history('/')
         }
-        }, [dispatch, success]);
+        }, [dispatch, success, history]);
 
     function register(e) {
-
         e.preventDefault()
 
         const user = {
@@ -38,6 +38,9 @@ function RegisterScreen() {
             email: email,
             password: password
         }
+
+        console.log(userRegister)
+
         if(password === confirmPassword){
             dispatch(registerNewUser(user))
 
@@ -47,10 +50,10 @@ function RegisterScreen() {
 
     }
 
-
     return (
         <div>
             <div className="row d-flex justify-content-center">
+            
                 <div className="col-md-5 card p-3" style={{marginTop:'150px'}}>
                     <div className="div">
                         <h4 className='text-center m-3'>Register</h4>
@@ -63,6 +66,7 @@ function RegisterScreen() {
                                 <button type='submit' className='btn mt-3'>Register</button>
                             </div>
                         </form>
+                        <Link to="/login" className="btn btn-light m-3 login-button">You already have account</Link>
                         
                     </div>
                 </div>

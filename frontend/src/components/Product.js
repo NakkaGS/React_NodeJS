@@ -6,10 +6,11 @@ import React from 'react'
 //Boostrap Components
 import { Card, Row, Col, Badge } from 'react-bootstrap'
 
+//React Router Dom
+import { Link } from 'react-router-dom'
+
 //Components
 import Rating from './Rating'
-
-import { Link } from 'react-router-dom'
 
 const formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',

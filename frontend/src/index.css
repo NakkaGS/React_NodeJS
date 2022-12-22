@@ -179,3 +179,15 @@ input{
   margin-top: 10px !important;
   border: 1px solid #000 !important;
 }
+
+.register-button{
+  position: absolute;
+  top: 72%;
+  left: 0px
+}
+
+.login-button{
+  position: absolute;
+  top: 80%;
+  left: 0px
+}

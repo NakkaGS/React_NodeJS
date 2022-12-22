@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 
+//Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { loginUser } from '../actions/userActions'
 
 //Router
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+
+//Actions
+import { loginUser } from '../actions/userActions'
 
 function LoginScreen() {
 
@@ -15,8 +18,19 @@ function LoginScreen() {
 
     let history = useNavigate(); //for V6 it is useNavigate, NOT useHistory
 
-    function login(e) {
+    const userLogin = useSelector(state => state.userLogin)
+    const { loading, error, userInfo } = userLogin
 
+    useEffect(() => {
+        if (typeof(userInfo) !=="undefined") {
+            if(userInfo){
+                history('/')
+            }
+
+        }
+        }, [userInfo, history]);
+
+    function login(e) {
         e.preventDefault()
 
         const user = {
@@ -39,6 +53,8 @@ function LoginScreen() {
                                 <button type='submit' className='btn mt-3'>Sign In</button>
                             </div>
                         </form>
+
+                        <Link to="/register" className="btn btn-light m-3 register-button">Register</Link>
                         
                     </div>
                 </div>

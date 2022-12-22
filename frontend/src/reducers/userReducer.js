@@ -5,7 +5,7 @@ import { CREATE_USER_REQUEST,
         USER_LOGIN_REQUEST,
         USER_LOGIN_SUCCESS,
         USER_LOGIN_FAIL,
-        USER_LOGIN_RESET,
+        USER_LOGOUT,
     
     } from '../constants/userConstants'
 
@@ -19,7 +19,6 @@ export const userRegisterReducer = ( state={} , action )=> {
         
         case CREATE_USER_SUCCESS:
             return{
-                ...state,
                 loading: false,
                 sucess: true,
                 userInfo: action.payload,
@@ -27,7 +26,6 @@ export const userRegisterReducer = ( state={} , action )=> {
 
         case CREATE_USER_FAIL:
             return{
-                ...state, 
                 loading: false,
                 error: 'User Already Registered'
             }
@@ -37,18 +35,19 @@ export const userRegisterReducer = ( state={} , action )=> {
     }
 }
 
-export const userLoginReducer = (state = {userInfo:{} }, action) => {
+export const userLoginReducer = ( state = { } , action ) => {
     switch(action.type){
 
         case USER_LOGIN_REQUEST:
             return {
+                ...state,
                 loading: true,
             }
         
         case USER_LOGIN_SUCCESS:
             return {
                 loading: false,
-                userInfo: action.payload,
+                userInfo: action.payload
             }
 
         case USER_LOGIN_FAIL:
@@ -56,6 +55,9 @@ export const userLoginReducer = (state = {userInfo:{} }, action) => {
                 loading: false,
                 error: action.payload
             }
+
+        case USER_LOGOUT:
+                return {}
 
         default:
             return state;

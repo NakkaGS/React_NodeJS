@@ -1,25 +1,18 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 
 //Redux
 import { useDispatch, useSelector } from 'react-redux' 
 //useSelector - allows us to used certain parts of the state/reducer
 
-import {
-    MDBContainer,
-    MDBRow,
-  } from "mdb-react-ui-kit";
-
 //Actions
 import { listProducts } from '../actions/productActions'
 
 //Boostrap Components
-import { Row, Col } from 'react-bootstrap'
+import { Row } from 'react-bootstrap'
 
 //Components
-import Product from '../components/Product'
 import Banner from '../components/Banner'
 import NewProductCard from '../components/NewProductCard'
-import NewProductMDB from '../components/NewProductMDB'
 
 export default function HomeScreen(){
 
