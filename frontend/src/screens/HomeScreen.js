@@ -13,6 +13,8 @@ import { Row } from 'react-bootstrap'
 //Components
 import Banner from '../components/Banner'
 import NewProductCard from '../components/NewProductCard'
+import Loader from '../components/Loader' //to have the Spinner in the page
+import Message from '../components/Message' //to have the Error in the page
 
 export default function HomeScreen(){
 
@@ -40,19 +42,27 @@ export default function HomeScreen(){
     return(
     <div>
         <Row>
-            <div id='products'>
+        <h1 className='text-center mt-5'>Latest Products</h1>
 
-            {products?.length && (products.map(product => {
+            <div id='products'>
                 
-                return ( 
-                    <div className='col' key={product._id}>
-                        <NewProductCard product={product} />
-                    </div>
-                )
-    
-            })) }
+                {loading ? <Loader /> //it is to create the loadin and error view 
+                    : error ? <Message variant='danger'>{error}</Message>
+                    : (!loading && Object.keys(productList.products).length === 0) ? <Message variant='info'>No Products</Message> 
+                    :
+                        (products?.length && (products.map(product => {
+                            
+                            return ( 
+                                <div className='col' key={product._id}>
+                                    <NewProductCard product={product} />
+                                </div>
+                            )
+                
+                        })))
+                    }
 
             </div>
+            
 
         </Row>
         <Banner />
