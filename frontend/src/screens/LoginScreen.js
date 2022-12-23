@@ -54,10 +54,10 @@ function LoginScreen() {
                         <div className="div">
                             <h4 className='text-center m-3'>Sign In</h4>
                             <form onSubmit={login}>
-                                <input type="text" placeholder='Email' required className='form-control' value={email} onChange={(e) => setEmail(e.target.value)} />
-                                <input type="password" placeholder='Password' required className='form-control' value={password} onChange={(e) => setPassword(e.target.value)} />
+                                <input type="text" placeholder='Email' required className='form-control mt-2' value={email} onChange={(e) => setEmail(e.target.value)} />
+                                <input type="password" placeholder='Password' required className='form-control mt-2' value={password} onChange={(e) => setPassword(e.target.value)} />
                                 <div className="d-flex align-items-end flex-column">
-                                    <button type='submit' className='btn mt-3'>Sign In</button>
+                                    <button type='submit' className='btn btn-light mt-3'>Sign In</button>
                                 </div>
                             </form>
 

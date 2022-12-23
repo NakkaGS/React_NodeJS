@@ -105,3 +105,47 @@ export const createProduct = (productCreate) => async(dispatch, getState) => {
         })
     }
 }
+
+export const filterProducts = (searchKey, sortKey, category) => async dispatch => {
+    try {
+        
+        dispatch({ type: PRODUCT_LIST_REQUEST })
+            const { data } = await axios.get(`/api/products/getallproducts`)
+            //console.log(data)
+            var filteredProducts = data;
+
+        if(searchKey !== undefined && searchKey){
+            console.log(data)
+            filteredProducts = data.filter(product => { return product.name.toLowerCase().includes(searchKey) })
+        }
+
+        if(sortKey !== 'popular'){
+            if (sortKey ==='htl'){
+                filteredProducts = data.sort((a,b) => {
+                    return -a.price + b.price
+                })
+            } else {
+                filteredProducts = data.sort((a,b) => {
+                    return a.price + -b.price
+                })
+            }
+        }
+
+        if(category !== 'all'){
+            filteredProducts = data.filter(product => { return product.category.toLowerCase().includes(category) })
+        }
+
+        dispatch({
+            type: PRODUCT_LIST_SUCCESS,
+            payload: filteredProducts
+        })
+
+    } catch (error) {
+        dispatch({
+            type: PRODUCT_LIST_FAIL,
+            payload: error.response && error.response.data.detail //if there a detail it show the detail, otherwise it shows the message set in 
+                ? error.response.data.detail 
+                : error.message,
+        })
+    }
+}

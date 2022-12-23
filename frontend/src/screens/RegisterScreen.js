@@ -64,10 +64,10 @@ function RegisterScreen() {
                         <div className="div">
                             <h4 className='text-center m-3'>Register</h4>
                             <form onSubmit={register}>
-                                <input type="text" placeholder='Name' required className='form-control' value={name} onChange={(e) => setName(e.target.value)} />
-                                <input type="text" placeholder='Email' required className='form-control' value={email} onChange={(e) => setEmail(e.target.value)} />
-                                <input type="text" placeholder='Password' required className='form-control' value={password} onChange={(e) => setPassword(e.target.value)} />
-                                <input type="text" placeholder='Confirm Password' required className='form-control' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                                <input type="text" placeholder='Name' required className='form-control mt-2' value={name} onChange={(e) => setName(e.target.value)} />
+                                <input type="text" placeholder='Email' required className='form-control mt-2' value={email} onChange={(e) => setEmail(e.target.value)} />
+                                <input type="text" placeholder='Password' required className='form-control mt-2' value={password} onChange={(e) => setPassword(e.target.value)} />
+                                <input type="text" placeholder='Confirm Password' required className='form-control mt-2' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                                 <div className="d-flex align-items-end flex-column">
                                     <button type='submit' className='btn mt-3'>Register</button>
                                 </div>
