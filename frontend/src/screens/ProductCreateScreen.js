@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createProduct } from "../actions/productActions";
 
 //Bootstrap Components
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 
 //Components
 import Loader from "../components/Loader";
@@ -44,7 +44,7 @@ function RegisterScreen() {
         dispatch({ type: PRODUCT_CREATE_RESET })
         history('/')
     }
-    }, [dispatch, successCreate]);
+    }, [dispatch, successCreate, history]);
 
   //when the button is pressed, it executes this line
   const submitHandler = (e) => {

@@ -31,7 +31,7 @@ function Header() {
 
           <Nav className="float-end">
             <Nav.Link href='/cart'>
-                <i className="fas fa-shopping-cart"></i> Cart <Badge pill bg="light" text="dark">
+                <i className="fas fa-shopping-cart"></i> <Badge pill bg="light" text="dark">
                 {(typeof(cartItems) !== "undefined") && cartItems.length}</Badge>
             </Nav.Link>
 

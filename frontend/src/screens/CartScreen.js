@@ -6,6 +6,8 @@ import { useSelector, useDispatch } from 'react-redux'
 //Actions
 import { addToCart, deleteFromCart } from '../actions/cartActions' //this is the reducer
 
+import CheckOut from '../components/CheckOut'
+
 function CartScreen() {
     
     const cart = useSelector(state=>state.cart)
@@ -60,7 +62,8 @@ function CartScreen() {
                     <h3 className='m-3'>Subtotal: {typeof(subtotal) !== "undefined" ? (formatter.format(subtotal)) : "$0" }</h3>
                     
                     <hr/>
-                        <button className='light'>Pay</button>
+                    <CheckOut amount={ subtotal }/>
+                        
 
                 </div>
             </div>

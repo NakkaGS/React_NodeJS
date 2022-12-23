@@ -10,6 +10,8 @@ import { cartReducer } from './reducers/cartReducers'
 
 import { userRegisterReducer, userLoginReducer } from './reducers/userReducer'
 
+import { placeOrderReducer } from './reducers/orderReducers'
+
 //every time that one of the items on the left is call (in the screen, component), it calls the reducer 
 const reducer = combineReducers({
     
@@ -21,6 +23,8 @@ const reducer = combineReducers({
 
     userRegister : userRegisterReducer,
     userLogin : userLoginReducer,
+
+    placeOrder : placeOrderReducer,
 
 })
 
