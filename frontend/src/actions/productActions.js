@@ -50,11 +50,12 @@ export const listProductDetails = (id) => async (dispatch) => { //it is a action
         }
 
         dispatch({ type: PRODUCT_DETAILS_REQUEST })
-            const { data } = await axios.post(
-                '/api/products/getproductbyid', 
-                { productid: id },
-                config
-            )  
+        
+        const { data } = await axios.post(
+            '/api/products/getproductbyid', 
+            { productid: id },
+            config
+        )  
 
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,

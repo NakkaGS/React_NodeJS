@@ -6,23 +6,20 @@ export const placeOrder = (token, amount) => async (dispatch, getState) => {
 
     const currentUser = getState().userLogin.userInfo
     const cartItems = getState().cart.cartItems
-    console.log(token) 
     
     try {
-        dispatch({type: PLACE_ORDER_REQUEST})
-
         const config = {
-            headers: { //It just worked like this for PUT. Axious is in x-www-form-urlencoded
+            headers: { //It just worked slike this for PUT. Axious is in x-www-form-urlencoded
                 "Content-Type": "application/x-www-form-urlencoded",
             }
         }
+        dispatch({type: PLACE_ORDER_REQUEST})
 
         const { data } = await axios.post(
             '/api/orders/placeorder', 
-            { token, amount, currentUser, cartItems},
+            { token: token, amount: amount, currentUser: currentUser, cartItems: cartItems},
             config
-        ) 
-        console.log(data)
+        )
 
         dispatch({
             type: PLACE_ORDER_SUCCESS,
