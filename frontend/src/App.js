@@ -13,6 +13,8 @@ import ProductCreateScreen from './screens/ProductCreateScreen';
 import CartScreen from './screens/CartScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import LoginScreen from './screens/LoginScreen';
+import PaymentSuccess from './screens/PaymentSuccess';
+import PaymentFailed from './screens/PaymentFailed';
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
           <Route path='cart' element={<CartScreen/>}/>
           <Route path='register' element={<RegisterScreen/>}/>
           <Route path='login' element={<LoginScreen/>}/>
+          <Route path='order/payment/success' element={<PaymentSuccess/>}/>
+          <Route path='order/payment/failed' element={<PaymentFailed/>}/>
 
         </Routes>
       </div>

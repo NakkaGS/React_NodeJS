@@ -9,26 +9,24 @@ import Loader from '../components/Loader' //to have the Spinner in the page
 //Actions
 import { placeOrder } from '../actions/orderActions'
 
-//Stripe
-import StripeCheckout from 'react-stripe-checkout'
-
 //Router
 import { useNavigate, Link } from "react-router-dom";
 
-function CheckOut({ amount }) {
+function CheckOut({ total }) {
 
   const dispatch = useDispatch()
   let history = useNavigate(); //for V6 it is useNavigate, NOT useHistory
 
   const userInfo =  localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
+  const cartItem =  localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : null
 
-  function tokenHandler(token, userInfo) {
+  function payHandler(total) {
     if(userInfo){
-      dispatch(placeOrder(token, amount))
+      dispatch(placeOrder(total))
     }
   }
 
-  const ClickHandler = (e) => {
+  const clickHandler = (e) => {
     e.preventDefault()
     if (!userInfo) {
       history('/login')
@@ -38,18 +36,9 @@ function CheckOut({ amount }) {
   return (
     <div>
       {process.env.REACT_APP_STRIPE_KEY === undefined ? <Loader />
-       : userInfo === null ?
-       <button className='light' onClick={ClickHandler}>Pay</button>
-        :  <StripeCheckout
-            token={tokenHandler}
-            amount={amount}
-            shippingAddress
-            currency='EUR'
-            stripeKey={process.env.REACT_APP_STRIPE_KEY}
->
-                <button className='light'>Pay</button>
-
-            </StripeCheckout>
+       : (userInfo === null || cartItem === null) ?
+       <button className='light' onClick={ clickHandler }>Pay</button>
+        :  <button className='light' onClick={() => payHandler()}>Pay</button>
       }
 
     </div>
