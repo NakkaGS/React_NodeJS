@@ -10,6 +10,8 @@ const router = express.Router();
 const enableIF = false;
 
 const Order = require("../models/orderModel");
+const Product = require("../models/productModel");
+
 var bodyParser = require("body-parser");
 
 router.use(bodyParser.json());
@@ -17,12 +19,6 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use("/api/checkout/webhook", bodyParser.raw({ type: "*/*" }));
 
 const stripe = require("stripe")(process.env.SECRET_STRIPE_KEY);
-
-
-const storeItems = new Map([
-  [1, { priceInCents: 10000, name: "Learn React Today" }],
-  [2, { priceInCents: 20000, name: "Learn CSS Today" }],
-]);
 
 //////////////////////////////////////////////////
 router.post("/placeorder", async (req, res) => {
@@ -72,7 +68,28 @@ router.post("/placeorder", async (req, res) => {
   }
 });
 
+//////////////////////////////////////////////////
+// Update the Products CountInStock
+const updateProducts = async (customer) => {
 
+  const Items = JSON.parse(customer.metadata.cart);
+
+  Items.map((item) => {
+    Product.findByIdAndUpdate(item._id , 
+      { countInStock : (item.countInStock - item.quantity) } ,
+       (err)=>{
+
+      if(err){
+        console.log("Error");
+      } else {
+        console.log("Worked")
+      }
+
+    })
+  })
+}
+
+//////////////////////////////////////////////////
 // Create order function
 const createOrder = async (customer, data) => {
   const Items = JSON.parse(customer.metadata.cart);
@@ -97,12 +114,14 @@ const createOrder = async (customer, data) => {
 
   try {
     const savedOrder = await newOrder.save();
-    console.log("Processed Order:", savedOrder);
+    updateProducts(customer)
+    //console.log("Processed Order:", savedOrder);
   } catch (err) {
     console.log(err);
   }
 };
 
+//////////////////////////////////////////////////
 //Webhook reads all the requests and response from the Stripe
 router.post("/webhook", async (req, res) => {
   const sig = req.headers["stripe-signature"];
@@ -110,7 +129,6 @@ router.post("/webhook", async (req, res) => {
   let data;
   let eventType;
 
-  
   if (enableIF) {
     let event;
     try {
@@ -137,8 +155,6 @@ router.post("/webhook", async (req, res) => {
       .then(async (customer) => {
         try {
           // CREATE ORDER
-          //console.log(customer)
-          //console.log(data)
           createOrder(customer, data);
         } catch (err) {
           console.log(typeof createOrder);
@@ -150,7 +166,7 @@ router.post("/webhook", async (req, res) => {
 
   // Return a 200 response to acknowledge receipt of the event
   res.send();
-}
-);
+  
+});
 
 module.exports = router;
