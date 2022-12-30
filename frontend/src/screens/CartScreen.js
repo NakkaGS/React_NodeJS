@@ -25,9 +25,9 @@ function CartScreen() {
     return (
         <div>
             <div className='row justify-content-center text-center'>
-                <div className='col-md-8'>
+                <div className='col-md-10'>
                     <h1 className='m-5'>My Cart</h1>
-                    <table className='table table-bordered '>
+                    <table className='table '>
                         <thead>
                             <tr>
                                 <th><strong>Name</strong></th>
@@ -41,7 +41,7 @@ function CartScreen() {
                         <tbody>
                             {cartItems?.map(item=> {
                                 return (
-                                    <tr key={item._id} >
+                                    <tr key={item._id} className='cart-item'>
                                         <td>{item.name}</td>
                                         <td>{formatter.format(item.price)}</td>
                                         <td><select value={item.quantity} onChange={(e)=>{dispatch(addToCart(item, e.target.value))}}>
@@ -58,7 +58,6 @@ function CartScreen() {
 
                     </table>
 
-                    <hr/>
                     <h3 className='m-3'>Subtotal: {typeof(subtotal) !== "undefined" ? (formatter.format(subtotal)) : "$0" }</h3>
                     
                     <hr/>

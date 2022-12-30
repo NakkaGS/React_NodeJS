@@ -2,6 +2,8 @@ import axios from 'axios'
 
 import { PLACE_ORDER_REQUEST, PLACE_ORDER_SUCCESS, PLACE_ORDER_FAIL } from '../constants/orderConstants'
 
+import { CART_CLEAR_ITEMS } from '../constants/cartConstants'
+
 export const placeOrder = (amount) => async (dispatch, getState) => {
 
     const currentUser = getState().userLogin.userInfo
@@ -40,4 +42,9 @@ export const placeOrder = (amount) => async (dispatch, getState) => {
         })
     }
 
+}
+
+export const paymentSuccess = () => (dispatch) => {
+    localStorage.removeItem('cartItems')
+    dispatch({type: CART_CLEAR_ITEMS})
 }
