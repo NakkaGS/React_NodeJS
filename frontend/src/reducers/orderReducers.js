@@ -1,4 +1,13 @@
-import { PLACE_ORDER_REQUEST, PLACE_ORDER_SUCCESS, PLACE_ORDER_FAIL } from '../constants/orderConstants'
+import {    
+    PLACE_ORDER_REQUEST, 
+    PLACE_ORDER_SUCCESS, 
+    PLACE_ORDER_FAIL,
+
+    ORDER_LIST_MY_REQUEST,
+    ORDER_LIST_MY_SUCCESS,
+    ORDER_LIST_MY_FAIL,
+    ORDER_LIST_MY_RESET,
+} from '../constants/orderConstants'
 
 export const placeOrderReducer = (state = { }, action) => {
     switch(action.type){
@@ -13,5 +22,24 @@ export const placeOrderReducer = (state = { }, action) => {
         
         default:
             return state;
+    }
+}
+
+export const orderListMyReducer = (state = { loading: false, orders:[] }, action) => {
+    switch (action.type) {
+        case ORDER_LIST_MY_REQUEST:
+            return { loading: true }
+
+        case ORDER_LIST_MY_SUCCESS:
+            return { loading: false, orders: action.payload }
+
+        case ORDER_LIST_MY_FAIL:
+            return { loading: false, error: action.payload }
+
+        case ORDER_LIST_MY_RESET:
+            return { order: [] }//reset the order state (redux)
+
+        default:
+            return state
     }
 }

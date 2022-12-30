@@ -166,7 +166,24 @@ router.post("/webhook", async (req, res) => {
 
   // Return a 200 response to acknowledge receipt of the event
   res.send();
-  
+
+});
+
+//Get all Products
+router.get("/myorders", (req, res) => {
+
+  Order.find({} , (err , docs)=>{
+
+  if(!err)
+  {
+      return res.send(docs);
+  }
+  else{
+      return res.status(400).json({ message: 'Something went wrong' });
+  }
+
+  })
+
 });
 
 module.exports = router;
