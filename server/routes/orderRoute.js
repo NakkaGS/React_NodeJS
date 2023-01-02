@@ -169,21 +169,33 @@ router.post("/webhook", async (req, res) => {
 
 });
 
+//////////////////////////////////////////////////
 //Get all Products
 router.get("/myorders", (req, res) => {
 
   Order.find({} , (err , docs)=>{
 
-  if(!err)
-  {
+  if(!err){
       return res.send(docs);
-  }
-  else{
+  } else {
       return res.status(400).json({ message: 'Something went wrong' });
   }
 
   })
 
 });
+
+//////////////////////////////////////////////////
+router.post('/myorderbyid/', (req, res) => {
+
+  Order.find({_id : req.body.orderid}, (err, docs) => {
+    if(!err){
+      return res.send(docs[0]);
+    } else {
+      return res.status(400).json({ message: 'Something went wrong'})
+    }
+  })
+})
+
 
 module.exports = router;

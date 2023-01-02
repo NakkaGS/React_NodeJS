@@ -7,6 +7,10 @@ import {
     ORDER_LIST_MY_SUCCESS,
     ORDER_LIST_MY_FAIL,
     ORDER_LIST_MY_RESET,
+
+    ORDER_MY_REQUEST,
+    ORDER_MY_SUCCESS,
+    ORDER_MY_FAIL,
 } from '../constants/orderConstants'
 
 export const placeOrderReducer = (state = { }, action) => {
@@ -38,6 +42,22 @@ export const orderListMyReducer = (state = { loading: false, orders:[] }, action
 
         case ORDER_LIST_MY_RESET:
             return { order: [] }//reset the order state (redux)
+
+        default:
+            return state
+    }
+}
+
+export const orderMyReducer = (state = { order: [] }, action) => {
+    switch(action.type) {
+        case ORDER_MY_REQUEST:
+            return { loading: true, ...state, order: [] }
+
+        case ORDER_MY_SUCCESS:
+            return { loading: false, order: action.payload }
+        
+        case ORDER_MY_FAIL:
+            return { loading: false, error: action.payload }
 
         default:
             return state

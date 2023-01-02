@@ -1,5 +1,3 @@
-//App.js->Route->ProductScreen.js
-
 import React, { useState, useEffect } from "react";
 
 //Router

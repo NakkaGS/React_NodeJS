@@ -15,7 +15,8 @@ import RegisterScreen from './screens/RegisterScreen';
 import LoginScreen from './screens/LoginScreen';
 import PaymentSuccess from './screens/PaymentSuccess';
 import PaymentFailed from './screens/PaymentFailed';
-import OrderScreen from './screens/OrderScreen';
+import MyOrdersScreen from './screens/MyOrdersScreen';
+import MyOrderDetailScreen from './screens/MyOrderDetailScreen'
 
 function App() {
   return (
@@ -27,10 +28,14 @@ function App() {
           <Route path='/' element={<HomeScreen/>} exact/>
           <Route path='product/:id' element={<ProductDetailScreen/>} />
           <Route path='product/create' element={<ProductCreateScreen/>} />
+
           <Route path='cart' element={<CartScreen/>}/>
+
           <Route path='register' element={<RegisterScreen/>}/>
           <Route path='login' element={<LoginScreen/>}/>
-          <Route path='orders' element={<OrderScreen/>}/>
+
+          <Route path='myorders' element={<MyOrdersScreen/>}/>
+          <Route path='myorders/:id' element={<MyOrderDetailScreen/>}/>
           <Route path='order/payment/success' element={<PaymentSuccess/>}/>
           <Route path='order/payment/failed' element={<PaymentFailed/>}/>
 

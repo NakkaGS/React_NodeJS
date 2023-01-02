@@ -4,9 +4,15 @@ import {
     PLACE_ORDER_REQUEST, 
     PLACE_ORDER_SUCCESS, 
     PLACE_ORDER_FAIL,
+
     ORDER_LIST_MY_REQUEST,
     ORDER_LIST_MY_SUCCESS,
     ORDER_LIST_MY_FAIL,
+
+    ORDER_MY_REQUEST,
+    ORDER_MY_SUCCESS,
+    ORDER_MY_FAIL,
+
 } from '../constants/orderConstants'
 
 import { CART_CLEAR_ITEMS } from '../constants/cartConstants'
@@ -92,6 +98,46 @@ export const listMyOrders = () => async (dispatch, getState) => {
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message,
+        })
+    }
+}
+
+export const myOrder = (orderID) => async (dispatch, getState) => {
+    try {
+
+        dispatch({
+            type: ORDER_MY_REQUEST
+        })
+
+        const {
+            userLogin: { userInfo }, //that is to get the token
+        } = getState()
+
+        //Huge Problem with the orderItem was because it must be "Content-Type": "application/json", in orderActions
+        const config = {
+            headers: { 
+                'Content-type': 'application/json',
+                accept: 'application/json',
+                Authorization: `Bearer ${userInfo?.token}`
+            }
+        }
+
+        const { data } = await axios.post ('/api/orders/myorderbyid',
+            {orderid: orderID},
+            config
+        )
+
+        dispatch ({
+            type: ORDER_MY_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: ORDER_MY_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message
         })
     }
 }
