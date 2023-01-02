@@ -154,6 +154,26 @@ button.light:hover {
   padding: 0;
 }
 
+.head-left{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.orderhead select{
+  width: 100px;
+}
+
+.orderhead button{
+  width: 100px;
+}
+
+.detail-head{
+  display: grid !important;
+  grid-template-columns: 1fr 150px  !important;
+}
+
+
 /*Media*/
 
 @media (max-width: 1170px ) {
