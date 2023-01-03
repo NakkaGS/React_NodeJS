@@ -154,23 +154,119 @@ button.light:hover {
   padding: 0;
 }
 
-.head-left{
+/*Detail Head*/
+
+#detail-head {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  margin: 2rem;
+}
+
+#detail-head .detail-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
-  flex-wrap: nowrap;
-}
-.orderhead select{
-  width: 100px;
-}
-
-.orderhead button{
-  width: 100px;
+  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 1rem 10rem;
 }
 
-.detail-head{
-  display: grid !important;
-  grid-template-columns: 1fr 150px  !important;
+#detail-head .detail-top p {
+  font-size: 15px;
+  color:rgba(0, 0, 0, 0.564);
+  margin: 0 !important;
+}
+
+#detail-head .detail-top p strong {
+  font-size: 17px;
+  color:rgba(0, 0, 0, 0.564);
+}
+
+#detail-head .detail-top .detail-badge{
+  margin-left: 1rem;
+  font-size: 15px;
+  align-items: center;
+}
+
+#detail-head .detail-top .detail-badge .success{
+  color: #58a074;
+  background-color: #e3cf21;
+  border-radius: 5px;
+  padding: 4px;
+}
+
+#detail-head .detail-top .detail-badge .warning{
+  color: #000;
+  background-color: #e3cf21;
+  border-radius: 5px;
+  padding: 4px;
+}
+
+/*Detail User*/
+
+#detail-head .detail-userdata {
+  border: 1px solid #000;
+  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  width: 78%;
+  display: flex;
+  justify-content: space-between;
+}
+
+#detail-head .detail-userdata h4{
+  font-size: 20px;
+}
+
+#detail-head .detail-userdata h5{
+  font-size: 15px;
+}
+
+#detail-head .detail-userdata .personal-data {
+  padding: 1rem 0 1rem 2rem;
+}
+
+#detail-head .detail-userdata .address {
+  padding: 1rem 2rem 0 0;
+}
+
+#detail-head .detail-userdata .address p{
+  margin: 0 !important;
+  font-size: 15px;
+}
+
+
+
+
+#detail-head .detail-price {
+  display: flex;
+  border: 1px solid #000;
+  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  width: 20%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  
+  
+}
+
+#detail-head .detail-price p{
+  margin: 5px !important;
+
+}
+
+#detail-head .detail-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+  margin-top: 10px;
 }
 
 

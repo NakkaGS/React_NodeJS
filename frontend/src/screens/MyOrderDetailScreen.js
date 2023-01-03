@@ -24,6 +24,18 @@ function MyOrderDetailScreen({ match }) {
 
   let { id } = useParams(match); //get the Product ID
 
+  let shipping = order.shippingAddress
+  
+
+  let orderItems = order.orderItems
+
+  console.log(order)
+
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+
   useEffect (() => {
     if(!userInfo) {
       history('/login')
@@ -34,33 +46,81 @@ function MyOrderDetailScreen({ match }) {
   }, [dispatch, history, id])
 
   return (
-    <div className="container">
-        <div className="row detail-head">
-          <div className="col">
-            <h3>Order <strong>#{order._id}</strong></h3>
-            {order.isDelivered ? <Badge bg="success">Success</Badge> : <Badge bg="warning" text="dark"><storng>Not Delivered</storng></Badge>}
+    <div>
+      <section id="detail-head">
+        <div className="container">
+
+          <div className="row">
+            <div className="detail-top">
+              <p>Order <strong>#{order._id}</strong></p>
+              <div className="detail-badge">
+                {order.isDelivered ? <p className="success">Delivered</p> : <p className="warning">Not Delivered</p>}
+              </div>
+            </div>
           </div>
-          <div className="col head-left">
 
-            <Form.Group className="orderhead" controlId="brand">
-                <Form.Control
-                  as='select'
-                  value={delivered} //it must have the same name as in the database attribute
-                  onChange={(e) => setDelivered(e.target.value)}>
-                      <option value="false">Not Delivered</option>
-                      <option value="true">Delivered</option>
-                </Form.Control>
+          <div className="row">
+            <div className="detail-bottom">
+              <div className="detail-userdata">
+                <div className="personal-data">
+                  <h4>{userInfo.name}</h4>
+                  <h5>{userInfo.email}</h5>
+                </div>
+                <div className="address">
+                  <p><strong>Address: </strong>{shipping?.address}</p>
+                  <p><strong>City: </strong>{shipping?.city} - {shipping?.country} </p>
+                  <p><strong>Postal Code: </strong>{shipping?.postalCode}</p>
+                  <p></p>
+                </div>
 
-                <Button type="submit" varint='Primary'>
-              Save
-            </Button>
-            </Form.Group>
+              </div>
+              <div className="detail-price">
+                <pre>
+                  <p><strong>Total Amount</strong></p>
+                  <p>${order.orderAmount}</p>
+                </pre>
 
-
+              </div>
+            </div>
           </div>
         </div>
 
+      </section>
+      <section id="detail-table">
+      <div className='row justify-content-center text-center'>
+                <div className='col-md-8'>
+                    <h1 className='m-3'>My Order</h1>
+                    <table className='table '>
+                        <thead>
+                            <tr>
+                                <th><strong>Name</strong></th>
+                                <th><strong>Price</strong></th>
+                                <th><strong>Quantity</strong></th>
+                                <th><strong>Total Price</strong></th>
+                            </tr>
+                        </thead>
 
+                        <tbody>
+                            {orderItems?.map(item=> {
+                                return (
+                                    <tr key={item._id} className='cart-item'>
+                                        <td>{item.name}</td>
+                                        <td>{formatter.format(item.price)}</td>
+                                        <td>{item.quantity}</td>
+                                        <td>{formatter.format(item.quantity * item.price)}</td>
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+
+
+                    </table>
+
+                        
+
+                </div>
+            </div>
+      </section>
     </div>
   )
 }
