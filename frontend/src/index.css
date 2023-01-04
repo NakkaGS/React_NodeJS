@@ -175,7 +175,7 @@ button.light:hover {
 
 #detail-head .detail-top p {
   font-size: 15px;
-  color:rgba(0, 0, 0, 0.564);
+  font-weight: 700;
   margin: 0 !important;
 }
 
@@ -188,6 +188,7 @@ button.light:hover {
   margin-left: 1rem;
   font-size: 15px;
   align-items: center;
+  font-weight: 700;
 }
 
 #detail-head .detail-top .detail-badge .success{
@@ -211,9 +212,10 @@ button.light:hover {
   box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  width: 78%;
+  width: 60%;
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
 
 #detail-head .detail-userdata h4{
@@ -228,6 +230,11 @@ button.light:hover {
   padding: 1rem 0 1rem 2rem;
 }
 
+#detail-head .detail-userdata .personal-data p {
+  margin: 0.25rem 0 !important;
+  font-size: 15px;
+}
+
 #detail-head .detail-userdata .address {
   padding: 1rem 2rem 0 0;
 }
@@ -237,26 +244,35 @@ button.light:hover {
   font-size: 15px;
 }
 
-
-
-
-#detail-head .detail-price {
+#detail-head .detail-shipping {
   display: flex;
   border: 1px solid #000;
   box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  width: 20%;
+  width: 39%;
   height: 100%;
-  justify-content: center;
-  align-items: center;
-  
-  
+  padding: 1rem 0 0 2rem;
+  justify-content: flex-start;
+  position: relative;
 }
 
-#detail-head .detail-price p{
-  margin: 5px !important;
+#detail-head .shipping-title {
+  position: absolute;
+  top: 85%;
+  right: 0%;
+  background-color: rgb(241, 147, 235);
+  color: #000;
+  border-radius: 10px;
+  padding: 0.25rem 1rem;
+  font-size: 15px;
+  font-weight: 700;
+  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid rgb(236, 107, 228);
+}
 
+#detail-head .detail-shipping p{
+  margin: 5px !important;
 }
 
 #detail-head .detail-bottom {
@@ -269,6 +285,19 @@ button.light:hover {
   margin-top: 10px;
 }
 
+#detail-head .userdata-title {
+  position: absolute;
+  top:85%;
+  right: 0%;
+  background-color: rgb(147, 216, 241);
+  color: #000;
+  border-radius: 10px;
+  padding: 0.25rem 1rem;
+  font-size: 15px;
+  font-weight: 700;
+  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid rgb(118, 191, 218);
+}
 
 /*Media*/
 

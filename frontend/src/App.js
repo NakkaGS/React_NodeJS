@@ -11,8 +11,11 @@ import HomeScreen from './screens/HomeScreen';
 import ProductDetailScreen from './screens/ProductDetailScreen';
 import ProductCreateScreen from './screens/ProductCreateScreen';
 import CartScreen from './screens/CartScreen';
+
 import RegisterScreen from './screens/RegisterScreen';
 import LoginScreen from './screens/LoginScreen';
+import ProfileScreen from './screens/ProfileScreen';
+
 import PaymentSuccess from './screens/PaymentSuccess';
 import PaymentFailed from './screens/PaymentFailed';
 import MyOrdersScreen from './screens/MyOrdersScreen';
@@ -33,6 +36,7 @@ function App() {
 
           <Route path='register' element={<RegisterScreen/>}/>
           <Route path='login' element={<LoginScreen/>}/>
+          <Route path='profile' element={<ProfileScreen/>}/>
 
           <Route path='myorders' element={<MyOrdersScreen/>}/>
           <Route path='myorders/:id' element={<MyOrderDetailScreen/>}/>

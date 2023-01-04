@@ -52,7 +52,7 @@ function MyOrderDetailScreen({ match }) {
 
           <div className="row">
             <div className="detail-top">
-              <p>Order <strong>#{order._id}</strong></p>
+              <p>Order: <strong>#{order._id}</strong></p>
               <div className="detail-badge">
                 {order.isDelivered ? <p className="success">Delivered</p> : <p className="warning">Not Delivered</p>}
               </div>
@@ -63,21 +63,26 @@ function MyOrderDetailScreen({ match }) {
             <div className="detail-bottom">
               <div className="detail-userdata">
                 <div className="personal-data">
-                  <h4>{userInfo.name}</h4>
-                  <h5>{userInfo.email}</h5>
-                </div>
-                <div className="address">
-                  <p><strong>Address: </strong>{shipping?.address}</p>
-                  <p><strong>City: </strong>{shipping?.city} - {shipping?.country} </p>
-                  <p><strong>Postal Code: </strong>{shipping?.postalCode}</p>
-                  <p></p>
+                  <h4>Name: {userInfo.name}</h4>
+                  <h5>Email: {userInfo.email}</h5>
+                  <p>Order Date: {order.createdAt}</p>
+                  <p>Transaction ID: {order.transactionId}</p>
+                  <p>Total Amount: ${order.orderAmount}</p>
+                  <div className="userdata-title">
+                    <p>Order Details</p>
+                  </div>
                 </div>
 
+
               </div>
-              <div className="detail-price">
+              <div className="detail-shipping">
                 <pre>
-                  <p><strong>Total Amount</strong></p>
-                  <p>${order.orderAmount}</p>
+                <p><strong>Address: </strong>{shipping?.address}</p>
+                  <p><strong>City: </strong>{shipping?.city} - {shipping?.country} </p>
+                  <p><strong>Postal Code: </strong>{shipping?.postalCode}</p>
+                  <div className="shipping-title">
+                    <p>Shipping Details</p>
+                  </div>
                 </pre>
 
               </div>
