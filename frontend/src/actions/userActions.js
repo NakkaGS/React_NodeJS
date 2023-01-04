@@ -11,9 +11,14 @@ import { CREATE_USER_REQUEST,
     USER_LOGIN_FAIL,
     USER_LOGOUT,
 
-    USER_UPDATE_REQUEST,
-    USER_UPDATE_SUCCESS,
-    USER_UPDATE_FAIL,
+    USER_UPDATE_PROFILE_REQUEST,
+    USER_UPDATE_PROFILE_SUCCESS,
+    USER_UPDATE_PROFILE_FAIL,
+    USER_UPDATE_PROFILE_RESET,
+
+    USER_DETAILS_REQUEST,
+    USER_DETAILS_SUCCESS,
+    USER_DETAILS_FAIL,
 
 } from '../constants/userConstants'
 
@@ -104,14 +109,50 @@ export const logout = () => (dispatch) => {
 }
 
 //////////////////////////////////////////////
+export const getUserDetails = (id) => async (dispatch) => { //it is a action
+    //console.log(id)
+
+    try {
+        const config = {
+            headers: { //It just worked like this for PUT. Axious is in x-www-form-urlencoded
+                "Content-Type": "application/x-www-form-urlencoded",
+            }
+        }
+
+        dispatch({ type: USER_DETAILS_REQUEST })
+        
+        const { user } = await axios.post(
+            '/api/users/getuserbyid', 
+            { userid: id },
+            config
+        )  
+
+        dispatch({
+            type: USER_DETAILS_SUCCESS,
+            payload: user
+        })
+
+        
+
+    } catch (error) {
+        dispatch({
+            type: USER_DETAILS_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+}
+
+//////////////////////////////////////////////
 export const updateUserProfile = (user) => async (dispatch, getState) => {
     try {
         dispatch({
-            type: USER_UPDATE_REQUEST
+            type: USER_UPDATE_PROFILE_REQUEST
         })
 
         const {
-            userLogin: { userInfo },
+            userDetails: { userInfo },
         } = getState()
 
         const config = {
@@ -128,7 +169,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
         )
 
         dispatch({
-            type: USER_UPDATE_SUCCESS,
+            type: USER_UPDATE_PROFILE_SUCCESS,
             payload: data
         })
 
@@ -142,10 +183,11 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
 
     } catch (error) {
         dispatch({
-            type: USER_UPDATE_FAIL,
+            type: USER_UPDATE_PROFILE_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message,
         })
     }
 }
+
