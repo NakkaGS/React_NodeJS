@@ -8,7 +8,7 @@ import {    productListReducer,
 
 import { cartReducer } from './reducers/cartReducers'
 
-import { userRegisterReducer, userLoginReducer } from './reducers/userReducer'
+import { userRegisterReducer, userLoginReducer, userUpdateReducer } from './reducers/userReducer'
 
 import { placeOrderReducer, orderListMyReducer, orderMyReducer } from './reducers/orderReducers'
 
@@ -23,6 +23,7 @@ const reducer = combineReducers({
 
     userRegister : userRegisterReducer,
     userLogin : userLoginReducer,
+    userUpdate : userUpdateReducer,
 
     placeOrder : placeOrderReducer,
     orderListMy : orderListMyReducer, //orders from the logged user

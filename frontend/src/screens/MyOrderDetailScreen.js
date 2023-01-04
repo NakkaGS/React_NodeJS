@@ -5,12 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { myOrder } from '../actions/orderActions'
+
 //Boostrap Components
 import { Button, Badge, Form } from 'react-bootstrap'
 
 function MyOrderDetailScreen({ match }) {
-
-  const[delivered,setDelivered] = useState(false)
 
   let history = useNavigate();
 
@@ -26,10 +25,7 @@ function MyOrderDetailScreen({ match }) {
 
   let shipping = order.shippingAddress
   
-
   let orderItems = order.orderItems
-
-  console.log(order)
 
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -41,7 +37,6 @@ function MyOrderDetailScreen({ match }) {
       history('/login')
     } else {
       dispatch(myOrder(id))
-      setDelivered(order.isDelivered)
     }
   }, [dispatch, history, id])
 

@@ -11,6 +11,10 @@ import { CREATE_USER_REQUEST,
     USER_LOGIN_FAIL,
     USER_LOGOUT,
 
+    USER_UPDATE_REQUEST,
+    USER_UPDATE_SUCCESS,
+    USER_UPDATE_FAIL,
+
 } from '../constants/userConstants'
 
 export const registerNewUser = (user) => async (dispatch) => {
@@ -50,6 +54,7 @@ export const registerNewUser = (user) => async (dispatch) => {
     }    
 }
 
+//////////////////////////////////////////////
 export const loginUser = (user) => async (dispatch, getState) => {
 
     try {
@@ -89,10 +94,58 @@ export const loginUser = (user) => async (dispatch, getState) => {
     }    
 }
 
+//////////////////////////////////////////////
 export const logout = () => (dispatch) => {
     localStorage.removeItem('userInfo')
     localStorage.removeItem('cartItems')
 
     dispatch({type: USER_LOGOUT})
     dispatch({type: CART_CLEAR_ITEMS})
+}
+
+//////////////////////////////////////////////
+export const updateUserProfile = (user) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: USER_UPDATE_REQUEST
+        })
+
+        const {
+            userLogin: { userInfo },
+        } = getState()
+
+        const config = {
+            headers: { //It just worked like this for PUT. Axious is in x-www-form-urlencoded
+                "Content-Type": "application/x-www-form-urlencoded",
+                Authorization: `Bearer ${userInfo?.token}`,
+            }
+        }
+
+        const { data } = await axios.put(
+            `/api/users/profile/update/`,   
+            user,
+            config
+        )
+
+        dispatch({
+            type: USER_UPDATE_SUCCESS,
+            payload: data
+        })
+
+        dispatch({
+            type: USER_LOGIN_SUCCESS,
+            payload: data
+        })
+
+        //itn writes the Data into the localStorage
+        localStorage.setItem('userInfo', JSON.stringify(data))
+
+    } catch (error) {
+        dispatch({
+            type: USER_UPDATE_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
 }

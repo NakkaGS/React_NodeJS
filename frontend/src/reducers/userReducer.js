@@ -6,6 +6,10 @@ import { CREATE_USER_REQUEST,
         USER_LOGIN_SUCCESS,
         USER_LOGIN_FAIL,
         USER_LOGOUT,
+
+        USER_UPDATE_REQUEST,
+        USER_UPDATE_SUCCESS,
+        USER_UPDATE_FAIL,
     
     } from '../constants/userConstants'
 
@@ -62,6 +66,30 @@ export const userLoginReducer = ( state = { } , action ) => {
         default:
             return state;
     }
+}
 
+export const userUpdateReducer = ( state = { user:{} }, action ) => {
+    switch(action.type){
 
+        case USER_UPDATE_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+        
+        case USER_UPDATE_SUCCESS:
+            return {
+                loading: false,
+                success: true,
+            }
+        
+        case USER_UPDATE_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        default:
+            return state
+    }
 }
