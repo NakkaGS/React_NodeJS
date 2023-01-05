@@ -13,6 +13,7 @@ import {
     ORDER_MY_FAIL,
 } from '../constants/orderConstants'
 
+//////////////////////////////////////////////
 export const placeOrderReducer = (state = { }, action) => {
     switch(action.type){
         case PLACE_ORDER_REQUEST:
@@ -29,6 +30,7 @@ export const placeOrderReducer = (state = { }, action) => {
     }
 }
 
+//////////////////////////////////////////////
 export const orderListMyReducer = (state = { loading: false, orders:[] }, action) => {
     switch (action.type) {
         case ORDER_LIST_MY_REQUEST:
@@ -48,6 +50,7 @@ export const orderListMyReducer = (state = { loading: false, orders:[] }, action
     }
 }
 
+//////////////////////////////////////////////
 export const orderMyReducer = (state = { order: [] }, action) => {
     switch(action.type) {
         case ORDER_MY_REQUEST:

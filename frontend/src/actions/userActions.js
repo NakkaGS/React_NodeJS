@@ -22,6 +22,7 @@ import { CREATE_USER_REQUEST,
 
 } from '../constants/userConstants'
 
+//////////////////////////////////////////////
 export const registerNewUser = (user) => async (dispatch) => {
 
     try {

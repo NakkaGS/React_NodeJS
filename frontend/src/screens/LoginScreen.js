@@ -30,9 +30,8 @@ function LoginScreen() {
             if(userInfo){
                 history('/')
             }
-
         }
-        }, [userInfo, history]);
+    }, [userInfo, history]);
 
     function login(e) {
         e.preventDefault()

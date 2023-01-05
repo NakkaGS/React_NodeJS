@@ -17,6 +17,7 @@ import {
 
 import { CART_CLEAR_ITEMS } from '../constants/cartConstants'
 
+//////////////////////////////////////////////
 export const placeOrder = (amount) => async (dispatch, getState) => {
 
     const currentUser = getState().userLogin.userInfo
@@ -102,6 +103,7 @@ export const listMyOrders = () => async (dispatch, getState) => {
     }
 }
 
+//////////////////////////////////////////////
 export const myOrder = (orderID) => async (dispatch, getState) => {
     try {
 

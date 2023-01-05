@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 //Redux
 import { useDispatch } from 'react-redux' 
 
+//Actions
 import { filterProducts } from '../actions/productActions'
 
 function Filter() {

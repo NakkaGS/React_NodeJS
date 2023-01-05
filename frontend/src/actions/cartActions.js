@@ -4,6 +4,7 @@ import {
 
 } from '../constants/cartConstants'
 
+//////////////////////////////////////////////
 export const addToCart = (product, qty) => async (dispatch, getState) => { //it is a action
 
     const cartItem = {
@@ -24,6 +25,7 @@ export const addToCart = (product, qty) => async (dispatch, getState) => { //it 
 
 }
 
+//////////////////////////////////////////////
 export const deleteFromCart = (product) => async (dispatch, getState) => {
 
     dispatch({type: CART_REMOVE_ITEM, 

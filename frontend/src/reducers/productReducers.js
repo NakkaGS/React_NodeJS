@@ -14,6 +14,7 @@ import {
 
 } from '../constants/productConstants' //it is like enum in C
 
+//////////////////////////////////////////////
 export const productListReducer = (state = { products:[]}, action ) => {
     switch(action.type){
         case PRODUCT_LIST_REQUEST: //it set the state loading to true and clear all the products
@@ -31,7 +32,6 @@ export const productListReducer = (state = { products:[]}, action ) => {
 }
 
 //////////////////////////////////////////////
-
 export const productDetailsReducer = (state = { product: [] }, action) => {
     switch(action.type){
         case PRODUCT_DETAILS_REQUEST:
@@ -49,7 +49,6 @@ export const productDetailsReducer = (state = { product: [] }, action) => {
 }
 
 //////////////////////////////////////////////
-
 export const productCreateReducer = (state = {}, action) => {
     switch(action.type){
         case PRODUCT_CREATE_REQUEST:

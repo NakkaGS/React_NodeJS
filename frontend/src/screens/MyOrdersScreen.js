@@ -1,11 +1,15 @@
 import React, { useEffect } from "react";
 
+//Redux
 import { useDispatch, useSelector } from "react-redux";
 
+//React 
 import { useNavigate } from 'react-router-dom'
 
+//Actions
 import { listMyOrders } from '../actions/orderActions'
 
+//Components
 import Loader from '../components/Loader' //to have the Spinner in the page
 import Message from '../components/Message' //to have the Error in the page
 

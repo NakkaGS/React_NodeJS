@@ -1,25 +1,34 @@
 import React, { useState, useEffect } from 'react'
 
+//React Redux
 import {useDispatch, useSelector} from 'react-redux'
 
-import { useNavigate } from 'react-router-dom'
+//Router Dom
+import { useNavigate, Link } from 'react-router-dom'
 
-import Message from '../components/Message'
+//Components
+import Loader from '../components/Loader' //to have the Spinner in the page
+import Message from '../components/Message' //to have the Error in the page
 
+//Actions
 import { updateUserProfile, getUserDetails } from '../actions/userActions'
+import { listMyOrders } from '../actions/orderActions'
 
 //Constants
 import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
+
+//Boostrap Components
+import { Button, Badge } from 'react-bootstrap'
 
 function ProfileScreen() {
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
 
-    const userDetails = useSelector((state) => state.userDetails)
-    const { error, loading, user } = userDetails
-
     const userUpdateProfile = useSelector((state) => state.userUpdateProfile)
     const { success: successUpdate } = userUpdateProfile
+
+    const orderListMy = useSelector((state) => state.orderListMy)
+    const { loading, error, orders } = orderListMy
 
     const dispatch = useDispatch()
 
@@ -32,24 +41,27 @@ function ProfileScreen() {
 
     const history = useNavigate()
 
-    if (!userInfo) {
-        history('/login')
-      }
-    
+    const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+    });
+
       /////////
       useEffect(() => {
         if (!userInfo) {
           history('/login')
         } else {
-            if(!user || !user.name || userInfo?._id !== user?._id || successUpdate){ //that to get the data
+            dispatch(listMyOrders())
+
+            if(!userInfo || !userInfo.name || userInfo?._id !== userInfo?._id || successUpdate){ //that to get the data
               dispatch({ type: USER_UPDATE_PROFILE_RESET}) //it helps to not get the same profile as in Edit User Profile            
 
             } else { //after get the data it full fill the data with setName and setEmail
-              setName(user.name)
-              setEmail(user.email)
+              setName(userInfo.name)
+              setEmail(userInfo.email)
             }
         }
-      }, [history, dispatch, user, userInfo]);
+      }, [history, dispatch, userInfo, userInfo]);
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -68,13 +80,12 @@ function ProfileScreen() {
           }
     }
 
-
     return (
     <div>
         <div className="row d-flex justify-content-center">
                 
-            <div className="col-md-5 card p-3" style={{marginTop:'150px'}}>
-                <div className="div">
+            <div className="col-md-3 mt-5">
+                <div className="card p-3">
                     <h4 className='text-center m-3'>Update</h4>
                     {message && <Message variant="danger">{message}</Message>}
                     <form onSubmit={submitHandler}>
@@ -89,6 +100,57 @@ function ProfileScreen() {
                     
                 </div>
             </div>
+
+            <div className="col-md-6 mt-5">
+                    <h2>My Orders</h2>
+
+                    <table className="table table-striped mt-5">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>Transaction ID</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                        {loading ? <Loader /> //it is to create the loadin and error view 
+                            : error ? <Message variant='danger'>{error}</Message>
+                            : 
+                            (orders?.map(order=> {
+                                return (
+                                    
+                                        <tr key={order._id} className='cart-item'>
+
+                                            <td>{order._id}</td>
+                                            <td>{formatter.format(order.orderAmount)}</td>
+                                            <td>{order.createdAt.substring(0,10)}</td>
+                                            <td>{order.transactionId}</td>
+                                            <td>{order.isDelivered ? <Badge bg="success">Success</Badge> : <Badge bg="warning" text="dark"><storng>Not Delivered</storng></Badge>}</td>
+                                            <td>
+                                            <Link to={`/myorders/${order._id}/`}>
+                                                <Button variant='light' className='btn-sm'>
+                                                    <i className='fas fa-edit'></i>
+                                                </Button>
+                                            </Link>
+
+                                            {/* <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(product._id)}>
+                                                <i className='fas fa-trash'></i>
+                                            </Button> */}
+                                    </td>
+
+                                        </tr>
+                                    
+                                )
+                            }))
+                        }
+                        </tbody>
+                    </table>
+
+
+                </div>
         </div>
     </div>
     )

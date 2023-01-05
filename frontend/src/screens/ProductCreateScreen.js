@@ -1,5 +1,3 @@
-//App.js->Route->RegisterScreen.js
-
 import React, { useState, useEffect } from "react";
 
 //Router
@@ -23,7 +21,7 @@ import FormContainer from "../components/FormContainer";
 //Contants
 import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
 
-function RegisterScreen() {
+function ProductCreateScreen() {
 
   //Initial State Empty (initializing fields)
   const [name, setName] = useState('')
@@ -36,6 +34,9 @@ function RegisterScreen() {
 
   const productCreate = useSelector(state => state.productCreate)
   const { loading: loadingCreate, error: errorCreate, success: successCreate } = productCreate
+
+  const userLogin = useSelector((state)=> state.userLogin)
+  const{ userInfo } = userLogin
 
   let history = useNavigate(); //for V6 it is useNavigate, NOT useHistory
 
@@ -136,4 +137,4 @@ function RegisterScreen() {
   );
 }
 
-export default RegisterScreen;
+export default ProductCreateScreen;

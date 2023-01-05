@@ -19,6 +19,7 @@ import { CREATE_USER_REQUEST,
     
     } from '../constants/userConstants'
 
+//////////////////////////////////////////////
 export const userRegisterReducer = ( state={} , action )=> {
     switch(action.type){
         case CREATE_USER_REQUEST:
@@ -45,6 +46,7 @@ export const userRegisterReducer = ( state={} , action )=> {
     }
 }
 
+//////////////////////////////////////////////
 export const userLoginReducer = ( state = { } , action ) => {
     switch(action.type){
 
@@ -74,6 +76,7 @@ export const userLoginReducer = ( state = { } , action ) => {
     }
 }
 
+//////////////////////////////////////////////
 export const userDetailsReducer = ( state = { userInfo: {} } , action ) => {
     switch(action.type){
 
@@ -100,6 +103,7 @@ export const userDetailsReducer = ( state = { userInfo: {} } , action ) => {
     }
 }
 
+//////////////////////////////////////////////
 export const userUpdateProfileReducer = ( state = { success: false, user:{} }, action ) => {
     switch(action.type){
 

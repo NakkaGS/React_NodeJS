@@ -72,6 +72,7 @@ export const listProductDetails = (id) => async (dispatch) => { //it is a action
     }
 }
 
+//////////////////////////////////////////////
 export const createProduct = (productCreate) => async(dispatch, getState) => {
     try {
         dispatch({
@@ -107,6 +108,7 @@ export const createProduct = (productCreate) => async(dispatch, getState) => {
     }
 }
 
+//////////////////////////////////////////////
 export const filterProducts = (searchKey, sortKey, category) => async dispatch => {
     try {
         
