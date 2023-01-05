@@ -12,6 +12,10 @@ import {
     PRODUCT_CREATE_FAIL,
     PRODUCT_CREATE_RESET,
 
+    PRODUCT_REVIEW_CREATE_REQUEST,
+    PRODUCT_REVIEW_CREATE_SUCCESS,
+    PRODUCT_REVIEW_CREATE_FAIL,
+
 } from '../constants/productConstants' //it is like enum in C
 
 //////////////////////////////////////////////
@@ -66,4 +70,21 @@ export const productCreateReducer = (state = {}, action) => {
         default:
             return state;
     }       
+}
+
+//////////////////////////////////////////////
+export const reviewCreateReducer = (state = {}, action) => {
+    switch(action.type){
+        case PRODUCT_REVIEW_CREATE_REQUEST:
+            return { loading: true }
+
+        case PRODUCT_REVIEW_CREATE_SUCCESS:
+            return { loading: false, success: true}
+
+        case PRODUCT_REVIEW_CREATE_FAIL:
+            return { loading: false, error: action.payload}
+
+        default:
+            return state
+    }
 }

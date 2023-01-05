@@ -17,6 +17,7 @@ import { Row, Col, Image, ListGroup, Button, Card, Form } from "react-bootstrap"
 import Rating from "../components/Rating";
 import Loader from '../components/Loader'
 import Message from '../components/Message'
+import Review from '../components/Review'
 
 function ProductScreen({ match }) {
 
@@ -151,6 +152,11 @@ function ProductScreen({ match }) {
 
                     </ListGroup>
                   </Card>
+                </Col>
+              </Row>
+              <Row className="justify-content-center">
+                <Col className="d-flex ml-5 justify-content-center flex-wrap align-items-center">
+                  <Review product={product}/>
                 </Col>
               </Row>
 

@@ -13,6 +13,10 @@ import {
     PRODUCT_CREATE_SUCCESS,
     PRODUCT_CREATE_FAIL,
 
+    PRODUCT_REVIEW_CREATE_REQUEST,
+    PRODUCT_REVIEW_CREATE_SUCCESS,
+    PRODUCT_REVIEW_CREATE_FAIL,
+
 } from '../constants/productConstants' //it is like enum in C
 
 //it works like a state machine
@@ -118,7 +122,6 @@ export const filterProducts = (searchKey, sortKey, category) => async dispatch =
             var filteredProducts = data;
 
         if(searchKey !== undefined && searchKey){
-            console.log(data)
             filteredProducts = data.filter(product => { return product.name.toLowerCase().includes(searchKey) })
         }
 
@@ -151,4 +154,37 @@ export const filterProducts = (searchKey, sortKey, category) => async dispatch =
                 : error.message,
         })
     }
+}
+
+//////////////////////////////////////////////
+export const addProductReview = (review, productId) => async (dispatch, getState) => {
+
+    try{
+        dispatch({
+            type: PRODUCT_REVIEW_CREATE_REQUEST
+        })
+    
+        const config = {
+            headers: { //It just worked like this for PUT. Axious is in x-www-form-urlencoded
+                "Content-Type": "application/x-www-form-urlencoded",
+            }
+        }
+    
+        const currentUser = getState().userLogin.userInfo
+    
+        const { data } = await axios.post('api/products/addreview', {review, productId, currentUser}, config)
+    
+        dispatch({type: PRODUCT_REVIEW_CREATE_SUCCESS})
+
+    } catch (error) {
+
+        dispatch({
+            type: PRODUCT_REVIEW_CREATE_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.message.data.detail
+                : error.message,
+        })
+    }
+
+
 }
