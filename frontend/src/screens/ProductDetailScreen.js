@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 //Router
-import { Link, useParams } from "react-router-dom"; //Library React Router Dom
+import { Link, useParams, useNavigate } from "react-router-dom"; //Library React Router Dom
 
 //Redux
 import { useDispatch, useSelector } from 'react-redux'
@@ -30,6 +30,8 @@ function ProductScreen({ match }) {
 
   const dispatch = useDispatch()
 
+  let history = useNavigate(); //for V6 it is useNavigate, NOT useHistory
+
   const productDetails = useSelector(state => state.productDetails)
   const { loading, error, product } = productDetails
 
@@ -45,12 +47,12 @@ function ProductScreen({ match }) {
       dispatch(addToCart(product, quantity))
   }
 
-
   const { reviews } = product
 
   const deleteProductHandler = (e) => {
     e.preventDefault()
     dispatch(deleteProduct(product?._id))
+    history('/')
   }
 
   return(
@@ -161,7 +163,6 @@ function ProductScreen({ match }) {
                         <Button 
                           onClick={deleteProductHandler}
                           className='btn-block' 
-                          disabled={product?.countInStock === 0 || product?.countInStock < 0} 
                           type='button'>
                           Delete Product
                         </Button>

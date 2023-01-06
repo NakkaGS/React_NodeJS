@@ -70,16 +70,17 @@ router.post("/create", (req, res) => {
   
 });
 
+//create a review to a product
 router.post('/addreview',  async (req,res) => {
     const { review , productId , currentUser } = req.body
 
     const product = await Product.findById({_id : productId})
 
     const reviewmodel = {
-        name : currentUser.name,
-        userid : currentUser._id ,
-        rating : review.rating,
-        comment : review.comment 
+        name : currentUser?.name,
+        userid : currentUser?._id ,
+        rating : review?.rating,
+        comment : review?.comment 
     }
 
     product.reviews.push(reviewmodel)
@@ -96,5 +97,22 @@ router.post('/addreview',  async (req,res) => {
     })
 
 })
+
+//Delete Product
+router.post("/deleteproductbyid", (req, res) => {
+
+    Product.findByIdAndDelete({_id : req.body.productId} , (err , docs)=>{
+
+        if(!err)
+        {
+            res.send(docs[0])
+        }
+        else{
+            return res.status(400).json({ message: 'something went wrong' });
+        }
+
+    })
+  
+});
 
 module.exports = router
