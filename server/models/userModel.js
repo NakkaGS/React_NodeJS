@@ -13,6 +13,11 @@ const UserSchema = mongoose.Schema({
         require
     },
 
+    isadmin: {
+        type: Boolean,
+        default: false,
+    },
+
     hash : String,
     salt : String
     

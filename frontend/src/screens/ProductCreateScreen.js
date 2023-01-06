@@ -62,7 +62,8 @@ function ProductCreateScreen() {
   };
 
   return (
-    <FormContainer>
+    <div className="mt-5">
+      <FormContainer>
       <h1>Create Product</h1>
 
       {loadingCreate ? 
@@ -134,7 +135,9 @@ function ProductCreateScreen() {
             )}
 
     </FormContainer>
-  );
+
+    </div>
+      );
 }
 
 export default ProductCreateScreen;

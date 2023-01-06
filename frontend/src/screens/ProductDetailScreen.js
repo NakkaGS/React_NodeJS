@@ -7,7 +7,7 @@ import { Link, useParams } from "react-router-dom"; //Library React Router Dom
 import { useDispatch, useSelector } from 'react-redux'
 
 //Actions
-import { listProductDetails } from '../actions/productActions' //this is the reducer
+import { listProductDetails, deleteProduct } from '../actions/productActions' //this is the reducer
 import { addToCart } from '../actions/cartActions' //this is the reducer
 
 //Bootstrap Components
@@ -45,7 +45,13 @@ function ProductScreen({ match }) {
       dispatch(addToCart(product, quantity))
   }
 
+
   const { reviews } = product
+
+  const deleteProductHandler = (e) => {
+    e.preventDefault()
+    dispatch(deleteProduct(product?._id))
+  }
 
   return(
     <div>
@@ -149,6 +155,15 @@ function ProductScreen({ match }) {
                           disabled={product?.countInStock === 0 || product?.countInStock < 0} 
                           type='button'>
                           Add to Cart
+                        </Button>
+                      </ListGroup.Item>
+                      <ListGroup.Item>
+                        <Button 
+                          onClick={deleteProductHandler}
+                          className='btn-block' 
+                          disabled={product?.countInStock === 0 || product?.countInStock < 0} 
+                          type='button'>
+                          Delete Product
                         </Button>
                       </ListGroup.Item>
 

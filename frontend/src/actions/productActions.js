@@ -17,6 +17,10 @@ import {
     PRODUCT_REVIEW_CREATE_SUCCESS,
     PRODUCT_REVIEW_CREATE_FAIL,
 
+    PRODUCT_DELETE_REQUEST,
+    PRODUCT_DELETE_SUCCESS,
+    PRODUCT_DELETE_FAIL,
+
 
 } from '../constants/productConstants' //it is like enum in C
 
@@ -191,4 +195,38 @@ export const addProductReview = (review, productId) => async (dispatch, getState
         })
     }
 
+}
+
+export const deleteProduct = (productId) => async (dispatch, getState) => {
+    try {
+
+        dispatch({
+            type: PRODUCT_DELETE_REQUEST
+        })
+    
+        const config = {
+            headers: { //It just worked like this for PUT. Axious is in x-www-form-urlencoded
+                "Content-Type": "application/x-www-form-urlencoded",
+            }
+        }
+    
+        const currentUser = getState().userLogin.userInfo
+
+        if(!currentUser) {
+            console.log('It must be logged')
+        } else {
+            const { data } = await axios.post('/api/products/addreview', {productId}, config)
+    
+            dispatch({type: PRODUCT_DELETE_SUCCESS})
+        }
+
+    } catch (error) {
+
+        dispatch({
+            type: PRODUCT_DELETE_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.message.data.detail
+                : error.message,
+        })
+    }
 }
