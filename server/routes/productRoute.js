@@ -70,4 +70,31 @@ router.post("/create", (req, res) => {
   
 });
 
+router.post('/addreview',  async (req,res) => {
+    const { review , productId , currentUser } = req.body
+
+    const product = await Product.findById({_id : productId})
+
+    const reviewmodel = {
+        name : currentUser.name,
+        userid : currentUser._id ,
+        rating : review.rating,
+        comment : review.comment 
+    }
+
+    product.reviews.push(reviewmodel)
+    var rating = product.reviews.reduce((acc , x)=> acc + x.rating , 0) / product.reviews.length
+
+    product.rating = rating
+
+    product.save(err => {
+        if(err){
+            return res.status(400).json({ message: 'Something went wrong'})
+        } else {
+            res.send('Product Added Successfully')
+        }
+    })
+
+})
+
 module.exports = router

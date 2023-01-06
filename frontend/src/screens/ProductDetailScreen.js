@@ -11,7 +11,7 @@ import { listProductDetails } from '../actions/productActions' //this is the red
 import { addToCart } from '../actions/cartActions' //this is the reducer
 
 //Bootstrap Components
-import { Row, Col, Image, ListGroup, Button, Card, Form } from "react-bootstrap"; //Library React Bootstrap
+import { Row, Col, Image, ListGroup, Button, Card, Form, Badge } from "react-bootstrap"; //Library React Bootstrap
 
 //Components
 import Rating from "../components/Rating";
@@ -44,6 +44,8 @@ function ProductScreen({ match }) {
       e.preventDefault()
       dispatch(addToCart(product, quantity))
   }
+
+  const { reviews } = product
 
   return(
     <div>
@@ -157,6 +159,35 @@ function ProductScreen({ match }) {
               <Row className="justify-content-center">
                 <Col className="d-flex ml-5 justify-content-center flex-wrap align-items-center">
                   <Review product={product}/>
+                </Col>
+                <Col>
+                    <table className="table table-striped mt-5">
+                        <thead>
+                            <tr>
+                                <th>User Name</th>
+                                <th>Rating</th>
+                                <th>Commenting</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                        {loading ? <Loader /> //it is to create the loadin and error view 
+                            : error ? <Message variant='danger'>{error}</Message>
+                            : 
+                            (reviews?.length && (reviews.map(review=> {
+                                return (
+                                    
+                                  <tr key={review?._id} className='cart-item'>
+                                      <td>{review?.name}</td>
+                                      <td>{review?.rating}</td>
+                                      <td>{review?.comment}</td>
+                                  </tr>
+                                    
+                                )
+                            })))
+                        }
+                        </tbody>
+                    </table>
                 </Col>
               </Row>
 

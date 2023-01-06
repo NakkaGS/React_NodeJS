@@ -23,7 +23,7 @@ function Review({ product }) {
             rating: rating,
             comment: comment,
         }
-        dispatch(addProductReview(review, product))
+        dispatch(addProductReview(review, product._id))
     }
 
     return (

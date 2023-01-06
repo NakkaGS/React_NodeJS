@@ -17,6 +17,7 @@ import {
     PRODUCT_REVIEW_CREATE_SUCCESS,
     PRODUCT_REVIEW_CREATE_FAIL,
 
+
 } from '../constants/productConstants' //it is like enum in C
 
 //it works like a state machine
@@ -171,10 +172,14 @@ export const addProductReview = (review, productId) => async (dispatch, getState
         }
     
         const currentUser = getState().userLogin.userInfo
+
+        if(!currentUser) {
+            console.log('It must be logged')
+        } else {
+            const { data } = await axios.post('/api/products/addreview', {review, productId, currentUser}, config)
     
-        const { data } = await axios.post('api/products/addreview', {review, productId, currentUser}, config)
-    
-        dispatch({type: PRODUCT_REVIEW_CREATE_SUCCESS})
+            dispatch({type: PRODUCT_REVIEW_CREATE_SUCCESS})
+        }
 
     } catch (error) {
 
@@ -185,6 +190,5 @@ export const addProductReview = (review, productId) => async (dispatch, getState
                 : error.message,
         })
     }
-
 
 }

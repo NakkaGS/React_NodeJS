@@ -94,7 +94,7 @@ router.post('/profile/', (req,res) => {
     console.log(req.body)
     User.findByIdAndUpdate(req.body._id ,
         { name : req.body.name, email: req.body.email}, function(err, docs) {
-            console.log(docs)
+
         if(err){
             return res.status(400).send({ 
                 message : "Wrong Password"
@@ -110,7 +110,7 @@ router.put('/profile/update/', (req,res) => {
     console.log(req.body)
     User.findByIdAndUpdate(req.body._id , 
         { name : req.body.name, email: req.body.email}, {new: true}, function(err, docs) {
-            console.log(docs)
+
         if(err){
             return res.status(400).send({ 
                 message : "Wrong Password"
