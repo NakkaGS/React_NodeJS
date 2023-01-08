@@ -11,7 +11,7 @@ import { listProductDetails, deleteProduct } from '../actions/productActions' //
 import { addToCart } from '../actions/cartActions' //this is the reducer
 
 //Bootstrap Components
-import { Row, Col, Image, ListGroup, Button, Card, Form, Badge } from "react-bootstrap"; //Library React Bootstrap
+import { Row, Col, Image, ListGroup, Button, Card, Form } from "react-bootstrap"; //Library React Bootstrap
 
 //Components
 import Rating from "../components/Rating";
@@ -34,6 +34,9 @@ function ProductScreen({ match }) {
 
   const productDetails = useSelector(state => state.productDetails)
   const { loading, error, product } = productDetails
+  
+  const userLogin = useSelector(state=> state.productDetails)
+  const { userInfo } = userLogin
 
   let { id } = useParams(match); //get the Product ID
 
@@ -162,7 +165,8 @@ function ProductScreen({ match }) {
                       <ListGroup.Item>
                         <Button 
                           onClick={deleteProductHandler}
-                          className='btn-block' 
+                          className='btn-block'
+                          disabled={userInfo}
                           type='button'>
                           Delete Product
                         </Button>
