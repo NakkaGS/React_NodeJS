@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom' //it i
 //Components
 import Header from './components/Header';
 
+import HeaderNew from './components/HeaderNew'
+
 //Screens
 import HomeScreen from './screens/HomeScreen';
 import ProductDetailScreen from './screens/ProductDetailScreen';
@@ -22,11 +24,13 @@ import MyOrdersScreen from './screens/MyOrdersScreen';
 import MyOrderDetailScreen from './screens/MyOrderDetailScreen'
 import AdminScreen from './screens/AdminScreen';
 
+
+
 function App() {
   return (
     <Router>
       <div>
-        <Header />
+        <HeaderNew/>
         <Routes>
 
           <Route path='/' element={<HomeScreen/>} exact/>

@@ -16,6 +16,9 @@ import NewProductCard from '../components/NewProductCard'
 import Filter from '../components/Filter'
 import Loader from '../components/Loader' //to have the Spinner in the page
 import Message from '../components/Message' //to have the Error in the page
+import ProductSection from '../components/ProductSection'
+
+import Sidebar from '../components/Sidebar'
 
 export default function HomeScreen(){
 
@@ -42,33 +45,31 @@ export default function HomeScreen(){
 
     return(
     <div>
-        <Filter/>
-        <Row>
-            <hr/>
+        <div className="product-container">
 
-            <h1 className='text-center mt-5'>Latest Products</h1>
+            <div className="container">
+                <div class="sidebar has-scrollbar" data-mobile-menu="">
+                    <Sidebar productList={productList.products}/>
+                </div>
 
-            <div id='products'>
+                <div className='product-box'>
+                    
+                    {loading ? <Loader /> //it is to create the loadin and error view 
+                        : error ? <Message variant='danger'>{error}</Message>
+                        : (!loading && Object.keys(productList.products).length === 0) ? <Message variant='info'>No Products</Message> 
+                        :
+                            <ProductSection productList={productList.products} />
+                        }
+
+                </div>
                 
-                {loading ? <Loader /> //it is to create the loadin and error view 
-                    : error ? <Message variant='danger'>{error}</Message>
-                    : (!loading && Object.keys(productList.products).length === 0) ? <Message variant='info'>No Products</Message> 
-                    :
-                        (products?.length && (products.map(product => {
-                            
-                            return ( 
-                                <div className='col' key={product._id}>
-                                    <NewProductCard product={product} />
-                                </div>
-                            )
-                
-                        })))
-                    }
-
             </div>
+        </div>
+
+
+
             
 
-        </Row>
         <Banner />
     </div>
     

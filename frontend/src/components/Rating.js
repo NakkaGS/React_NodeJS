@@ -74,7 +74,7 @@ function Rating({ value, text, color }) {
       </span>
 
       <span>
-        {text && text}{" "}
+        <p>{text && text}{" "}</p>
         {/* //if text in Product.js exist (<Rating value={product.rating} text={`${product.numReviews} reviews`}), then show the text */}
       </span>
     </div>

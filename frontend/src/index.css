@@ -12,6 +12,12 @@ p {
   font-family: "Open Sans" !important;
 }
 
+a {
+  text-decoration: none;
+}
+
+
+
 /*Button*/
 
 button.normal {
@@ -22,10 +28,12 @@ button.normal {
   margin-top: 15px;
   margin-bottom: 30px;
   border: 0;
+  background-color: rgb(52,58,64);
+  color:#cce7d0
 }
 
 button.normal:hover {
-  background-color: rgb(52,58,64);
+  background-color: rgb(137, 137, 137);
   color:#cce7d0
 }
 
@@ -242,6 +250,14 @@ button.light:hover {
 #detail-head .detail-userdata .address p{
   margin: 0 !important;
   font-size: 15px;
+}
+
+.rating {
+  font-size: 13px;
+}
+
+.rating p{
+  margin-left: 0.8rem;
 }
 
 #detail-head .detail-shipping {
