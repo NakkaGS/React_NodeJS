@@ -34,7 +34,7 @@ function HeaderNew() {
         <div className="header-main">
             <div className="container">
                 <a href="/" className='logo-title'>
-                    <img src="./images/MERN_logo.svg" alt="" height={80}/>
+                    <img src="https://github.com/NakkaGS/React_NodeJS/blob/main/frontend/public/images/MERN_Logo.svg" alt="" height={80}/>
                 </a>
 
                 <div className="header-search-container">

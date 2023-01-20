@@ -13,8 +13,10 @@ var productsRoute = require('./routes/productRoute')
 var userRoute = require('./routes/userRoute')
 var orderRoute = require('./routes/orderRoute')
 
+const path = require('path');
+
 app.use(express.json());
-app.use(cors())
+app.use(cors(allowedOrigins))
 
 //Create Route
 app.use('/api/products/' , productsRoute)
