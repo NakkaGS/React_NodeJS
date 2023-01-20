@@ -1,8 +1,7 @@
-# React_NodeJS
+# React_NodeJS - [Look here](https://mern-app-n7d5.onrender.com/)
  
 E-Commerce - Frontend (React+Redux+Router+Axios) / Backend (Node.JS + MongoDB)
 
-Check out! - [E-Commerce MERN](https://mern-app-n7d5.onrender.com/)
 ##### Project from K.Sathyaprakash Reddy - [Udemy Page](https://www.udemy.com/course/mern-stack-ecommerce-app-reactreduxnodeexpressmongo-db/)
 
 ## New Version - I got the idea from the Frontend-3 Project 
