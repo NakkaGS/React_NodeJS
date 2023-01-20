@@ -4,8 +4,6 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom' //it is used for the endpoints
 
 //Components
-import Header from './components/Archive/Header';
-
 import HeaderNew from './components/HeaderNew'
 
 //Screens
@@ -23,8 +21,6 @@ import PaymentFailed from './screens/PaymentFailed';
 import MyOrdersScreen from './screens/MyOrdersScreen';
 import MyOrderDetailScreen from './screens/MyOrderDetailScreen'
 import AdminScreen from './screens/AdminScreen';
-
-
 
 function App() {
   return (

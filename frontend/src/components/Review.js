@@ -27,7 +27,7 @@ function Review({ product }) {
     }
 
     return (
-    <div>
+    <div className='col-md-10'>
         
         <h3>Give your Review</h3>
 
@@ -40,7 +40,7 @@ function Review({ product }) {
 
         />
 
-        <input type="text"className="form-control mt-2 col-md-10" value={comment} onChange={(e)=>{setComment(e.target.value)}} />
+        <textarea type="text"className="form-control mt-2 col-md-10" value={comment} onChange={(e)=>{setComment(e.target.value)}} />
         <button className="btn btn-light mt-3" onClick={sendReview}>Submit Review</button>
     </div>
     )

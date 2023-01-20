@@ -81,12 +81,12 @@ function ProfileScreen() {
     }
 
     return (
-    <div>
-        <div className="row d-flex justify-content-center">
+    <div className='container'>
+        <div className="row d-flex">
                 
             <div className="col-md-3 mt-5">
                 <div className="card p-3">
-                    <h4 className='text-center m-3'>Update</h4>
+                    <h4 className='center'>Update</h4>
                     {message && <Message variant="danger">{message}</Message>}
                     <form onSubmit={submitHandler}>
                         <input type="text" placeholder='Name' className='form-control mt-2' value={name} onChange={(e) => setName(e.target.value)} />

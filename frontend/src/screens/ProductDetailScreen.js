@@ -59,7 +59,7 @@ function ProductScreen({ match }) {
   }
 
   return(
-    <div>
+    <div className="container">
       <Link to="/" className="btn btn-light m-3">Go Back</Link>
 
       {loading ?
@@ -67,14 +67,14 @@ function ProductScreen({ match }) {
         : error
           ? <Message variant='danger'>{error}</Message>
           : (
-            <div>
-              <Row>
-                <Col md={2} className="m-5">
-                  <Image src={product?.image} alt={product?.name} fluid style={{maxWidth: 250}}/>
+            <div >
+              <Row >
+                <Col md={2} className="my-5">
+                  <Image src={product?.image} alt={product?.name} fluid />
                   {/* //it was necessary to add '?' every time that we want to get a attribute from the product */}
                 </Col>
       
-                <Col md={3} className="mx-5 w-50 newfont">
+                <Col md={6}>
                   <ListGroup variant="flush">
 
                     <ListGroup.Item>
@@ -100,7 +100,7 @@ function ProductScreen({ match }) {
                   </ListGroup>
                 </Col>
         
-                <Col md={2}>
+                <Col md={3}>
                   <Card>
                     <ListGroup variant="flush">
                       <ListGroup.Item>
@@ -177,7 +177,7 @@ function ProductScreen({ match }) {
                 </Col>
               </Row>
               <Row className="justify-content-center">
-                <Col className="d-flex ml-5 justify-content-center flex-wrap align-items-center">
+                <Col className="d-flex my-5 justify-content-center flex-wrap col-md-6">
                   <Review product={product}/>
                 </Col>
                 <Col>

@@ -1859,8 +1859,13 @@ footer {
 
 /* Responsive larger than 570px screen */
 @media (min-width:570px) {
-  /* Header */
 
+  /* Reused Style */
+  .container {
+    margin: 20px 0;
+  }
+
+  /* Header */
   .header-top .container,
   .header-main .container {
     display: flex;
@@ -1966,7 +1971,7 @@ footer {
   /* Reused style */
   .container {
     max-width: 750px;
-    margin: auto;
+    margin: 30px 0;
   }
 
   /* Modal */
@@ -2077,7 +2082,6 @@ footer {
 @media (min-width:1024px) {
 
   :root {
-
     /* topography */
     --fs-1: 2.625rem;
     --fs-2: 1.1125rem;
@@ -2333,13 +2337,11 @@ footer {
   }
 
   /* Product */
-
   .product-container {
     display: flex;
     justify-content: center;
-    min-width: 1400px;
+    min-width: 1024px;
   }
-
 
   .product-container .container {
     position: relative;

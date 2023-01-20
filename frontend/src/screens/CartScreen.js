@@ -23,10 +23,9 @@ function CartScreen() {
       });
 
     return (
-        <div>
-            <div className='row justify-content-center text-center'>
-                <div className='col-md-10'>
-                    <h1 className='m-5'>My Cart</h1>
+        <div className='cart'>
+            <div className='container'>
+                    <h1 className='my-5'>My Cart</h1>
                     <table className='table '>
                         <thead>
                             <tr>
@@ -58,13 +57,15 @@ function CartScreen() {
 
                     </table>
 
-                    <h3 className='m-3'>Subtotal: {typeof(subtotal) !== "undefined" ? (formatter.format(subtotal)) : "$0" }</h3>
+                    <h3 className='mt-5'>Subtotal: {typeof(subtotal) !== "undefined" ? (formatter.format(subtotal)) : "$0" }</h3>
                     
                     <hr/>
-                    <CheckOut amount={ subtotal }/>
+                    <div className='d-flex justify-content-center'>
+                        <CheckOut amount={ subtotal }/>
+                    </div>
+                    
                         
 
-                </div>
             </div>
         </div>
     )
