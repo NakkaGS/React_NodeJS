@@ -62,9 +62,9 @@ function ProductCreateScreen() {
   };
 
   return (
-    <div className="mt-5">
+    <div className="create-product">
       <FormContainer>
-      <h1>Create Product</h1>
+      <h1 className="create-product-title">Create Product</h1>
 
       {loadingCreate ? 
         <Loader/> 
@@ -72,7 +72,7 @@ function ProductCreateScreen() {
             ? <Message variant='danger'>{errorCreate}</Message>
             : (
                 <Form onSubmit={submitHandler}>
-                    <Form.Group className="mb-3" controlId="name">
+                    <Form.Group className="mb-2" controlId="name">
                     <Form.Label>Name</Form.Label>
                     <Form.Control
                         required
@@ -83,7 +83,7 @@ function ProductCreateScreen() {
                     ></Form.Control>
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="price">
+                    <Form.Group className="mb-2" controlId="price">
                     <Form.Label>Price</Form.Label>
                     <Form.Control
                         required
@@ -94,7 +94,7 @@ function ProductCreateScreen() {
                     ></Form.Control>
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="category">
+                    <Form.Group className="mb-2" controlId="category">
                     <Form.Label>Category</Form.Label>
                     <Form.Control
                         required
@@ -105,7 +105,7 @@ function ProductCreateScreen() {
                     ></Form.Control>
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="description">
+                    <Form.Group className="mb-2" controlId="description">
                     <Form.Label>Description</Form.Label>
                     <Form.Control
                         required
@@ -116,7 +116,7 @@ function ProductCreateScreen() {
                     ></Form.Control>
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="countInStock">
+                    <Form.Group className="mb-2" controlId="countInStock">
                     <Form.Label>Stock</Form.Label>
                     <Form.Control
                         required
@@ -127,9 +127,12 @@ function ProductCreateScreen() {
                     ></Form.Control>
                     </Form.Group>
 
-                    <Button type="submit" variant="primary">
-                    Create Product
-                    </Button>
+                    <div className="create-submit-btn">
+                      <Button type="submit" variant="primary">
+                        Create Product
+                      </Button>
+                    </div>
+
 
                 </Form>
             )}

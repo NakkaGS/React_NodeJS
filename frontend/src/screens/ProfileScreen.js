@@ -81,12 +81,12 @@ function ProfileScreen() {
     }
 
     return (
-    <div className='container'>
+    <div className='profile container'>
         <div className="row d-flex">
                 
-            <div className="col-md-3 mt-5">
+            <div className="col-md-3">
                 <div className="card p-3">
-                    <h4 className='center'>Update</h4>
+                    <h2 className='user-title'>Update</h2>
                     {message && <Message variant="danger">{message}</Message>}
                     <form onSubmit={submitHandler}>
                         <input type="text" placeholder='Name' className='form-control mt-2' value={name} onChange={(e) => setName(e.target.value)} />
@@ -94,17 +94,17 @@ function ProfileScreen() {
                         <input type="text" placeholder='Password' className='form-control mt-2' value={password} onChange={(e) => setPassword(e.target.value)} />
                         <input type="text" placeholder='Confirm Password' className='form-control mt-2' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                         <div className="d-flex align-items-end flex-column">
-                            <button type='submit' className='btn mt-3'>Update</button>
+                            <button type='submit' normal className='mt-3 light'>Update</button>
                         </div>
                     </form>
                     
                 </div>
             </div>
 
-            <div className="col-md-6 mt-5">
-                <h2>My Orders</h2>
+            <div className="col-md-9">
+                <h2 className='table-title'>My Orders</h2>
 
-                <table className="table table-striped mt-5">
+                <table className="table table-striped mt-3">
                     <thead>
                         <tr>
                             <th>Order ID</th>
@@ -122,27 +122,27 @@ function ProfileScreen() {
                         (orders?.map(order=> {
                             return (
                                 
-                                    <tr key={order._id} className='cart-item'>
+                                <tr key={order._id} className='cart-item'>
 
-                                        <td>{order._id}</td>
-                                        <td>{formatter.format(order.orderAmount)}</td>
-                                        <td>{order.createdAt.substring(0,10)}</td>
-                                        <td>{order.transactionId}</td>
-                                        <td>{order.isDelivered ? <Badge bg="success"><strong>Delivered</strong></Badge> : <Badge bg="warning" text="dark"><strong>Not Delivered</strong></Badge>}</td>
-                                        <td>
-                                        <Link to={`/myorders/${order._id}/`}>
-                                            <Button variant='light' className='btn-sm'>
-                                                <i className='fas fa-edit'></i>
-                                            </Button>
-                                        </Link>
+                                    <td>{order._id}</td>
+                                    <td>{formatter.format(order.orderAmount)}</td>
+                                    <td>{order.createdAt.substring(0,10)}</td>
+                                    <td>{order.transactionId}</td>
+                                    <td>{order.isDelivered ? <Badge bg="success"><strong>Delivered</strong></Badge> : <Badge bg="warning" text="dark"><strong>Not Delivered</strong></Badge>}</td>
+                                    <td>
+                                    <Link to={`/myorders/${order._id}/`}>
+                                        <Button variant='light' className='btn-sm'>
+                                            <i className='fas fa-edit'></i>
+                                        </Button>
+                                    </Link>
 
-                                        {/* <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(product._id)}>
-                                            <i className='fas fa-trash'></i>
-                                        </Button> */}
-                                        </td>
+                                    {/* <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(product._id)}>
+                                        <i className='fas fa-trash'></i>
+                                    </Button> */}
+                                    </td>
 
-                                    </tr>
-                                
+                                </tr>
+                            
                             )
                         }))
                     }

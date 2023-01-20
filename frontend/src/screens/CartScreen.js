@@ -25,8 +25,8 @@ function CartScreen() {
     return (
         <div className='cart'>
             <div className='container'>
-                    <h1 className='my-5'>My Cart</h1>
-                    <table className='table '>
+                    <h2 className='cart-title'>My Cart</h2>
+                    <table className='table'>
                         <thead>
                             <tr>
                                 <th><strong>Name</strong></th>
@@ -57,7 +57,7 @@ function CartScreen() {
 
                     </table>
 
-                    <h3 className='mt-5'>Subtotal: {typeof(subtotal) !== "undefined" ? (formatter.format(subtotal)) : "$0" }</h3>
+                    <h3 className='cart-subtotal'>Subtotal: {typeof(subtotal) !== "undefined" ? (formatter.format(subtotal)) : "$0" }</h3>
                     
                     <hr/>
                     <div className='d-flex justify-content-center'>

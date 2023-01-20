@@ -5,7 +5,7 @@ function Banner() {
     <div className='nktbanner'>
       <p>crazy deals</p>
       <h2>Up to 30% off: Cameras & Mouses</h2>
-      <button className='normal'>More</button>
+      <button className='normal my-3'>More</button>
     </div>
   )
 }
