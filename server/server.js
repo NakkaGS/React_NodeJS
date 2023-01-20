@@ -16,12 +16,12 @@ var orderRoute = require('./routes/orderRoute')
 const path = require('path');
 
 app.use(express.json());
-app.use(cors(allowedOrigins))
+app.use(cors())
 
 //Create Route
-app.use('/api/products/' , productsRoute)
-app.use('/api/users/', userRoute)
-app.use('/api/orders/', orderRoute)
+app.use('/api/products/' , productsRoute, cors())
+app.use('/api/users/', userRoute, cors())
+app.use('/api/orders/', orderRoute, cors())
 
 //This is for the production part
 if(process.env.NODE_ENV === 'production')
