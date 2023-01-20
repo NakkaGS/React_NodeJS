@@ -36,7 +36,9 @@ function HeaderNew() {
     return (
         <div class="header-main">
             <div class="container">
-                <a href="/" class='logo-title'><b>MERN</b></a>
+                <a href="/" class='logo-title'>
+                    <img src="./images/MERN_logo.svg" alt="" height={80}/>
+                </a>
 
                 <div class="header-search-container">
                 <input type="search" name="search" class="search-field" placeholder="Enter your product name..." value={searchKey} onChange={(e) => setSearchKey(e.target.value)} ></input>
