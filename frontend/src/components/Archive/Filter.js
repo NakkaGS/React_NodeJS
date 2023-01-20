@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux' 
 
 //Actions
-import { filterProducts } from '../actions/productActions'
+import { filterProducts } from '../../actions/productActions'
 
 function Filter() {
 

@@ -7,7 +7,7 @@ import { Navbar, Nav, Container, Badge, NavDropdown } from "react-bootstrap"; //
 import { useDispatch, useSelector } from 'react-redux'
 
 //Actions
-import { logout } from '../actions/userActions'
+import { logout } from '../../actions/userActions'
 
 function Header() {
 

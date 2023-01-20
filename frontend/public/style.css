@@ -1335,7 +1335,7 @@ body::-webkit-scrollbar-thumb:hover {
 
 .product-grid .showcase-category {
   color: var(--salmon-pink);
-  font-size: var(--fs-9);
+  font-size: var(--fs-10);
   font-weight: var(--weight-500);
   text-transform: uppercase;
   margin-bottom: 10px;
@@ -2260,9 +2260,9 @@ footer {
     position: absolute;
     top: 100%;
     left: 0;
-    width: 200px;
+    width: 150px;
     background: var(--white);
-    padding: 20px 0;
+    padding: 10px 0;
     border-radius: var(--border-radius-md );
     box-shadow: 0 3px 5px hsla(0, 0%, 0%, 0.1);
     transform: translateY(50px);
@@ -2271,9 +2271,10 @@ footer {
     pointer-events: none;
     transition: var(--transition-timing);
     z-index: 5;
+    text-align: left;
   }
 
-  .desktop-menu-category-list .menu-category:hover > .dropdown-list {
+  .dropdown-menu-header:hover > .dropdown-list {
     transform: translateY(0);
     opacity: 1;
     visibility: visible;

@@ -4,7 +4,7 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom' //it is used for the endpoints
 
 //Components
-import Header from './components/Header';
+import Header from './components/Archive/Header';
 
 import HeaderNew from './components/HeaderNew'
 

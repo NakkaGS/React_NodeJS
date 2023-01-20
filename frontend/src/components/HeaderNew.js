@@ -1,8 +1,5 @@
 import React, { useState } from 'react'
 
-//Boostrap Components
-import { Navbar, Nav, Container, Badge, NavDropdown } from "react-bootstrap"; //installed using the console
-
 //Redux
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -34,43 +31,55 @@ function HeaderNew() {
     }
 
     return (
-        <div class="header-main">
-            <div class="container">
-                <a href="/" class='logo-title'>
+        <div className="header-main">
+            <div className="container">
+                <a href="/" className='logo-title'>
                     <img src="./images/MERN_logo.svg" alt="" height={80}/>
                 </a>
 
-                <div class="header-search-container">
-                <input type="search" name="search" class="search-field" placeholder="Enter your product name..." value={searchKey} onChange={(e) => setSearchKey(e.target.value)} ></input>
-                <button class="search-btn" onClick={() => {dispatch(filterProducts(searchKey, sort, category)) }}>
-                    <ion-icon name="search-outline" role="img" class="md hydrated" aria-label="search outline"></ion-icon>
+                <div className="header-search-container">
+                <input type="search" name="search" className="search-field" placeholder="Enter your product name..." value={searchKey} onChange={(e) => setSearchKey(e.target.value)} ></input>
+                <button className="search-btn" onClick={() => {dispatch(filterProducts(searchKey, sort, category)) }}>
+                    <ion-icon name="search-outline" role="img" className="md hydrated" aria-label="search outline"></ion-icon>
                 </button>
                 </div>
 
-                <div class="header-user-actions">
-                <button class="action-btn dropdown-menu-header">
-                    <ion-icon name="person-outline" role="img" class="md hydrated" aria-label="person outline"></ion-icon>
-                    {userInfo ? (
-                        <NavDropdown>
-                            <NavDropdown.Item href='/profile'>Profile</NavDropdown.Item>
-                            {/* <NavDropdown.Item href="/myorders">My Orders</NavDropdown.Item> */}
-                            <NavDropdown.Item href="/product/create">Create Product</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
-                        </NavDropdown>
-                        ) : (
-                            <Nav.Link href='/login'>Login</Nav.Link>
-                        )}
-                </button>
-                
-                <Link to={`/cart`}>
+                <div className="header-user-actions">
+                    <button className="action-btn dropdown-menu-header">
+                        {userInfo ? (
+                                <><ion-icon name="person-outline" role="img" class="md hydrated" aria-label="person outline"></ion-icon><ul className="dropdown-list">
 
-                <button class="action-btn">
-                    <ion-icon name="bag-handle-outline" role="img" class="md hydrated" aria-label="bag handle outline"></ion-icon>
-                    <span class="count">{(typeof(cartItems) !== "undefined") && cartItems.length}</span>
-                </button>
+                                    <li className="dropdown-item">
+                                        <a href="/profile">Profile</a>
+                                    </li>
+
+                                    <li className="dropdown-item">
+                                        <a href="#">Product List</a>
+                                    </li>
+
+                                    <li className="dropdown-item">
+                                        <a href="/product/create">Create Product</a>
+                                    </li>
+
+                                    <li className="dropdown-item">
+                                        <a onClick={logoutHandler}>Logout</a>
+                                    </li>
+
+                                </ul></>
+
+                            ) : (
+                                <a href='/login'><ion-icon name="person-outline" role="img" class="md hydrated" aria-label="person outline"></ion-icon></a>
+                            )}
+                    </button>
+                
+                    <Link to={`/cart`}>
+
+                    <button className="action-btn">
+                        <ion-icon name="bag-handle-outline" role="img" class="md hydrated" aria-label="bag handle outline"></ion-icon>
+                        <span className="count">{(typeof(cartItems) !== "undefined") && cartItems.length}</span>
+                    </button>
                     
-                </Link>
+                    </Link>
 
                 </div>
 

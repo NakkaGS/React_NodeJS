@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
 
-import Rating from "../components/Rating";
-
 //Redux
 import { useDispatch } from 'react-redux'
 
 //Actions
 import { filterProducts } from '../actions/productActions'
+
+//React Router Dom
+import { Link } from 'react-router-dom'
+
+//Components
+import Rating from "../components/Rating";
 
 function Sidebar({productList}) {
 
@@ -23,7 +27,6 @@ function Sidebar({productList}) {
 
         for (let i = 0; i < accordionBtn.length; i++) {
 
-            console.log(accordionBtn[i])
             accordionBtn[i].addEventListener('click', function () {
 
             const clickedBtn = this.nextElementSibling.classList.contains('active');
@@ -50,25 +53,25 @@ function Sidebar({productList}) {
       };
       
     return (
-        <div class="sidebar has-scrollbar" data-mobile-menu="">
+        <div className="sidebar has-scrollbar" data-mobile-menu="">
 
-            <div class="sidebar-category">
+            <div className="sidebar-category">
 
-                <div class="sidebar-top">
-                    <h2 class="sidebar-title">Category</h2>
-                    <button class="sidebar-close-btn" data-mobile-menu-close-btn="">
+                <div className="sidebar-top">
+                    <h2 className="sidebar-title">Category</h2>
+                    <button className="sidebar-close-btn" data-mobile-menu-close-btn="">
                     <ion-icon name="close-outline" role="img" class="md hydrated" aria-label="close outline"></ion-icon>
                     </button>
                 </div>
 
-                <ul class="sidebar-menu-category-list">
+                <ul className="sidebar-menu-category-list">
 
-                    <li class="sidebar-menu-category">
+                    <li className="sidebar-menu-category">
                     
-                    <button class="sidebar-accordion-menu" onClick={openCloseSidebar} data-accordion-btn="">
+                    <button className="sidebar-accordion-menu" onClick={openCloseSidebar} data-accordion-btn="">
 
-                        <div class="menu-title-flex">
-                            <p class="menu-title">shop</p>
+                        <div className="menu-title-flex">
+                            <p className="menu-title">shop</p>
                         </div>
 
                         <div>
@@ -78,23 +81,23 @@ function Sidebar({productList}) {
 
                     </button>
 
-                    <ul class="sidebar-submenu-category-list" data-accordion="">
+                    <ul className="sidebar-submenu-category-list" data-accordion="">
 
-                        <li class="sidebar-submenu-category">
-                            <button class="sidebar-submenu-title" onClick={() => {dispatch(filterProducts(searchKey, sort, 'fashion')) }}>
-                                <p class="product-name">fashion</p>
+                        <li className="sidebar-submenu-category">
+                            <button className="sidebar-submenu-title" onClick={() => {dispatch(filterProducts(searchKey, sort, 'fashion')) }}>
+                                <p className="product-name">fashion</p>
                             </button>
                         </li>
 
-                        <li class="sidebar-submenu-category">
-                            <button class="sidebar-submenu-title" onClick={() => {dispatch(filterProducts(searchKey, sort, 'mobiles')) }}>
-                                <p class="product-name">mobiles</p>
+                        <li className="sidebar-submenu-category">
+                            <button className="sidebar-submenu-title" onClick={() => {dispatch(filterProducts(searchKey, sort, 'mobiles')) }}>
+                                <p className="product-name">mobiles</p>
                             </button>
                         </li>
 
-                        <li class="sidebar-submenu-category">
-                            <button class="sidebar-submenu-title" onClick={() => {dispatch(filterProducts(searchKey, sort, 'electronics')) }}>
-                                <p class="product-name">electronics</p>
+                        <li className="sidebar-submenu-category">
+                            <button className="sidebar-submenu-title" onClick={() => {dispatch(filterProducts(searchKey, sort, 'electronics')) }}>
+                                <p className="product-name">electronics</p>
                             </button>
                         </li>
 
@@ -107,34 +110,34 @@ function Sidebar({productList}) {
 
             </div>
 
-            <div class="product-showcase">
-                <h3 class="showcase-heading">best sellers</h3>
+            <div className="product-showcase">
+                <h3 className="showcase-heading">best sellers</h3>
 
-                <div class="showcase-wrapper">
+                <div className="showcase-wrapper">
 
-                    <div class="showcase-container">
+                    <div className="showcase-container">
 
                         {(productList?.length && (productList.map(product => {
                         
                         return ( 
-                        <div class="showcase">
+                        <div className="showcase">
 
-                            <a href="#" class="showcase-img-box">
-                                <img src={product?.image} alt="Top Products" class="showcase-img" width="75" height="75"></img>
-                            </a>
+                            <Link to={`/product/${product._id}`} className="showcase-img-box">
+                                <img src={product?.image} alt="Top Products" className="showcase-img" width="75" height="75"></img>
+                            </Link>
 
-                            <div class="showcase-content">
+                            <div className="showcase-content">
 
-                                <a href="#">
-                                    <h4 class="showcase-title">{product?.name}</h4>
-                                </a>
+                                <Link to={`/product/${product._id}`} >
+                                    <h4 className="showcase-title">{product?.name}</h4>
+                                </Link>
 
-                                <div class="showcase-rating">
+                                <div className="showcase-rating">
                                     <Rating value={Number(product?.rating)} color={'#f8e825'} />
                                 </div>
 
-                                <div class="price-box">
-                                    <p class="price-product">${product?.price}</p>
+                                <div className="price-box">
+                                    <p className="price-product">${product?.price}</p>
                                 </div>
                             
                             </div>

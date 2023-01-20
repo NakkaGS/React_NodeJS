@@ -7,17 +7,13 @@ import { useDispatch, useSelector } from 'react-redux'
 //Actions
 import { listProducts } from '../actions/productActions'
 
-//Boostrap Components
-import { Row } from 'react-bootstrap'
-
 //Components
 import Banner from '../components/Banner'
-import NewProductCard from '../components/NewProductCard'
-import Filter from '../components/Filter'
 import Loader from '../components/Loader' //to have the Spinner in the page
 import Message from '../components/Message' //to have the Error in the page
-import ProductSection from '../components/ProductSection'
 
+//Components by me Nakata
+import ProductSection from '../components/ProductSection'
 import Sidebar from '../components/Sidebar'
 
 export default function HomeScreen(){
@@ -48,7 +44,7 @@ export default function HomeScreen(){
         <div className="product-container">
 
             <div className="container">
-                <div class="sidebar has-scrollbar" data-mobile-menu="">
+                <div className="sidebar has-scrollbar" data-mobile-menu="">
                     <Sidebar productList={productList.products}/>
                 </div>
 
