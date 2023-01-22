@@ -29,7 +29,8 @@ router.post('/addcategory', async (req, res) => {
 
 })
 
-router.get('/getcategories' , async (req,res) => {
+router.get('/getallcategories' , async (req,res) => {
+    console.log('requesting')
     Category.find({} , (err, docs) => {
         if(!err) {
             return res.send(docs)
@@ -38,3 +39,5 @@ router.get('/getcategories' , async (req,res) => {
         }
     })
 })
+
+module.exports = router

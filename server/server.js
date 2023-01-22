@@ -12,6 +12,7 @@ var dbconnection = require('./db')
 var productsRoute = require('./routes/productRoute')
 var userRoute = require('./routes/userRoute')
 var orderRoute = require('./routes/orderRoute')
+var categoryRoute = require('./routes/categoryRoute')
 
 const path = require('path');
 
@@ -22,7 +23,7 @@ app.use(cors())
 app.use('/api/products/' , productsRoute, cors())
 app.use('/api/users/', userRoute, cors())
 app.use('/api/orders/', orderRoute, cors())
-app.use('/api/categories/', orderRoute, cors())
+app.use('/api/categories/', categoryRoute, cors())
 
 //This is for the production part
 if(process.env.NODE_ENV === 'production')
