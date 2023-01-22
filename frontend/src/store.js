@@ -11,6 +11,8 @@ import {    productListReducer,
 
 import { cartReducer } from './reducers/cartReducers'
 
+import { categoryListReducer } from './reducers/categoryReducers'
+
 import { userRegisterReducer, userLoginReducer, userUpdateProfileReducer, userDetailsReducer } from './reducers/userReducer'
 
 import { placeOrderReducer, orderListMyReducer, orderMyReducer } from './reducers/orderReducers'
@@ -34,6 +36,8 @@ const reducer = combineReducers({
     placeOrder : placeOrderReducer,
     orderListMy : orderListMyReducer, //orders from the logged user
     orderMy : orderMyReducer,
+
+    categoryList : categoryListReducer,
 
 })
 

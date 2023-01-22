@@ -60,6 +60,10 @@ function HeaderNew() {
                                     <li className="dropdown-item">
                                         <a href="/product/create">Create Product</a>
                                     </li>
+                                    
+                                    <li className="dropdown-item">
+                                        <a href="/category">Category List</a>
+                                    </li>
 
                                     <li className="dropdown-item">
                                         <a onClick={logoutHandler}>Logout</a>

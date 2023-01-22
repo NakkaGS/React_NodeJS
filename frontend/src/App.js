@@ -22,6 +22,9 @@ import MyOrdersScreen from './screens/MyOrdersScreen';
 import MyOrderDetailScreen from './screens/MyOrderDetailScreen'
 import AdminScreen from './screens/AdminScreen';
 
+import CategoryScreen from './screens/CategoryScreen'
+import CategoryCreateScreen from './screens/CategoryCreateScreen'
+
 function App() {
   return (
     <Router>
@@ -32,6 +35,9 @@ function App() {
           <Route path='/' element={<HomeScreen/>} exact/>
           <Route path='product/:id' element={<ProductDetailScreen/>} />
           <Route path='product/create' element={<ProductCreateScreen/>} />
+
+          <Route path='category' element={<CategoryScreen/>} />
+          <Route path='category/create' element={<CategoryCreateScreen/>} />
 
           <Route path='cart' element={<CartScreen/>}/>
 
