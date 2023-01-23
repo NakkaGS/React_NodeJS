@@ -197,7 +197,7 @@ function ProductScreen({ match }) {
                         <thead>
                             <tr>
                                 <th>User Name</th>
-                                <th>Rating</th>
+                                <th className='text-center'>Rating</th>
                                 <th>Commenting</th>
                             </tr>
                         </thead>
@@ -211,7 +211,7 @@ function ProductScreen({ match }) {
                                     
                                   <tr key={review?._id} className='cart-item'>
                                       <td>{review?.name}</td>
-                                      <td>{review?.rating}</td>
+                                      <td className='text-center'>{review?.rating}</td>
                                       <td>{review?.comment}</td>
                                   </tr>
                                     

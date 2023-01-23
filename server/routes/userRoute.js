@@ -35,7 +35,6 @@ router.post("/register", (req,res) => {
         }
 
         if(err){
-            console.log(err)
             return res.status(400).send({ message : "Something went wrong" }); 
         }
     })
@@ -49,7 +48,6 @@ router.post('/login', (req, res) => {
     User.findOne({ email : req.body.user.email, password : req.body.user.password }, function(err, user) { 
 
         if (user === null) { 
-            console.log("Not Found")
             return res.status(400).send({ message : "User not found."}); 
         } 
         else { 
@@ -81,7 +79,6 @@ router.post('/getuserbyid', (req, res) => {
 }); 
 
 router.post('/profile/', (req,res) => {
-    console.log(req.body)
     User.findByIdAndUpdate(req.body._id ,
         { name : req.body.name, email: req.body.email}, function(err, docs) {
 
@@ -97,7 +94,6 @@ router.post('/profile/', (req,res) => {
 })
 
 router.put('/profile/update/', (req,res) => {
-    console.log(req.body)
     User.findByIdAndUpdate(req.body._id , 
         { name : req.body.name, email: req.body.email}, {new: true}, function(err, docs) {
 

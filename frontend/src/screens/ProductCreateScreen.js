@@ -118,6 +118,8 @@ function ProductCreateScreen() {
                     <Form.Group className="mb-2" controlId="description">
                     <Form.Label>Description</Form.Label>
                     <Form.Control
+                        as="textarea" 
+                        rows={3}
                         required
                         type="text"
                         placeholder="Enter Description"

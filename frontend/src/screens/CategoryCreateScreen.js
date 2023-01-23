@@ -55,7 +55,7 @@ function CategoryCreateScreen() {
     return (
         <div className="create-category">
             <FormContainer>
-                <h1 className="create-category-title">Create Product</h1>
+                <h1 className="create-category-title">Create Category</h1>
         
                 {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
 

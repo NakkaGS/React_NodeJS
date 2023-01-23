@@ -17,7 +17,6 @@ router.get("/getallproducts", (req, res) => {
     Product.find({ }).
         populate('category'). // only return the Persons name
         exec(function (err, docs) {
-            console.log(docs)
             if(!err){
                 return res.send(docs);
             } else {
@@ -48,7 +47,7 @@ router.post("/create",  (req, res) => {
 
     const {product} = req.body
 
-    const category = Category.find({name : product.category}, (err , docs)=>{
+    Category.find({name : product.category}, (err , docs)=>{
 
         if(!err){
             const productModel = new Product({
@@ -64,18 +63,8 @@ router.post("/create",  (req, res) => {
                     return res.status(400).json({ message: 'Something went wrong' });
                 } else {
                     res.send('Product Added Successfully')
-            
-                    console.log('Inside Category')
-                    console.log(productNew._id)
-                    console.log(docs[0].name)
-
                     docs[0].products.push([productNew._id])
-
-                    console.log('After Push')
                     docs[0].save()
-                    
-                
-
                 }
             })
         } else {
@@ -109,17 +98,13 @@ router.post('/addreview',  async (req,res) => {
         comment : review?.comment 
     }
 
-    console.log(reviewmodel)
-
     product.reviews.push(reviewmodel)
     var rating = product.reviews.reduce((acc , x)=> acc + x.rating , 0) / product.reviews.length
 
     product.rating = rating
 
-    console.log(product)
     product.save(err => {
         if(err){
-            console.log(err)
             return res.status(400).json({ message: 'Something went wrong'})
         } else {
             res.send('Product Added Successfully')

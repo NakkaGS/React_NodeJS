@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 //Redux
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 //Actions
 import { filterProducts } from '../actions/productActions'
@@ -12,6 +12,9 @@ import { Link } from 'react-router-dom'
 //Components
 import Rating from "../components/Rating";
 
+//Actions
+import { listCategories } from '../actions/categoryActions'
+
 function Sidebar({productList}) {
 
     const [searchKey, setSearchKey] = useState('')
@@ -19,6 +22,15 @@ function Sidebar({productList}) {
     const [category, setCategory] = useState('all')
 
     const dispatch = useDispatch()
+
+    const categoryList = useSelector(state => state.categoryList)
+    const {error, loading, categories} = categoryList 
+
+    useEffect(() => {
+        dispatch(listCategories())
+    }, [dispatch])
+
+    
 
     const openCloseSidebar = () => {
         // accordion variables
@@ -29,130 +41,119 @@ function Sidebar({productList}) {
 
             accordionBtn[i].addEventListener('click', function () {
 
-            const clickedBtn = this.nextElementSibling.classList.contains('active');
+                const clickedBtn = this.nextElementSibling.classList.contains('active');
 
-            for (let i = 0; i < accordion.length; i++) {
+                for (let i = 0; i < accordion.length; i++) {
 
-                if (clickedBtn) break;
+                    if (clickedBtn) break;
 
-                if (accordion[i].classList.contains('active')) {
+                    if (accordion[i].classList.contains('active')) {
 
-                    accordion[i].classList.remove('active');
-                    accordionBtn[i].classList.remove('active');
+                        accordion[i].classList.remove('active');
+                        accordionBtn[i].classList.remove('active');
+
+                    }
 
                 }
 
+                this.nextElementSibling.classList.toggle('active');
+                this.classList.toggle('active');
+
             }
-
-            this.nextElementSibling.classList.toggle('active');
-            this.classList.toggle('active');
-
-        });
-
-}
-      };
+        )}
+    };
       
-    return (
-        <div className="sidebar has-scrollbar" data-mobile-menu="">
+        return (
+            <div className="sidebar has-scrollbar" data-mobile-menu="">
 
-            <div className="sidebar-category">
+                <div className="sidebar-category">
 
-                <div className="sidebar-top">
-                    <h2 className="sidebar-title">Category</h2>
-                    <button className="sidebar-close-btn" data-mobile-menu-close-btn="">
-                    <ion-icon name="close-outline" role="img" class="md hydrated" aria-label="close outline"></ion-icon>
-                    </button>
-                </div>
+                    <div className="sidebar-top">
+                        <h2 className="sidebar-title">Category</h2>
+                        <button className="sidebar-close-btn" data-mobile-menu-close-btn="">
+                        <ion-icon name="close-outline" role="img" class="md hydrated" aria-label="close outline"></ion-icon>
+                        </button>
+                    </div>
 
-                <ul className="sidebar-menu-category-list">
+                    <ul className="sidebar-menu-category-list">
 
-                    <li className="sidebar-menu-category">
-                    
-                    <button className="sidebar-accordion-menu" onClick={openCloseSidebar} data-accordion-btn="">
+                        <li className="sidebar-menu-category">
+                        
+                        <button className="sidebar-accordion-menu" onClick={openCloseSidebar} data-accordion-btn="">
 
-                        <div className="menu-title-flex">
-                            <p className="menu-title">shop</p>
-                        </div>
+                            <div className="menu-title-flex">
+                                <p className="menu-title">shop</p>
+                            </div>
 
-                        <div>
-                            <ion-icon name="add-outline" class="add-icon md hydrated" role="img" aria-label="add outline"></ion-icon>
-                            <ion-icon name="remove-outline" class="remove-icon md hydrated" role="img" aria-label="remove outline"></ion-icon>
-                        </div>
+                            <div>
+                                <ion-icon name="add-outline" class="add-icon md hydrated" role="img" aria-label="add outline"></ion-icon>
+                                <ion-icon name="remove-outline" class="remove-icon md hydrated" role="img" aria-label="remove outline"></ion-icon>
+                            </div>
 
-                    </button>
+                        </button>
 
-                    <ul className="sidebar-submenu-category-list" data-accordion="">
+                        <ul className="sidebar-submenu-category-list" data-accordion="">
+                            {categories?.map(category => {
+                                return (
+                                    <li className="sidebar-submenu-category" key={category._id}>
+                                        <button className="sidebar-submenu-title" onClick={() => {dispatch(filterProducts(searchKey, sort, String(category.name))) }}>
+                                            <p className="product-name">{category.name}</p>
+                                        </button>
+                                    </li>
+                                )
+                            })}
 
-                        <li className="sidebar-submenu-category">
-                            <button className="sidebar-submenu-title" onClick={() => {dispatch(filterProducts(searchKey, sort, 'fashion')) }}>
-                                <p className="product-name">fashion</p>
-                            </button>
-                        </li>
+                        </ul>
 
-                        <li className="sidebar-submenu-category">
-                            <button className="sidebar-submenu-title" onClick={() => {dispatch(filterProducts(searchKey, sort, 'mobiles')) }}>
-                                <p className="product-name">mobiles</p>
-                            </button>
-                        </li>
-
-                        <li className="sidebar-submenu-category">
-                            <button className="sidebar-submenu-title" onClick={() => {dispatch(filterProducts(searchKey, sort, 'electronics')) }}>
-                                <p className="product-name">electronics</p>
-                            </button>
                         </li>
 
                     </ul>
 
-                    </li>
+                </div>
 
+                <div className="product-showcase">
+                    <h3 className="showcase-heading">best sellers</h3>
 
-                </ul>
+                    <div className="showcase-wrapper">
 
-            </div>
+                        <div className="showcase-container">
 
-            <div className="product-showcase">
-                <h3 className="showcase-heading">best sellers</h3>
+                            {(productList?.length && (productList.map(product => {
+                            
+                            return ( 
+                            <div className="showcase" key={product._id}>
 
-                <div className="showcase-wrapper">
-
-                    <div className="showcase-container">
-
-                        {(productList?.length && (productList.map(product => {
-                        
-                        return ( 
-                        <div className="showcase">
-
-                            <Link to={`/product/${product._id}`} className="showcase-img-box">
-                                <img src={product?.image} alt="Top Products" className="showcase-img" width="75" height="75"></img>
-                            </Link>
-
-                            <div className="showcase-content">
-
-                                <Link to={`/product/${product._id}`} >
-                                    <h4 className="showcase-title">{product?.name}</h4>
+                                <Link to={`/product/${product._id}`} className="showcase-img-box">
+                                    <img src={product?.image} alt="Top Products" className="showcase-img" width="75" height="75"></img>
                                 </Link>
 
-                                <div className="showcase-rating">
-                                    <Rating value={Number(product?.rating)} color={'#f8e825'} />
+                                <div className="showcase-content">
+
+                                    <Link to={`/product/${product._id}`} >
+                                        <h4 className="showcase-title">{product?.name}</h4>
+                                    </Link>
+
+                                    <div className="showcase-rating">
+                                        <Rating value={Number(product?.rating)} color={'#f8e825'} />
+                                    </div>
+
+                                    <div className="price-box">
+                                        <p className="price-product">${product?.price}</p>
+                                    </div>
+                                
                                 </div>
 
-                                <div className="price-box">
-                                    <p className="price-product">${product?.price}</p>
-                                </div>
-                            
                             </div>
+                            )
+        
+                        })))}
 
                         </div>
-                        )
-    
-                    })))}
 
                     </div>
-
                 </div>
-            </div>
 
-        </div>
+            </div>
     )
 }
 

@@ -29,7 +29,6 @@ function RegisterScreen() {
 
     useEffect(() => {
         if (success) {
-            console.log("Hier")
             history('/')
         }
         }, [dispatch, success, history]);
@@ -42,8 +41,6 @@ function RegisterScreen() {
             email: email,
             password: password
         }
-
-        console.log(userRegister)
 
         if(password === confirmPassword){
             dispatch(registerNewUser(user))

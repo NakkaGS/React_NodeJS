@@ -120,7 +120,7 @@ export const createProduct = (productCreate) => async(dispatch, getState) => {
 //////////////////////////////////////////////
 export const filterProducts = (searchKey, sortKey, category) => async dispatch => {
     try {
-        
+
         dispatch({ type: PRODUCT_LIST_REQUEST })
             const { data } = await axios.get(`/api/products/getallproducts`)
             //console.log(data)
@@ -143,7 +143,7 @@ export const filterProducts = (searchKey, sortKey, category) => async dispatch =
         }
 
         if(category !== 'all'){
-            filteredProducts = data.filter(product => { return product.category.toLowerCase().includes(category) })
+            filteredProducts = data.filter(product => { return product.category.name.toLowerCase().includes(category.toLowerCase()) })
         }
 
         dispatch({

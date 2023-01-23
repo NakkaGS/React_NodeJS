@@ -10,6 +10,9 @@ import { Link } from 'react-router-dom'
 //Actions
 import { listProducts } from '../actions/productActions'
 
+//Boostrap Components
+import { Button } from 'react-bootstrap'
+
 function ProductListScreen() {
 
     const dispatch = useDispatch()
@@ -30,21 +33,22 @@ function ProductListScreen() {
                         <h2>Product List</h2>
                     </div>
                     <div className="product-add-btn">
-                        <Link to="/category/create" className="btn btn-dark m-3">Add Category</Link>
+                        <Link to="/product/create" className="btn btn-dark m-3">Add Product</Link>
                     </div>
 
                     
                 </div>
                 
-                <table className='table'>
+                <table className='table '>
                     <thead>
-                        <tr>
+                        <tr className='table-active'>
                             <th><strong>Name</strong></th>
-                            <th><strong>Category</strong></th>
-                            <th><strong>Price</strong></th>
-                            <th><strong>Number in Stock</strong></th>
-                            <th><strong>Rating</strong></th>
-                            <th><strong>Number of Reviews</strong></th>
+                            <th className='text-center'><strong>Category</strong></th>
+                            <th className='text-center'><strong>Price</strong></th>
+                            <th className='text-center'><strong>Number in Stock</strong></th>
+                            <th className='text-center'><strong>Rating</strong></th>
+                            <th className='text-center'><strong>Number of Reviews</strong></th>
+                            <th className='center'><strong>Options</strong></th>
                         </tr>
                     </thead>
 
@@ -53,11 +57,22 @@ function ProductListScreen() {
                             return (
                                 <tr key={item._id}>
                                     <td>{item.name}</td>
-                                    <td>{item.category.name}</td>
-                                    <td>${item.price}</td>
-                                    <td>{item.countInStock} units</td>
-                                    <td>{item.rating}</td>
-                                    <td>{item.reviews.length}</td>
+                                    <td className='text-center'>{item.category.name}</td>
+                                    <td className='text-center'>${item.price}</td>
+                                    <td className='text-center'>{item.countInStock} units</td>
+                                    <td className='text-center'>{item.rating.toFixed(2)}</td>
+                                    <td className='text-center'>{item.reviews.length}</td>
+                                    <td className='center'>
+
+                                        <Button variant='light' className='btn-sm'>
+                                            <i className='fas fa-edit'></i>
+                                        </Button>
+
+                                        <Button variant='danger' className='btn-sm'>
+                                            <i className='fas fa-trash'></i>
+                                        </Button>
+
+                                    </td>   
                                 </tr>
                             )
                         })}

@@ -63,7 +63,6 @@ router.post("/placeorder", async (req, res) => {
     res.json({ url: session.url });
 
   } catch (e) {
-    console.log("Error");
     res.status(500).json({ error: e.message });
   }
 });
@@ -157,7 +156,6 @@ router.post("/webhook", async (req, res) => {
           // CREATE ORDER
           createOrder(customer, data);
         } catch (err) {
-          console.log(typeof createOrder);
           console.log(err);
         }
       })

@@ -407,13 +407,23 @@ input{
 /* Create Product Screen */
 .create-product-title {
   color: var(--onyx);
-  font-size: var(--fs-2);
+  font-size: var(--fs-2) !important;
   text-transform: uppercase;
   letter-spacing: 0.8px;
   font-weight: var(--weight-600);
   border-bottom: 1px solid var(--cultured);
   margin-bottom: 1rem;
   padding-bottom: 10px;
+}
+
+.create-product option{
+  color: var(--onyx);
+  font-size: var(--fs-7);
+}
+
+.create-product textarea{
+  color: var(--onyx);
+  font-size: var(--fs-7);
 }
 
 .create-product label {

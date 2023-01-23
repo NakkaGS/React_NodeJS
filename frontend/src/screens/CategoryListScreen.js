@@ -7,6 +7,9 @@ import { useDispatch, useSelector } from 'react-redux'
 //Router Dom
 import { Link } from 'react-router-dom'
 
+//Boostrap Components
+import { Button } from 'react-bootstrap'
+
 //Actions
 import { listCategories } from '../actions/categoryActions'
 
@@ -38,9 +41,10 @@ function CategoryListScreen() {
                 
                 <table className='table'>
                     <thead>
-                        <tr>
+                        <tr className='table-active'>
                             <th><strong>Name</strong></th>
-                            <th><strong>Number of Products</strong></th>
+                            <th className='text-center'><strong>Number of Products</strong></th>
+                            <th className='center'><strong>Options</strong></th>
                         </tr>
                     </thead>
 
@@ -49,7 +53,17 @@ function CategoryListScreen() {
                             return (
                                 <tr key={item._id}>
                                     <td>{item.name}</td>
-                                    <td>{item.products.length}</td>
+                                    <td className='text-center'>{item.products.length}</td>
+                                    <td className='center'>
+
+                                        <Button variant='light' className='btn-sm'>
+                                            <i className='fas fa-edit'></i>
+                                        </Button>
+
+                                        <Button variant='danger' className='btn-sm'>
+                                            <i className='fas fa-trash'></i>
+                                        </Button>
+                                    </td>   
                                 </tr>
                             )
                         })}
