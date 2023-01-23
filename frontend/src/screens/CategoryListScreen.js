@@ -27,7 +27,7 @@ function CategoryListScreen() {
 
                 <div className="table-top d-flex justify-content-between">
                     <div className="category-title">
-                        <h2>My Cart</h2>
+                        <h2>Category List</h2>
                     </div>
                     <div className="category-add-btn">
                         <Link to="/category/create" className="btn btn-dark m-3">Add Category</Link>

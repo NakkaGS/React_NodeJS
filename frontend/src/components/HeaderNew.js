@@ -54,11 +54,7 @@ function HeaderNew() {
                                     </li>
 
                                     <li className="dropdown-item">
-                                        <a href="#">Product List</a>
-                                    </li>
-
-                                    <li className="dropdown-item">
-                                        <a href="/product/create">Create Product</a>
+                                        <a href="/product/list">Product List</a>
                                     </li>
                                     
                                     <li className="dropdown-item">

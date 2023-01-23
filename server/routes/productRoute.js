@@ -4,6 +4,7 @@ const router = express.Router();
 
 //Models
 const Product = require('../models/productModel')
+const Category = require('../models/categoryModel')
 
 var bodyParser = require('body-parser')
 
@@ -13,13 +14,15 @@ router.use(bodyParser.urlencoded({ extended: true }))
 //Get all Products
 router.get("/getallproducts", (req, res) => {
 
-    Product.find({} , (err , docs)=>{
-
-        if(!err){
-            return res.send(docs);
-        } else {
-            return res.status(400).json({ message: 'Something went wrong' });
-        }
+    Product.find({ }).
+        populate('category'). // only return the Persons name
+        exec(function (err, docs) {
+            console.log(docs)
+            if(!err){
+                return res.send(docs);
+            } else {
+                return res.status(400).json({ message: 'Something went wrong' });
+            }
 
     })
   
@@ -41,28 +44,55 @@ router.post("/getproductbyid", (req, res) => {
 });
 
 //Create a product
-router.post("/create", (req, res) => {
+router.post("/create",  (req, res) => {
 
     const {product} = req.body
 
-    //console.log(product);
+    const category = Category.find({name : product.category}, (err , docs)=>{
 
-    const productModel = new Product({
-        name : product.name , 
-        price : product.price,
-        description : product.description,
-        countInStock : product.countInStock ,
-        category : product.category
+        if(!err){
+            const productModel = new Product({
+                name : product.name , 
+                price : product.price,
+                description : product.description,
+                countInStock : product.countInStock,
+                category : docs[0]._id,
+            })
+        
+            productModel.save((err, productNew) => {
+                if(err){
+                    return res.status(400).json({ message: 'Something went wrong' });
+                } else {
+                    res.send('Product Added Successfully')
+            
+                    console.log('Inside Category')
+                    console.log(productNew._id)
+                    console.log(docs[0].name)
 
-    })
+                    docs[0].products.push([productNew._id])
 
-    productModel.save(err=>{
-        if(err){
-            return res.status(400).json({ message: 'Something went wrong' });
-        }else{
-            res.send('Product Added Successfully')
+                    console.log('After Push')
+                    docs[0].save()
+                    
+                
+
+                }
+            })
+        } else {
+            return res.status(400).json({ message: 'something went wrong' });
         }
+
     })
+
+    
+
+
+
+    
+
+
+    
+
   
 });
 
@@ -79,13 +109,17 @@ router.post('/addreview',  async (req,res) => {
         comment : review?.comment 
     }
 
+    console.log(reviewmodel)
+
     product.reviews.push(reviewmodel)
     var rating = product.reviews.reduce((acc , x)=> acc + x.rating , 0) / product.reviews.length
 
     product.rating = rating
 
+    console.log(product)
     product.save(err => {
         if(err){
+            console.log(err)
             return res.status(400).json({ message: 'Something went wrong'})
         } else {
             res.send('Product Added Successfully')

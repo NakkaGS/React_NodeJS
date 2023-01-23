@@ -1,5 +1,4 @@
-const { default: mongoose } = require("mongoose")
-const moogose = require("mongoose")
+const mongoose = require("mongoose")
 
 const categorySchema = mongoose.Schema({
 
@@ -8,12 +7,13 @@ const categorySchema = mongoose.Schema({
         required: true,
         unique: true
     },
+    
     products: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Product'
     }]
 })
 
-const Category = mongoose.model('categories' , categorySchema)
+const Category = mongoose.model('Category' , categorySchema)
 
 module.exports = Category

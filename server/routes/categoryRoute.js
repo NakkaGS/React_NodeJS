@@ -16,10 +16,7 @@ router.post('/addcategory', (req, res) => {
 
     try{
         Category.findOne({name : category.name}, async (err , docs) => {
-            console.log('try')
-            console.log(docs)
             if (!docs) {
-                console.log('if')
                 const categoryModel = new Category ({
                     name: category.name
                 })
@@ -31,7 +28,6 @@ router.post('/addcategory', (req, res) => {
         })
 
     } catch(err) {
-        console.log('catch')
         return res.status(400).json({message: 'Something went wrong'})
     }
 

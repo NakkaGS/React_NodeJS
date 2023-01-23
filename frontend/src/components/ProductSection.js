@@ -21,7 +21,7 @@ function ProductSection({productList}) {
                     <div className="showcase" id={product._id}>
 
                         <div className="showcase-banner">
-
+                        
                         <img src={product?.image} alt="Product Image" width="300" className="product-img default"/>
 
                         <p className="showcase-badge">15%</p>
@@ -50,7 +50,7 @@ function ProductSection({productList}) {
 
                             <div className="showcase-content">
 
-                                <a href="#" className="showcase-category"><b>{product?.category}</b></a>
+                                <a href="#" className="showcase-category"><b>{product?.category?.name}</b></a>
 
                                 <Link to={`/product/${product._id}`}>
                                     <div className="showcase-title-box">                               
@@ -59,8 +59,8 @@ function ProductSection({productList}) {
                                 </Link>
 
                                 <Rating value={Number(product.rating)} color={'#f8e825'} 
-                                    text={(product.numReviews) > 0 
-                                        ? (` ${Number(product?.numReviews)} reviews`) 
+                                    text={(product?.reviews.length) > 0 
+                                        ? (` ${Number(product?.reviews.length)} reviews`) 
                                         : typeof(product?.numReviews)=== 'undefined' 
                                             ? (' 0 review') : (' 0 review')}  />
 

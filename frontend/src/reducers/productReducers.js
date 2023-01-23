@@ -15,6 +15,7 @@ import {
     PRODUCT_REVIEW_CREATE_REQUEST,
     PRODUCT_REVIEW_CREATE_SUCCESS,
     PRODUCT_REVIEW_CREATE_FAIL,
+    PRODUCT_REVIEW_CREATE_RESET,
 
     PRODUCT_DELETE_REQUEST,
     PRODUCT_DELETE_SUCCESS,
@@ -69,7 +70,7 @@ export const productCreateReducer = (state = {}, action) => {
             return { loading: false, error: action.payload }
 
         case PRODUCT_CREATE_RESET:
-            return {}
+            return { }
 
         default:
             return state;
@@ -87,6 +88,9 @@ export const reviewCreateReducer = (state = {}, action) => {
 
         case PRODUCT_REVIEW_CREATE_FAIL:
             return { loading: false, error: action.payload}
+
+        case PRODUCT_REVIEW_CREATE_RESET:
+            return { }
 
         default:
             return state

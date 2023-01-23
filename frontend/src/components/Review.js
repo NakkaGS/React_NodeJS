@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 //React Rating Component
 import Rating from 'react-rating'
@@ -9,9 +9,13 @@ import { useDispatch } from 'react-redux'
 //Actions
 import { addProductReview } from '../actions/productActions'
 
+//React 
+import { useNavigate } from 'react-router-dom'
+
 function Review({ product }) {
 
     const dispatch = useDispatch()
+
 
     const [rating, setRating] = useState(5)
     const [comment, setComment] = useState("")
@@ -23,8 +27,10 @@ function Review({ product }) {
             rating: rating,
             comment: comment,
         }
+        
         dispatch(addProductReview(review, product._id))
     }
+
 
     return (
     <div className='col-md-10'>

@@ -27,7 +27,7 @@ function ProductListScreen() {
 
                 <div className="table-top d-flex justify-content-between">
                     <div className="product-list-title">
-                        <h2>My Cart</h2>
+                        <h2>Product List</h2>
                     </div>
                     <div className="product-add-btn">
                         <Link to="/category/create" className="btn btn-dark m-3">Add Category</Link>
@@ -40,7 +40,11 @@ function ProductListScreen() {
                     <thead>
                         <tr>
                             <th><strong>Name</strong></th>
-                            <th><strong>Number of Products</strong></th>
+                            <th><strong>Category</strong></th>
+                            <th><strong>Price</strong></th>
+                            <th><strong>Number in Stock</strong></th>
+                            <th><strong>Rating</strong></th>
+                            <th><strong>Number of Reviews</strong></th>
                         </tr>
                     </thead>
 
@@ -49,7 +53,11 @@ function ProductListScreen() {
                             return (
                                 <tr key={item._id}>
                                     <td>{item.name}</td>
-                                    <td>{item.products.length}</td>
+                                    <td>{item.category.name}</td>
+                                    <td>${item.price}</td>
+                                    <td>{item.countInStock} units</td>
+                                    <td>{item.rating}</td>
+                                    <td>{item.reviews.length}</td>
                                 </tr>
                             )
                         })}

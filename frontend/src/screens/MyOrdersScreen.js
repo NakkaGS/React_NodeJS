@@ -37,7 +37,6 @@ function MyOrdersScreen() {
         history('/login')
     } else {
         dispatch(listMyOrders())
-
     }
     }, [history, dispatch, userInfo]);
 

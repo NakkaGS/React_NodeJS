@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 //Actions
 import { createProduct } from "../actions/productActions";
+import { listCategories } from '../actions/categoryActions'
 
 //Bootstrap Components
 import { Form, Button } from "react-bootstrap";
@@ -25,7 +26,7 @@ function ProductCreateScreen() {
 
   //Initial State Empty (initializing fields)
   const [name, setName] = useState('')
-  const [category, setCategory] = useState('')
+  const [category, setCategory] = useState('Others')
   const [description, setDescription] = useState('')
   const [price, setPrice] = useState('')
   const [countInStock, setCountInStock] = useState('')
@@ -35,12 +36,16 @@ function ProductCreateScreen() {
   const productCreate = useSelector(state => state.productCreate)
   const { loading: loadingCreate, error: errorCreate, success: successCreate } = productCreate
 
+  const categoryList = useSelector(state => state.categoryList)
+  const {error, loading, categories} = categoryList 
+
   const userLogin = useSelector((state)=> state.userLogin)
   const{ userInfo } = userLogin
 
   let history = useNavigate(); //for V6 it is useNavigate, NOT useHistory
 
-  useEffect(() => {
+  useEffect(() => { 
+    dispatch(listCategories())
     if (successCreate) {
         dispatch({ type: PRODUCT_CREATE_RESET })
         history('/')
@@ -95,14 +100,19 @@ function ProductCreateScreen() {
                     </Form.Group>
 
                     <Form.Group className="mb-2" controlId="category">
-                    <Form.Label>Category</Form.Label>
-                    <Form.Control
-                        required
-                        type="text"
-                        placeholder="Enter setCategory"
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)}
-                    ></Form.Control>
+                      <Form.Label>Category</Form.Label>
+                      <Form.Select
+                          required
+                          placeholder="Enter setCategory"
+                          value={category}
+                          onChange={(e) => setCategory(e.target.value)}
+                      >
+                        {categories?.map(item=> {
+                              return (
+                                <option>{item.name}</option>
+                              )
+                          })}
+                      </Form.Select>
                     </Form.Group>
 
                     <Form.Group className="mb-2" controlId="description">

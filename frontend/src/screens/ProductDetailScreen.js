@@ -10,6 +10,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { listProductDetails, deleteProduct } from '../actions/productActions' //this is the reducer
 import { addToCart } from '../actions/cartActions' //this is the reducer
 
+//Constant
+import { PRODUCT_REVIEW_CREATE_RESET } from "../constants/productConstants";
+
 //Bootstrap Components
 import { Row, Col, Image, ListGroup, Button, Card, Form } from "react-bootstrap"; //Library React Bootstrap
 
@@ -34,23 +37,31 @@ function ProductScreen({ match }) {
 
   const productDetails = useSelector(state => state.productDetails)
   const { loading, error, product } = productDetails
+
+  const reviewCreate = useSelector(state => state.reviewCreate)
+  const {error: errorReview, loading: loadingReview, success: successReview} = reviewCreate 
   
   const userLogin = useSelector(state=> state.productDetails)
   const { userInfo } = userLogin
+
+  const { reviews } = product
 
   let { id } = useParams(match); //get the Product ID
 
   useEffect(() => {
     dispatch(listProductDetails(id))
 
-  }, [dispatch, id, match])
+    if (successReview) {
+      dispatch({ type: PRODUCT_REVIEW_CREATE_RESET })
+      dispatch(listProductDetails(id))
+    }
+
+  }, [dispatch, id, match, successReview])
 
   const addtoCardHandler = (e) => {
       e.preventDefault()
       dispatch(addToCart(product, quantity))
   }
-
-  const { reviews } = product
 
   const deleteProductHandler = (e) => {
     e.preventDefault()
@@ -84,9 +95,9 @@ function ProductScreen({ match }) {
                     <ListGroup.Item>
                     
                       <Rating value={Number(product.rating)} color={'#f8e825'} 
-                        text={(product.numReviews) > 0 
-                              ? (` ${Number(product?.numReviews)} reviews`) 
-                              : typeof(product?.numReviews)=== 'undefined' 
+                        text={(reviews?.length) > 0 
+                              ? (` ${Number(reviews?.length)} reviews`) 
+                              : typeof(reviews?.length)=== 'undefined' 
                                 ? (' 0 review') : (' 0 review')}  />
                     </ListGroup.Item>
         
@@ -162,6 +173,7 @@ function ProductScreen({ match }) {
                           Add to Cart
                         </Button>
                       </ListGroup.Item>
+                      
                       <ListGroup.Item>
                         <Button 
                           onClick={deleteProductHandler}
