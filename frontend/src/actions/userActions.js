@@ -50,7 +50,6 @@ export const registerNewUser = (user) => async (dispatch) => {
         
     } catch (error) {
 
-        console.log(error)
         dispatch({
             type: CREATE_USER_FAIL,
             payload: error.response && error.response.data.detail
@@ -90,7 +89,6 @@ export const loginUser = (user) => async (dispatch, getState) => {
         
     } catch (error) {
 
-        console.log(error)
         dispatch({
             type: USER_LOGIN_FAIL,
             payload: error.response && error.response.data.detail

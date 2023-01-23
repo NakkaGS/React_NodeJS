@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 //Redux
 import { useDispatch, useSelector } from 'react-redux' 
@@ -7,12 +7,19 @@ import { useDispatch, useSelector } from 'react-redux'
 //Router Dom
 import { Link } from 'react-router-dom'
 
-function CategoryScreen() {
+//Actions
+import { listCategories } from '../actions/categoryActions'
+
+function CategoryListScreen() {
 
     const dispatch = useDispatch()
 
     const categoryList = useSelector(state => state.categoryList)
     const {error, loading, categories} = categoryList 
+
+    useEffect(() => {
+        dispatch(listCategories())
+    }, [dispatch])
 
     return (
         <div className='category'>
@@ -40,8 +47,9 @@ function CategoryScreen() {
                     <tbody>
                         {categories?.map(item=> {
                             return (
-                                <tr key={item._id} className='category-item'>
+                                <tr key={item._id}>
                                     <td>{item.name}</td>
+                                    <td>{item.products.length}</td>
                                 </tr>
                             )
                         })}
@@ -54,4 +62,4 @@ function CategoryScreen() {
     )
 }
 
-export default CategoryScreen
+export default CategoryListScreen

@@ -10,20 +10,24 @@ import HeaderNew from './components/HeaderNew'
 import HomeScreen from './screens/HomeScreen';
 import ProductDetailScreen from './screens/ProductDetailScreen';
 import ProductCreateScreen from './screens/ProductCreateScreen';
+import ProductListScreen from './screens/ProductListScreen'
+
 import CartScreen from './screens/CartScreen';
+import PaymentSuccess from './screens/PaymentSuccess';
+import PaymentFailed from './screens/PaymentFailed';
 
 import RegisterScreen from './screens/RegisterScreen';
 import LoginScreen from './screens/LoginScreen';
 import ProfileScreen from './screens/ProfileScreen';
 
-import PaymentSuccess from './screens/PaymentSuccess';
-import PaymentFailed from './screens/PaymentFailed';
 import MyOrdersScreen from './screens/MyOrdersScreen';
 import MyOrderDetailScreen from './screens/MyOrderDetailScreen'
+
+import CategoryListScreen from './screens/CategoryListScreen'
+import CategoryCreateScreen from './screens/CategoryCreateScreen'
+
 import AdminScreen from './screens/AdminScreen';
 
-import CategoryScreen from './screens/CategoryScreen'
-import CategoryCreateScreen from './screens/CategoryCreateScreen'
 
 function App() {
   return (
@@ -35,8 +39,9 @@ function App() {
           <Route path='/' element={<HomeScreen/>} exact/>
           <Route path='product/:id' element={<ProductDetailScreen/>} />
           <Route path='product/create' element={<ProductCreateScreen/>} />
+          <Route path='product/list' element={<ProductListScreen/>} />
 
-          <Route path='category' element={<CategoryScreen/>} />
+          <Route path='category' element={<CategoryListScreen/>} />
           <Route path='category/create' element={<CategoryCreateScreen/>} />
 
           <Route path='cart' element={<CartScreen/>}/>

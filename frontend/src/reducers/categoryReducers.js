@@ -3,6 +3,11 @@ import {
     CATEGORY_LIST_SUCCESS,
     CATEGORY_LIST_FAIL,
 
+    CATEGORY_CREATE_REQUEST,
+    CATEGORY_CREATE_SUCCESS,
+    CATEGORY_CREATE_FAIL,
+    CATEGORY_CREATE_RESET,
+
 } from '../constants/categoryConstants' //it is like enum in C
 
 //////////////////////////////////////////////
@@ -19,5 +24,25 @@ export const categoryListReducer = (state = { categories:[]}, action ) => {
         
         default:
             return state;
+    }
+}
+
+//////////////////////////////////////////////
+export const categoryCreateReducer = (state = {}, action) => {
+    switch(action.type){
+        case CATEGORY_CREATE_REQUEST:
+            return { loading: true }
+
+        case CATEGORY_CREATE_SUCCESS:
+            return { loading: false, success: true}
+
+        case CATEGORY_CREATE_FAIL:
+            return { loading: false, error: action.payload}
+
+        case CATEGORY_CREATE_RESET:
+            return {}
+
+        default:
+            return state
     }
 }

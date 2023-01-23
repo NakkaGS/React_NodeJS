@@ -11,31 +11,40 @@ const Product = require('../models/productModel')
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({extended: true}))
 
-router.post('/addcategory', async (req, res) => {
+router.post('/addcategory', (req, res) => {
     const {category} = req.body
 
     try{
-        const categoryModel = new Category ({
-            name: category.name
+        Category.findOne({name : category.name}, async (err , docs) => {
+            console.log('try')
+            console.log(docs)
+            if (!docs) {
+                console.log('if')
+                const categoryModel = new Category ({
+                    name: category.name
+                })
+        
+                categoryModel.save();
+                return res.json({message: 'Category added sucessfully'})
+            }
+            return res.status(400).json({message: 'Something went wrong'})
         })
 
-        await categoryModel.save();
-        res.json({message: 'Category added sucessfully'})
-
-
     } catch(err) {
-        res.status(400).json({message: 'Something went wrong'})
+        console.log('catch')
+        return res.status(400).json({message: 'Something went wrong'})
     }
 
 })
 
 router.get('/getallcategories' , async (req,res) => {
-    console.log('requesting')
+
     Category.find({} , (err, docs) => {
+
         if(!err) {
             return res.send(docs)
         } else {
-            return res.status(400).json({message: 'Something went wrong'})
+            return res.status(400).json({message: err.message})
         }
     })
 })

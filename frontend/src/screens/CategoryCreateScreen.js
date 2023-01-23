@@ -14,7 +14,10 @@ import Message from "../components/Message";
 import FormContainer from "../components/FormContainer";
 
 //Contants
-import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
+import { CATEGORY_CREATE_RESET } from "../constants/categoryConstants";
+
+//Actions
+import { createCategory } from '../actions/categoryActions'
 
 function CategoryCreateScreen() {
 
@@ -25,16 +28,16 @@ function CategoryCreateScreen() {
 
     const dispatch = useDispatch();
 
-    const productCreate = useSelector(state => state.productCreate)
-    const { loading: loadingCreate, error: errorCreate, success: successCreate } = productCreate
+    const categoryCreate = useSelector(state => state.categoryCreate)
+    const { loading: loadingCreate, error: errorCreate, success: successCreate } = categoryCreate
   
     const userLogin = useSelector((state)=> state.userLogin)
     const{ userInfo } = userLogin
 
     useEffect(() => {
         if (successCreate) {
-            dispatch({ type: PRODUCT_CREATE_RESET })
-            history('/')
+            dispatch({ type: CATEGORY_CREATE_RESET })
+            history('/category')
         }
         }, [dispatch, successCreate, history]);
 
@@ -45,6 +48,8 @@ function CategoryCreateScreen() {
             name: name,
         };
 
+        dispatch(createCategory(category));
+
     };
 
     return (
@@ -52,31 +57,27 @@ function CategoryCreateScreen() {
             <FormContainer>
                 <h1 className="create-category-title">Create Product</h1>
         
-                {loadingCreate ? 
-                <Loader/> 
-                : errorCreate 
-                    ? <Message variant='danger'>{errorCreate}</Message>
-                    : (
-                        <Form onSubmit={submitHandler}>
-                            <Form.Group className="mb-2" controlId="name">
-                            <Form.Label>Name</Form.Label>
-                            <Form.Control
-                                required
-                                type="text"
-                                placeholder="Enter Name"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                            ></Form.Control>
-                            </Form.Group>
-        
-                            <div className="create-submit-btn">
-                                <Button type="submit" variant="primary">
-                                Create Category
-                                </Button>
-                            </div>
-        
-                        </Form>
-                    )}
+                {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
+
+                <Form onSubmit={submitHandler}>
+                    <Form.Group className="mb-2" controlId="name">
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control
+                        required
+                        type="text"
+                        placeholder="Enter Name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    ></Form.Control>
+                    </Form.Group>
+
+                    <div className="create-submit-btn">
+                        <Button type="submit" variant="primary">
+                        Create Category
+                        </Button>
+                    </div>
+
+                </Form>
         
                 </FormContainer>
   

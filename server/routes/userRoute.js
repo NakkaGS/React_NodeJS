@@ -14,9 +14,7 @@ router.post("/register", (req,res) => {
     User.find({email: req.body.user.email}, (err, docs) => {
 
         if(docs.length > 0){
-            return res.status(400).send({ 
-                message : "Something went wrong"
-            })
+            return res.status(400).send({ message : "Something went wrong" })
 
         } else {
 
@@ -30,7 +28,6 @@ router.post("/register", (req,res) => {
             newUser.save(err => {
                 if(!err){
                     res.send('User Registration Success!')
-                    console.log("User Registered")
                 } else {
                     res.send("Something went wrong")
                 }
@@ -39,9 +36,7 @@ router.post("/register", (req,res) => {
 
         if(err){
             console.log(err)
-            return res.status(400).send({ 
-                message : "Something went wrong"
-            }); 
+            return res.status(400).send({ message : "Something went wrong" }); 
         }
     })
 
@@ -55,20 +50,15 @@ router.post('/login', (req, res) => {
 
         if (user === null) { 
             console.log("Not Found")
-            return res.status(400).send({ 
-                message : "User not found."
-            }); 
+            return res.status(400).send({ message : "User not found."}); 
         } 
         else { 
             if (user.validPassword(req.body.user.password)) { 
-                console.log("User is logged")
 
                 return res.send(user)
             } 
             else { 
-                return res.status(400).send({ 
-                    message : "Wrong Password"
-                }); 
+                return res.status(400).send({ message : "Wrong Password" }); 
             } 
         } 
     }); 
