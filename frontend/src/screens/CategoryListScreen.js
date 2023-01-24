@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 //useSelector - allows us to used certain parts of the state/reducer
 
 //Router Dom
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 //Boostrap Components
 import { Button } from 'react-bootstrap'
@@ -17,11 +17,22 @@ function CategoryListScreen() {
 
     const dispatch = useDispatch()
 
+    const history = useNavigate();
+
     const categoryList = useSelector(state => state.categoryList)
     const {error, loading, categories} = categoryList 
 
+    const userLogin = useSelector((state)=> state.userLogin)
+    const{ userInfo } = userLogin
+
     useEffect(() => {
-        dispatch(listCategories())
+
+        if (!userInfo?.isadmin) {
+            history('/login')
+        } else {
+            dispatch(listCategories())
+        }
+        
     }, [dispatch])
 
     return (
@@ -33,9 +44,8 @@ function CategoryListScreen() {
                         <h2>Category List</h2>
                     </div>
                     <div className="category-add-btn">
-                        <Link to="/category/create" className="btn btn-dark m-3">Add Category</Link>
+                        <Link to="/admin/category/create" className="btn btn-dark m-3">Add Category</Link>
                     </div>
-
                     
                 </div>
                 

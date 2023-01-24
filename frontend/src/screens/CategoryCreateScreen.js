@@ -35,10 +35,16 @@ function CategoryCreateScreen() {
     const{ userInfo } = userLogin
 
     useEffect(() => {
+
+        if (!userInfo?.isadmin) {
+            history('/login')
+        } 
+
         if (successCreate) {
             dispatch({ type: CATEGORY_CREATE_RESET })
             history('/category')
         }
+
         }, [dispatch, successCreate, history]);
 
     //when the button is pressed, it executes this line

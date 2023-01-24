@@ -15,7 +15,7 @@ import { categoryCreateReducer, categoryListReducer } from './reducers/categoryR
 
 import { userRegisterReducer, userLoginReducer, userUpdateProfileReducer, userDetailsReducer } from './reducers/userReducer'
 
-import { placeOrderReducer, orderListMyReducer, orderMyReducer } from './reducers/orderReducers'
+import { placeOrderReducer, orderListMyReducer, orderMyReducer, orderListReducer } from './reducers/orderReducers'
 
 //every time that one of the items on the left is call (in the screen, component), it calls the reducer 
 const reducer = combineReducers({
@@ -35,6 +35,7 @@ const reducer = combineReducers({
     
     placeOrder : placeOrderReducer,
     orderListMy : orderListMyReducer, //orders from the logged user
+    orderList : orderListReducer, //orders for admin
     orderMy : orderMyReducer,
 
     categoryList : categoryListReducer,

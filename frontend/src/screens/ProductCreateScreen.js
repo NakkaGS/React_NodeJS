@@ -45,7 +45,13 @@ function ProductCreateScreen() {
   let history = useNavigate(); //for V6 it is useNavigate, NOT useHistory
 
   useEffect(() => { 
-    dispatch(listCategories())
+
+    if (!userInfo.isadmin) {
+      history('/login')
+    } else {
+      dispatch(listCategories())
+    }
+
     if (successCreate) {
         dispatch({ type: PRODUCT_CREATE_RESET })
         history('/')

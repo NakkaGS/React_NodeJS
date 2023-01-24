@@ -32,8 +32,8 @@ function ProfileScreen() {
 
     const dispatch = useDispatch()
 
-    const [name, setName] = useState( userInfo.name )
-    const [email, setEmail] = useState( userInfo.email)
+    const [name, setName] = useState( userInfo?.name )
+    const [email, setEmail] = useState( userInfo?.email)
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
 
@@ -57,8 +57,8 @@ function ProfileScreen() {
               dispatch({ type: USER_UPDATE_PROFILE_RESET}) //it helps to not get the same profile as in Edit User Profile            
 
             } else { //after get the data it full fill the data with setName and setEmail
-              setName(userInfo.name)
-              setEmail(userInfo.email)
+              setName(userInfo?.name)
+              setEmail(userInfo?.email)
             }
         }
       }, [history, dispatch, userInfo, userInfo]);

@@ -50,7 +50,7 @@ function ProductScreen({ match }) {
 
   useEffect(() => {
     dispatch(listProductDetails(id))
-
+  
     if (successReview) {
       dispatch({ type: PRODUCT_REVIEW_CREATE_RESET })
       dispatch(listProductDetails(id))

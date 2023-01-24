@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom'
 
 //Actions
-import { listMyOrders } from '../actions/orderActions'
+import { listOrders } from '../actions/orderActions'
 
 //Components
 import Loader from '../components/Loader' //to have the Spinner in the page
@@ -19,7 +19,7 @@ import { Link } from 'react-router-dom'
 //Boostrap Components
 import { Button, Badge } from 'react-bootstrap'
 
-function MyOrdersScreen() {
+function OrdersListScreen() {
 
     let history = useNavigate(); //for V6 it is useNavigate, NOT useHistory
 
@@ -28,18 +28,17 @@ function MyOrdersScreen() {
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
 
-    const orderListMy = useSelector((state) => state.orderListMy)
-    const { loading, error, orders } = orderListMy
+    const orderList = useSelector((state) => state.orderList)
+    const { loading, error, orders } = orderList
     
     /////////
     useEffect(() => {
-    if (!userInfo) {
+    if (userInfo?.isadmin === false) {
         history('/login')
     } else {
-        dispatch(listMyOrders())
+        dispatch(listOrders())
     }
     }, [history, dispatch, userInfo]);
-
     
     const formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
@@ -50,7 +49,7 @@ function MyOrdersScreen() {
         <div>
             <div className="row justify-content-center mt-5">
                 <div className="col-md-8">
-                    <h2>My Orders</h2>
+                    <h2>Orders</h2>
 
                     <table className="table table-striped mt-5">
                         <thead>
@@ -64,32 +63,32 @@ function MyOrdersScreen() {
                         </thead>
 
                         <tbody>
+                            {console.log(orders)}
                         {loading ? <Loader /> //it is to create the loadin and error view 
                             : error ? <Message variant='danger'>{error}</Message>
                             : 
                             (orders?.map(order=> {
-                                return (
-                                    
-                                        <tr key={order._id} className='cart-item'>
+                                return (                                    
+                                    <tr key={order._id} className='cart-item'>
 
-                                            <td>{order._id}</td>
-                                            <td>{formatter.format(order.orderAmount)}</td>
-                                            <td>{order.createdAt.substring(0,10)}</td>
-                                            <td>{order.transactionId}</td>
-                                            <td>{order.isDelivered ? <Badge bg="success">Success</Badge> : <Badge bg="warning" text="dark"><storng>Not Delivered</storng></Badge>}</td>
-                                            <td>
-                                            <Link to={`/myorders/${order._id}/`}>
-                                                <Button variant='light' className='btn-sm'>
-                                                    <i className='fas fa-edit'></i>
-                                                </Button>
-                                            </Link>
+                                        <td>{order._id}</td>
+                                        <td>{formatter.format(order.orderAmount)}</td>
+                                        <td>{order.createdAt.substring(0,10)}</td>
+                                        <td>{order.transactionId}</td>
+                                        <td>{order.isDelivered ? <Badge bg="success">Success</Badge> : <Badge bg="warning" text="dark"><storng>Not Delivered</storng></Badge>}</td>
+                                        <td>
+                                        <Link to={`/myorders/${order._id}/`}>
+                                            <Button variant='light' className='btn-sm'>
+                                                <i className='fas fa-edit'></i>
+                                            </Button>
+                                        </Link>
 
-                                            {/* <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(product._id)}>
-                                                <i className='fas fa-trash'></i>
-                                            </Button> */}
-                                    </td>
+                                        {/* <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(product._id)}>
+                                            <i className='fas fa-trash'></i>
+                                        </Button> */}
+                                        </td>
 
-                                        </tr>
+                                    </tr>
                                     
                                 )
                             }))
@@ -104,4 +103,4 @@ function MyOrdersScreen() {
     )
 }
 
-export default MyOrdersScreen
+export default OrdersListScreen

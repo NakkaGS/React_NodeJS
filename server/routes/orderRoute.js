@@ -168,16 +168,32 @@ router.post("/webhook", async (req, res) => {
 });
 
 //////////////////////////////////////////////////
-//Get all Products
-router.get("/myorders", (req, res) => {
+//Get all Orders from tjhe User
+router.post("/myorders", (req, res) => {
+
+  Order.find({userid : req.body.userid} , (err , docs)=>{
+
+    if(!err){
+        return res.send(docs);
+    } else {
+        return res.status(400).json({ message: 'Something went wrong' });
+    }
+
+  })
+
+});
+
+//////////////////////////////////////////////////
+//Get all Orders
+router.get("/allorders", (req, res) => {
 
   Order.find({} , (err , docs)=>{
 
-  if(!err){
-      return res.send(docs);
-  } else {
-      return res.status(400).json({ message: 'Something went wrong' });
-  }
+    if(!err){
+        return res.send(docs);
+    } else {
+        return res.status(400).json({ message: 'Something went wrong' });
+    }
 
   })
 

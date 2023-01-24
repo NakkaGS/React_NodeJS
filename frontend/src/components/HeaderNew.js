@@ -46,19 +46,42 @@ function HeaderNew() {
 
                 <div className="header-user-actions">
                     <button className="action-btn dropdown-menu-header">
-                        {userInfo ? (
-                                <><ion-icon name="person-outline" role="img" class="md hydrated" aria-label="person outline"></ion-icon><ul className="dropdown-list">
+                        {userInfo && !userInfo?.isadmin ? (
+                            
+                                <><ion-icon name="person-outline" role="img" class="md hydrated" aria-label="person outline"></ion-icon>
+
+                                <ul className="dropdown-list">
 
                                     <li className="dropdown-item">
                                         <a href="/profile">Profile</a>
                                     </li>
 
                                     <li className="dropdown-item">
-                                        <a href="/product/list">Product List</a>
+                                        <a onClick={logoutHandler}>Logout</a>
+                                    </li>
+
+                                </ul></>
+
+                            ) : userInfo?.isadmin ? (
+                                
+                                <><ion-icon name="person-outline" role="img" class="md hydrated" aria-label="person outline"></ion-icon>
+
+                                <ul className="dropdown-list">
+
+                                    <li className="dropdown-item">
+                                        <a href="/profile">Profile (Admin)</a>
+                                    </li>
+
+                                    <li className="dropdown-item">
+                                        <a href="/admin/product">Product List</a>
                                     </li>
                                     
                                     <li className="dropdown-item">
-                                        <a href="/category">Category List</a>
+                                        <a href="/admin/category">Category List</a>
+                                    </li>
+
+                                    <li className="dropdown-item">
+                                        <a href="/admin/orders">Order List</a>
                                     </li>
 
                                     <li className="dropdown-item">

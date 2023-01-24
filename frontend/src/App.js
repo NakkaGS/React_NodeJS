@@ -20,13 +20,13 @@ import RegisterScreen from './screens/RegisterScreen';
 import LoginScreen from './screens/LoginScreen';
 import ProfileScreen from './screens/ProfileScreen';
 
-import MyOrdersScreen from './screens/MyOrdersScreen';
 import MyOrderDetailScreen from './screens/MyOrderDetailScreen'
 
 import CategoryListScreen from './screens/CategoryListScreen'
 import CategoryCreateScreen from './screens/CategoryCreateScreen'
 
 import AdminScreen from './screens/AdminScreen';
+import OrdersListScreen from './screens/OrdersListScreen';
 
 
 function App() {
@@ -38,11 +38,6 @@ function App() {
 
           <Route path='/' element={<HomeScreen/>} exact/>
           <Route path='product/:id' element={<ProductDetailScreen/>} />
-          <Route path='product/create' element={<ProductCreateScreen/>} />
-          <Route path='product/list' element={<ProductListScreen/>} />
-
-          <Route path='category' element={<CategoryListScreen/>} />
-          <Route path='category/create' element={<CategoryCreateScreen/>} />
 
           <Route path='cart' element={<CartScreen/>}/>
 
@@ -50,12 +45,19 @@ function App() {
           <Route path='login' element={<LoginScreen/>}/>
           <Route path='profile' element={<ProfileScreen/>}/>
 
-          <Route path='admin' element={<AdminScreen/>}/>
-
-          <Route path='myorders' element={<MyOrdersScreen/>}/>
           <Route path='myorders/:id' element={<MyOrderDetailScreen/>}/>
           <Route path='order/payment/success' element={<PaymentSuccess/>}/>
           <Route path='order/payment/failed' element={<PaymentFailed/>}/>
+
+          {/* Admin Pages */}
+          <Route path='admin' element={<AdminScreen/>}/>
+          <Route path='admin/orders' element={<OrdersListScreen/>}/>
+
+          <Route path='/admin/category' element={<CategoryListScreen/>} />
+          <Route path='/admin/category/create' element={<CategoryCreateScreen/>} />
+
+          <Route path='/admin/product' element={<ProductListScreen/>} />
+          <Route path='/admin/product/create' element={<ProductCreateScreen/>} />
 
         </Routes>
       </div>

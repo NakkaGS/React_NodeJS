@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 //useSelector - allows us to used certain parts of the state/reducer
 
 //Router Dom
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 //Actions
 import { listProducts } from '../actions/productActions'
@@ -17,12 +17,21 @@ function ProductListScreen() {
 
     const dispatch = useDispatch()
 
+    let history = useNavigate(); //for V6 it is useNavigate, NOT useHistory
+
     const productList = useSelector(state => state.productList)
     const {error, loading, products} = productList 
 
+    const userLogin = useSelector(state=> state.productDetails)
+    const { userInfo } = userLogin
+
     useEffect(() => {
+        if (userInfo?.isadmin === false) {
+            history('/login')
+        } else {
         dispatch(listProducts())
-    }, [dispatch])
+        }
+    }, [dispatch, history])
 
     return (
         <div className='product-list'>
@@ -33,7 +42,7 @@ function ProductListScreen() {
                         <h2>Product List</h2>
                     </div>
                     <div className="product-add-btn">
-                        <Link to="/product/create" className="btn btn-dark m-3">Add Product</Link>
+                        <Link to="/admin/product/create" className="btn btn-dark m-3">Add Product</Link>
                     </div>
 
                     
