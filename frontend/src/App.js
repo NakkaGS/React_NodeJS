@@ -4,7 +4,7 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom' //it is used for the endpoints
 
 //Components
-import HeaderNew from './components/HeaderNew'
+import Header from './components/Header'
 
 //Screens
 import HomeScreen from './screens/HomeScreen';
@@ -33,7 +33,7 @@ function App() {
   return (
     <Router>
       <div>
-        <HeaderNew/>
+        <Header/>
         <Routes>
 
           <Route path='/' element={<HomeScreen/>} exact/>

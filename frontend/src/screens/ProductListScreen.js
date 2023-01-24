@@ -26,11 +26,13 @@ function ProductListScreen() {
     const { userInfo } = userLogin
 
     useEffect(() => {
+
         if (userInfo?.isadmin === false) {
             history('/login')
         } else {
-        dispatch(listProducts())
+            dispatch(listProducts())
         }
+
     }, [dispatch, history])
 
     return (

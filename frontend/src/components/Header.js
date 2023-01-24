@@ -12,7 +12,9 @@ import { filterProducts } from '../actions/productActions'
 //React Router Dom
 import { Link } from 'react-router-dom'
 
-function HeaderNew() {
+function Header() {
+
+    const dispatch = useDispatch()
 
     const [searchKey, setSearchKey] = useState('')
     const [sort, setSort] = useState('popular')
@@ -23,8 +25,6 @@ function HeaderNew() {
   
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
-  
-    const dispatch = useDispatch()
   
     const logoutHandler = (e) => {
       dispatch(logout())
@@ -47,7 +47,7 @@ function HeaderNew() {
                 <div className="header-user-actions">
                     <button className="action-btn dropdown-menu-header">
                         {userInfo && !userInfo?.isadmin ? (
-                            
+
                                 <><ion-icon name="person-outline" role="img" class="md hydrated" aria-label="person outline"></ion-icon>
 
                                 <ul className="dropdown-list">
@@ -92,7 +92,8 @@ function HeaderNew() {
 
                             ) : (
                                 <a href='/login'><ion-icon name="person-outline" role="img" class="md hydrated" aria-label="person outline"></ion-icon></a>
-                            )}
+                            )
+                        }
                     </button>
                 
                     <Link to={`/cart`}>
@@ -111,4 +112,4 @@ function HeaderNew() {
     )
 }
 
-export default HeaderNew
+export default Header
