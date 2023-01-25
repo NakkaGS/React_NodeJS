@@ -8,6 +8,7 @@ var bodyParser = require('body-parser')
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: true }))
 
+//////////////////////////////////////////////////
 //Register a New User
 router.post("/register", (req,res) => {
 
@@ -41,6 +42,7 @@ router.post("/register", (req,res) => {
 
 })
 
+//////////////////////////////////////////////////
 //Login
 router.post('/login', (req, res) => { 
 
@@ -48,7 +50,7 @@ router.post('/login', (req, res) => {
     User.findOne({ email : req.body.user.email, password : req.body.user.password }, function(err, user) { 
 
         if (user === null) { 
-            return res.status(400).send({ message : "User not found."}); 
+            return res.status(400).send({ message : "User not found." }); 
         } 
         else { 
             if (user.validPassword(req.body.user.password)) { 
@@ -62,30 +64,44 @@ router.post('/login', (req, res) => {
     }); 
 }); 
 
-//Login
+//////////////////////////////////////////////////
+//Get User Data by ID
 router.post('/getuserbyid', (req, res) => { 
 
     // Find user with requested email 
     User.findOne({ _id : req.body._id }, function(err, user) { 
 
         if(err){
-            return res.status(400).send({ 
-                message : "Wrong Password"
-            }); 
+            return res.status(400).send({ message : "User not found" }); 
         } else {
             return res.send(user)
         }
     }); 
 }); 
 
-router.post('/profile/', (req,res) => {
-    User.findByIdAndUpdate(req.body._id ,
-        { name : req.body.name, email: req.body.email}, function(err, docs) {
+//////////////////////////////////////////////////
+//Get all Users
+router.get('/getallusers', (req, res) => { 
+
+    // Find user with requested email 
+    User.find({ }, function(err, user) { 
 
         if(err){
-            return res.status(400).send({ 
-                message : "Wrong Password"
-            }); 
+            return res.status(400).send({ message : "No Users found" }); 
+        } else {
+            return res.send(user)
+        }
+    }); 
+}); 
+
+//////////////////////////////////////////////////
+//Get User Data
+router.post('/profile/', (req,res) => {
+    User.findByIdAndUpdate(req.body._id ,
+        { name : req.body.name, email: req.body.email }, function(err, docs) {
+
+        if(err){
+            return res.status(400).send({ message : "User not found" }); 
         } else {
             return res.send(docs)
         }
@@ -93,14 +109,14 @@ router.post('/profile/', (req,res) => {
       })
 })
 
+//////////////////////////////////////////////////
+//Update User Data
 router.put('/profile/update/', (req,res) => {
     User.findByIdAndUpdate(req.body._id , 
-        { name : req.body.name, email: req.body.email}, {new: true}, function(err, docs) {
+        { name : req.body.name, email: req.body.email }, { new: true} , function(err, docs) {
 
         if(err){
-            return res.status(400).send({ 
-                message : "Wrong Password"
-            }); 
+            return res.status(400).send({ message : "Not possible to update Profile" }); 
         } else {
             return res.send(docs)
         }

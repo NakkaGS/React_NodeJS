@@ -11,6 +11,7 @@ var bodyParser = require('body-parser')
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: true }))
 
+//////////////////////////////////////////////////
 //Get all Products
 router.get("/getallproducts", (req, res) => {
 
@@ -27,6 +28,7 @@ router.get("/getallproducts", (req, res) => {
   
 });
 
+//////////////////////////////////////////////////
 //Get Product ID by POST using Body
 router.post("/getproductbyid", (req, res) => {
 
@@ -42,6 +44,7 @@ router.post("/getproductbyid", (req, res) => {
   
 });
 
+//////////////////////////////////////////////////
 //Create a product
 router.post("/create",  (req, res) => {
 
@@ -57,7 +60,8 @@ router.post("/create",  (req, res) => {
                 countInStock : product.countInStock,
                 category : docs[0]._id,
             })
-        
+            
+            //Get the new Product ID and add into the Category
             productModel.save((err, productNew) => {
                 if(err){
                     return res.status(400).json({ message: 'Something went wrong' });
@@ -72,20 +76,11 @@ router.post("/create",  (req, res) => {
         }
 
     })
-
-    
-
-
-
-    
-
-
-    
-
   
 });
 
-//create a review to a product
+//////////////////////////////////////////////////
+//Create a review to a product
 router.post('/addreview',  async (req,res) => {
     const { review , productId , currentUser } = req.body
 
@@ -113,6 +108,7 @@ router.post('/addreview',  async (req,res) => {
 
 })
 
+//////////////////////////////////////////////////
 //Delete Product
 router.post("/deleteproductbyid", (req, res) => {
 

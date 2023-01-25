@@ -11,6 +11,8 @@ const Product = require('../models/productModel')
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({extended: true}))
 
+//////////////////////////////////////////////////
+//Create a new Category
 router.post('/addcategory', (req, res) => {
     const {category} = req.body
 
@@ -33,6 +35,8 @@ router.post('/addcategory', (req, res) => {
 
 })
 
+//////////////////////////////////////////////////
+//Get all the Categories
 router.get('/getallcategories' , async (req,res) => {
 
     Category.find({} , (err, docs) => {
