@@ -22,7 +22,7 @@ function ProductListScreen() {
     const productList = useSelector(state => state.productList)
     const {error, loading, products} = productList 
 
-    const userLogin = useSelector(state=> state.productDetails)
+    const userLogin = useSelector(state=> state.userLogin)
     const { userInfo } = userLogin
 
     useEffect(() => {

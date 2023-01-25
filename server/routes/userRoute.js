@@ -84,12 +84,12 @@ router.post('/getuserbyid', (req, res) => {
 router.get('/getallusers', (req, res) => { 
 
     // Find user with requested email 
-    User.find({ }, function(err, user) { 
+    User.find({ }, function(err, docs) { 
 
         if(err){
             return res.status(400).send({ message : "No Users found" }); 
         } else {
-            return res.send(user)
+            return res.send(docs)
         }
     }); 
 }); 

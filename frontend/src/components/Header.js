@@ -85,6 +85,10 @@ function Header() {
                                     </li>
 
                                     <li className="dropdown-item">
+                                        <a href="/admin/users">User List</a>
+                                    </li>
+
+                                    <li className="dropdown-item">
                                         <a onClick={logoutHandler}>Logout</a>
                                     </li>
 

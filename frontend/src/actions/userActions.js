@@ -20,6 +20,10 @@ import { CREATE_USER_REQUEST,
     USER_DETAILS_SUCCESS,
     USER_DETAILS_FAIL,
 
+    USER_LIST_REQUEST,
+    USER_LIST_SUCCESS,
+    USER_LIST_FAIL,
+
 } from '../constants/userConstants'
 
 //////////////////////////////////////////////
@@ -112,13 +116,15 @@ export const getUserDetails = (id) => async (dispatch) => { //it is a action
     //console.log(id)
 
     try {
+        dispatch({ type: USER_DETAILS_REQUEST })
+
+
+
         const config = {
             headers: { //It just worked like this for PUT. Axious is in x-www-form-urlencoded
                 "Content-Type": "application/x-www-form-urlencoded",
             }
         }
-
-        dispatch({ type: USER_DETAILS_REQUEST })
         
         const { user } = await axios.post(
             '/api/users/getuserbyid', 
@@ -136,6 +142,44 @@ export const getUserDetails = (id) => async (dispatch) => { //it is a action
     } catch (error) {
         dispatch({
             type: USER_DETAILS_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+}
+
+//////////////////////////////////////////////
+export const getAllUserDetails = () => async (dispatch, getState) => { //it is a action
+    //console.log(id)
+
+    try {
+        dispatch({ type: USER_LIST_REQUEST })
+
+        const {
+            userLogin: { userInfo }, //that is to get the token
+        } = getState()
+
+        const config = {
+            headers: { //It just worked like this for PUT. Axious is in x-www-form-urlencoded
+                "Content-Type": "application/x-www-form-urlencoded",
+                Authorization: `Bearer ${userInfo?.token}`,
+            }
+        }
+        
+        const { data } = await axios.get(
+            '/api/users/getallusers',
+            config
+        )  
+
+        dispatch({
+            type: USER_LIST_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: USER_LIST_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message,

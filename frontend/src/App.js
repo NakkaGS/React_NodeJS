@@ -27,7 +27,7 @@ import CategoryCreateScreen from './screens/CategoryCreateScreen'
 
 import AdminScreen from './screens/AdminScreen';
 import OrdersListScreen from './screens/OrdersListScreen';
-
+import UserListScreen from './screens/UserListScreen';
 
 function App() {
   return (
@@ -52,6 +52,8 @@ function App() {
           {/* Admin Pages */}
           <Route path='admin' element={<AdminScreen/>}/>
           <Route path='admin/orders' element={<OrdersListScreen/>}/>
+
+          <Route path='admin/users' element={<UserListScreen/>}/>
 
           <Route path='/admin/category' element={<CategoryListScreen/>} />
           <Route path='/admin/category/create' element={<CategoryCreateScreen/>} />
