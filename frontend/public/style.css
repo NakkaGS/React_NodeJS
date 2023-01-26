@@ -550,6 +550,7 @@ body::-webkit-scrollbar-thumb:hover {
   font-size: var(--fs-6);
   font-weight: var(--weight-500);
   padding: 12px 0;
+  margin: 0;
 }
 
 .accordion-menu > div {

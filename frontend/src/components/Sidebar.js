@@ -62,13 +62,13 @@ function Sidebar({productList}) {
     };
       
         return (
-            <div className="sidebar has-scrollbar" data-mobile-menu="">
+            <div className="sidebar has-scrollbar" data-mobile-menu>
 
                 <div className="sidebar-category">
 
                     <div className="sidebar-top">
                         <h2 className="sidebar-title">Category</h2>
-                        <button className="sidebar-close-btn" data-mobile-menu-close-btn="">
+                        <button className="sidebar-close-btn" data-mobile-menu-close-btn>
                         <ion-icon name="close-outline" role="img" class="md hydrated" aria-label="close outline"></ion-icon>
                         </button>
                     </div>
@@ -77,7 +77,7 @@ function Sidebar({productList}) {
 
                         <li className="sidebar-menu-category">
                         
-                        <button className="sidebar-accordion-menu" onClick={openCloseSidebar} data-accordion-btn="">
+                        <button className="sidebar-accordion-menu" onClick={openCloseSidebar} data-accordion-btn>
 
                             <div className="menu-title-flex">
                                 <p className="menu-title">shop</p>
@@ -90,7 +90,7 @@ function Sidebar({productList}) {
 
                         </button>
 
-                        <ul className="sidebar-submenu-category-list" data-accordion="">
+                        <ul className="sidebar-submenu-category-list" data-accordion>
                             {categories?.map(category => {
                                 return (
                                     <li className="sidebar-submenu-category" key={category._id}>

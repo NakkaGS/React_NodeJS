@@ -1,7 +1,7 @@
 import React from 'react'
 
 //Redux
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 //React Router Dom
 import { Link } from 'react-router-dom'
@@ -14,21 +14,21 @@ function Footer() {
         // Footer Navigation
         <footer>
 
-            <div class="footer-nav">
+            <div className="footer-nav">
                 
-                <div class="container">
+                <div className="container">
 
                     {/* Categories */}
-                    <ul class="footer-nav-list">
+                    <ul className="footer-nav-list">
 
-                        <li class="footer-nav-item">
-                            <h2 class="nav-title">Popular Categories</h2>
+                        <li className="footer-nav-item">
+                            <h2 className="nav-title">Popular Categories</h2>
                         </li>
 
                         {categories?.map(category => {
                             return(
-                            <li class="footer-nav-item" key={category._id}>
-                                <Link to={`/category/${(category.name.toLowerCase())}`} class="footer-nav-link">{category.name}</Link>
+                            <li className="footer-nav-item" key={category._id}>
+                                <Link to={`/category/${(category.name.toLowerCase())}`} className="footer-nav-link">{category.name}</Link>
                             </li>
                             )
                         })}
@@ -36,117 +36,117 @@ function Footer() {
                     </ul>
 
                     {/* Our Company */}
-                    <ul class="footer-nav-list">
+                    <ul className="footer-nav-list">
 
-                        <li class="footer-nav-item">
-                            <h2 class="nav-title">Our Company</h2>
+                        <li className="footer-nav-item">
+                            <h2 className="nav-title">Our Company</h2>
                         </li>
 
-                        <li class="footer-nav-item">
-                            <a href="#" class="footer-nav-link">about us</a>
+                        <li className="footer-nav-item">
+                            <a href="#" className="footer-nav-link">about us</a>
                         </li>
 
-                        <li class="footer-nav-item">
-                            <a href="#" class="footer-nav-link">career</a>
+                        <li className="footer-nav-item">
+                            <a href="#" className="footer-nav-link">career</a>
                         </li>
                     
                     </ul>
 
                     {/* Services */}
-                    <ul class="footer-nav-list">
+                    <ul className="footer-nav-list">
 
-                        <li class="footer-nav-item">
-                            <h2 class="nav-title">Services</h2>
+                        <li className="footer-nav-item">
+                            <h2 className="nav-title">Services</h2>
                         </li>
 
-                        <li class="footer-nav-item">
-                            <a href="#" class="footer-nav-link">Delivery</a>
+                        <li className="footer-nav-item">
+                            <a href="#" className="footer-nav-link">Delivery</a>
                         </li>
 
-                        <li class="footer-nav-item">
-                            <a href="#" class="footer-nav-link">Legal Notice</a>
+                        <li className="footer-nav-item">
+                            <a href="#" className="footer-nav-link">Legal Notice</a>
                         </li>
 
-                        <li class="footer-nav-item">
-                            <a href="#" class="footer-nav-link">terms and conditions</a>
+                        <li className="footer-nav-item">
+                            <a href="#" className="footer-nav-link">terms and conditions</a>
                         </li>
 
-                        <li class="footer-nav-item">
-                            <a href="#" class="footer-nav-link">secure payment</a>
+                        <li className="footer-nav-item">
+                            <a href="#" className="footer-nav-link">secure payment</a>
                         </li>
                     
                     </ul>
 
                     {/* Location, Phone, Email */}
-                    <ul class="footer-nav-list">
+                    <ul className="footer-nav-list">
 
-                        <li class="footer-nav-list">
-                            <h2 class="nav-title">Contact</h2>
+                        <li className="footer-nav-list">
+                            <h2 className="nav-title">Contact</h2>
                         </li>
 
                         {/* Location */}
-                        <li class="footer-nav-item flex">
-                            <div class="icon-box">
+                        <li className="footer-nav-item flex">
+                            <div className="icon-box">
                             <ion-icon name="location-outline"></ion-icon>
                             </div>
 
-                            <address class="content">
+                            <address className="content">
                             419 State 414 Retail
                             Beaver Dams, New York(NY), 14812, USA
                             </address>
                         </li>
 
                         {/* Phone */}
-                        <li class="footer-nav-item flex">
-                            <div class="icon-box">
+                        <li className="footer-nav-item flex">
+                            <div className="icon-box">
                             <ion-icon name="call-outline"></ion-icon>
                             </div>
 
-                            <a href="#" class="footer-nav-link">(607) 936-8058</a>
+                            <a href="#" className="footer-nav-link">(607) 936-8058</a>
                         </li>
 
                         {/* Email */}
-                        <li class="footer-nav-item flex">
-                            <div class="icon-box">
+                        <li className="footer-nav-item flex">
+                            <div className="icon-box">
                             <ion-icon name="mail-outline"></ion-icon>
                             </div>
 
-                            <a href="mailto:example@email.com" class="footer-nav-link">example@email.com</a>
+                            <a href="mailto:example@email.com" className="footer-nav-link">example@email.com</a>
                         </li>
                     
                     </ul>
 
                     {/* Social Media */}
-                    <ul class="footer-nav-list">
+                    <ul className="footer-nav-list">
 
-                        <li class="footer-nav-item">
-                            <h2 class="nav-title">Follow Us</h2>
+                        <li className="footer-nav-item">
+                            <h2 className="nav-title">Follow Us</h2>
                         </li>
 
                         <li>
 
-                            <ul class="social-link">
+                            <ul className="social-link">
 
-                                <li class="footer-nav-item">
-                                    <a href="#" class="footer-nav-link">
+                                <li className="footer-nav-item">
+                                    <a href="#" className="footer-nav-link">
                                     <ion-icon name="logo-facebook"></ion-icon>
                                     </a>
                                 </li>
 
-                                <li class="footer-nav-item">
-                                    <a href="#" class="footer-nav-link">
+                                <li className="footer-nav-item">
+                                    <a href="#" className="footer-nav-link">
                                     <ion-icon name="logo-twitter"></ion-icon>
                                     </a>
                                 </li>
 
-                                <li class="footer-nav-item">
-                                    <a href="#" class="footer-nav-link">
+                                <li className="footer-nav-item">
+                                    <a href="#" className="footer-nav-link">
                                     <ion-icon name="logo-linkedin"></ion-icon>
                                     </a>
                                 </li>
 
-                                <li class="footer-nav-item">
-                                    <a href="#" class="footer-nav-link">
+                                <li className="footer-nav-item">
+                                    <a href="#" className="footer-nav-link">
                                     <ion-icon name="logo-instagram"></ion-icon>
                                     </a>
                                 </li>
