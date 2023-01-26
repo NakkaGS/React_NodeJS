@@ -2,10 +2,16 @@
 
 import React, { useEffect } from 'react'
 
+//Redux
+import { useSelector } from 'react-redux'
+
 //React Router Dom
 import { Link } from 'react-router-dom'
 
 function MobileMenu() {
+
+  const cart = useSelector(state=>state.cart)
+  const { cartItems } = cart
 
   const openCloseMobileMenu = () => {
 
@@ -29,10 +35,9 @@ function MobileMenu() {
     }
   };
 
-useEffect(() => {
-  openCloseMobileMenu();
-}, [openCloseMobileMenu])
-
+  useEffect(() => {
+    openCloseMobileMenu();
+  }, [openCloseMobileMenu])
 
   return (
 
@@ -43,7 +48,7 @@ useEffect(() => {
 
       <Link to={'./cart'} className="action-btn">
         <ion-icon name="bag-handle-outline"></ion-icon>
-        <span className="count">0</span>
+        <span className="count">{(typeof(cartItems) !== "undefined") && cartItems.length}</span>
       </Link>
 
       <Link to='./' className="action-btn">
