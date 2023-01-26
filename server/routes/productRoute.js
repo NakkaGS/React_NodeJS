@@ -128,20 +128,28 @@ router.post("/deleteproductbyid", (req, res) => {
 
 router.post("/productsbycategory", (req,res) => {
 
-    Category.find({name : req.body.categoryName} , (err , docs)=>{
+    const { categoryName } = req.body
 
-        if(!err){
+    const categoryCapitalized = categoryName.split(" ");
+
+    for (let i = 0; i < categoryCapitalized.length; i++) {
+        categoryCapitalized[i] = categoryCapitalized[i][0].toUpperCase() + categoryCapitalized[i].substr(1);
+    }
+
+    Category.find({name : String(categoryCapitalized)} , (err , docs)=>{
+
+        if(!err && docs[0]){
             Product.find({category : docs[0]._id} , (err , docs)=>{
 
                 if(!err){
-                    res.send(docs[0])
+                    res.send(docs)
                 } else {
-                    return res.status(400).json({ message: 'something went wrong' });
+                    return res.status(400).json({ message: 'Something went wrong' });
                 }
         
             })
         } else {
-            return res.status(400).json({ message: 'something went wrong' });
+            return res.status(400).json({ message: 'Something went wrong' });
         }
 
     })

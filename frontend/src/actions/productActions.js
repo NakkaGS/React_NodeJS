@@ -4,6 +4,10 @@ import {
     PRODUCT_LIST_REQUEST,
     PRODUCT_LIST_SUCCESS,
     PRODUCT_LIST_FAIL,
+
+    PRODUCT_CATEGORY_REQUEST,
+    PRODUCT_CATEGORY_SUCCESS,
+    PRODUCT_CATEGORY_FAIL,   
     
     PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
@@ -82,7 +86,7 @@ export const listProductDetails = (id) => async (dispatch) => { //it is a action
 }
 
 //////////////////////////////////////////////
-export const categoryProducts = (id) => async (dispatch) => { //it is a action
+export const categoryProducts = (category) => async (dispatch) => { //it is a action
     //console.log(id)
 
     try {
@@ -92,22 +96,22 @@ export const categoryProducts = (id) => async (dispatch) => { //it is a action
             }
         }
 
-        dispatch({ type: PRODUCT_DETAILS_REQUEST })
+        dispatch({ type: PRODUCT_CATEGORY_REQUEST })
         
         const { data } = await axios.post(
-            '/api/products/getproductbyid', 
-            { productid: id },
+            '/api/products/productsbycategory', 
+            { categoryName: category },
             config
         )  
 
         dispatch({
-            type: PRODUCT_DETAILS_SUCCESS,
+            type: PRODUCT_CATEGORY_SUCCESS,
             payload: data
         })
 
     } catch (error) {
         dispatch({
-            type: PRODUCT_DETAILS_FAIL,
+            type: PRODUCT_CATEGORY_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message,

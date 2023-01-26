@@ -10,7 +10,9 @@ import Header from './components/Header'
 import HomeScreen from './screens/HomeScreen';
 import ProductDetailScreen from './screens/ProductDetailScreen';
 import ProductCreateScreen from './screens/ProductCreateScreen';
-import ProductListScreen from './screens/ProductListScreen'
+import ProductListScreen from './screens/ProductListScreen';
+
+import ProductCategoryScreen from './screens/ProductCategoryScreen';
 
 import CartScreen from './screens/CartScreen';
 import PaymentSuccess from './screens/PaymentSuccess';
@@ -44,6 +46,7 @@ function App() {
 
           <Route path='/' element={<HomeScreen/>} exact/>
           <Route path='product/:id' element={<ProductDetailScreen/>} />
+          <Route path='category/:category' element={<ProductCategoryScreen/>} />
 
           <Route path='cart' element={<CartScreen/>}/>
 

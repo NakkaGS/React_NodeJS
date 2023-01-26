@@ -94,9 +94,13 @@ function Sidebar({productList}) {
                             {categories?.map(category => {
                                 return (
                                     <li className="sidebar-submenu-category" key={category._id}>
-                                        <button className="sidebar-submenu-title" onClick={() => {dispatch(filterProducts(searchKey, sort, String(category.name))) }}>
+                                        {/* <button className="sidebar-submenu-title" onClick={() => {dispatch(filterProducts(searchKey, sort, String(category.name))) }}>
                                             <p className="product-name">{category.name}</p>
-                                        </button>
+                                        </button> */}
+
+                                        <a className="sidebar-submenu-title" href={`/category/${(category.name.toLowerCase())}`} >
+                                            <p className="product-name">{category.name}</p>
+                                        </a>
                                     </li>
                                 )
                             })}

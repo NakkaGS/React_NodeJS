@@ -87,7 +87,7 @@ function MobileLeftMenu() {
                     {categories?.map(category => {
                         return(
                         <li className="submenu-category" key={category._id}>
-                            <Link to={`/category/${(category.name.toLowerCase())}`} className="submenu-title">{category.name}</Link>
+                            <a href={`/category/${(category.name.toLowerCase())}`} className="submenu-title">{category.name}</a>
                         </li>
                         )
                     })}

@@ -28,7 +28,7 @@ function Footer() {
                         {categories?.map(category => {
                             return(
                             <li className="footer-nav-item" key={category._id}>
-                                <Link to={`/category/${(category.name.toLowerCase())}`} className="footer-nav-link">{category.name}</Link>
+                                <a href={`/category/${(category.name.toLowerCase())}`} className="footer-nav-link" >{category.name}</a>
                             </li>
                             )
                         })}
