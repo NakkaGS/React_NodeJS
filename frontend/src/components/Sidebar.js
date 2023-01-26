@@ -30,8 +30,6 @@ function Sidebar({productList}) {
         dispatch(listCategories())
     }, [dispatch])
 
-    
-
     const openCloseSidebar = () => {
         // accordion variables
         const accordionBtn = document.querySelectorAll('[data-accordion-btn]');

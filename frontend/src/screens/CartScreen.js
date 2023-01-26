@@ -64,8 +64,6 @@ function CartScreen() {
                         <CheckOut amount={ subtotal }/>
                     </div>
                     
-                        
-
             </div>
         </div>
     )

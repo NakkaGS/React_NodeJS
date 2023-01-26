@@ -62,11 +62,7 @@ export default function HomeScreen(){
             </div>
         </div>
 
-
-
-            
-
-        <Banner />
+        {/* <Banner /> */}
     </div>
     
     )

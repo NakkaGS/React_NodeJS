@@ -384,6 +384,10 @@ input{
 
 /* Cart Screen */
 
+.cart {
+  margin-bottom: 10rem;
+}
+
 .cart .cart-title {
   border-bottom: 1px solid var(--cultured);
   margin: 1rem 0;

@@ -29,9 +29,15 @@ import AdminScreen from './screens/AdminScreen';
 import OrdersListScreen from './screens/OrdersListScreen';
 import UserListScreen from './screens/UserListScreen';
 
+import BottomMenu from './components/BottomMenu'
+import LeftMenu from './components/LeftMenu'
+import Footer from './components/Footer'
+
 function App() {
   return (
     <Router>
+      <BottomMenu/>
+      <LeftMenu/>
       <div>
         <Header/>
         <Routes>
@@ -63,6 +69,7 @@ function App() {
 
         </Routes>
       </div>
+      <Footer/>
     </Router>
       
   );
