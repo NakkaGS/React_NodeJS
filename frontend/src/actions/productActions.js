@@ -82,6 +82,40 @@ export const listProductDetails = (id) => async (dispatch) => { //it is a action
 }
 
 //////////////////////////////////////////////
+export const categoryProducts = (id) => async (dispatch) => { //it is a action
+    //console.log(id)
+
+    try {
+        const config = {
+            headers: { //It just worked like this for PUT. Axious is in x-www-form-urlencoded
+                "Content-Type": "application/x-www-form-urlencoded",
+            }
+        }
+
+        dispatch({ type: PRODUCT_DETAILS_REQUEST })
+        
+        const { data } = await axios.post(
+            '/api/products/getproductbyid', 
+            { productid: id },
+            config
+        )  
+
+        dispatch({
+            type: PRODUCT_DETAILS_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: PRODUCT_DETAILS_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+}
+
+//////////////////////////////////////////////
 export const createProduct = (productCreate) => async(dispatch, getState) => {
     try {
         dispatch({

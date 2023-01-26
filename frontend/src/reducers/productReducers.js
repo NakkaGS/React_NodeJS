@@ -21,6 +21,10 @@ import {
     PRODUCT_DELETE_SUCCESS,
     PRODUCT_DELETE_FAIL,
 
+    PRODUCT_CATEGORY_REQUEST,
+    PRODUCT_CATEGORY_SUCCESS,
+    PRODUCT_CATEGORY_FAIL,   
+
 } from '../constants/productConstants' //it is like enum in C
 
 //////////////////////////////////////////////
@@ -33,6 +37,23 @@ export const productListReducer = (state = { products:[]}, action ) => {
             return {loading: false, products: action.payload}
 
         case PRODUCT_LIST_FAIL: //is there is a error, it calls this case
+            return {loading: false, error: action.payload}
+        
+        default:
+            return state;
+    }
+}
+
+//////////////////////////////////////////////
+export const productCategoryReducer = (state = { products:[]}, action ) => {
+    switch(action.type){
+        case PRODUCT_CATEGORY_REQUEST: //it set the state loading to true and clear all the products
+            return {loading: true, products: []}
+        
+        case PRODUCT_CATEGORY_SUCCESS: //if the connection is OK, it gets all the product and reset the loading 
+            return {loading: false, products: action.payload}
+
+        case PRODUCT_CATEGORY_FAIL: //is there is a error, it calls this case
             return {loading: false, error: action.payload}
         
         default:

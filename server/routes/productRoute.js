@@ -126,4 +126,25 @@ router.post("/deleteproductbyid", (req, res) => {
   
 });
 
+router.post("/productsbycategory", (req,res) => {
+
+    Category.find({name : req.body.categoryName} , (err , docs)=>{
+
+        if(!err){
+            Product.find({category : docs[0]._id} , (err , docs)=>{
+
+                if(!err){
+                    res.send(docs[0])
+                } else {
+                    return res.status(400).json({ message: 'something went wrong' });
+                }
+        
+            })
+        } else {
+            return res.status(400).json({ message: 'something went wrong' });
+        }
+
+    })
+})
+
 module.exports = router
