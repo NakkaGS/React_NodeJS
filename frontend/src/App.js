@@ -30,10 +30,12 @@ import CategoryCreateScreen from './screens/CategoryCreateScreen'
 import AdminScreen from './screens/AdminScreen';
 import OrdersListScreen from './screens/OrdersListScreen';
 import UserListScreen from './screens/UserListScreen';
+import ProductUpdateScreen from './screens/ProductUpdateScreen';
 
 import MobileMenu from './components/MobileMenu'
 import MobileLeftMenu from './components/MobileLeftMenu'
 import Footer from './components/Footer'
+
 
 function App() {
   return (
@@ -47,6 +49,7 @@ function App() {
           <Route path='/' element={<HomeScreen/>} exact/>
           <Route path='product/:id' element={<ProductDetailScreen/>} />
           <Route path='category/:category' element={<ProductCategoryScreen/>} />
+
 
           <Route path='cart' element={<CartScreen/>}/>
 
@@ -64,11 +67,12 @@ function App() {
 
           <Route path='admin/users' element={<UserListScreen/>}/>
 
-          <Route path='/admin/category' element={<CategoryListScreen/>} />
-          <Route path='/admin/category/create' element={<CategoryCreateScreen/>} />
+          <Route path='admin/category' element={<CategoryListScreen/>} />
+          <Route path='admin/category/create' element={<CategoryCreateScreen/>} />
 
-          <Route path='/admin/product' element={<ProductListScreen/>} />
-          <Route path='/admin/product/create' element={<ProductCreateScreen/>} />
+          <Route path='admin/product' element={<ProductListScreen/>} />
+          <Route path='admin/product/create' element={<ProductCreateScreen/>} />
+          <Route path='admin/product/:id' element={<ProductUpdateScreen/>} />
 
         </Routes>
       </div>

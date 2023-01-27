@@ -76,7 +76,7 @@ function ProductListScreen() {
                                     <td className='center'>
 
                                         <Button variant='light' className='btn-sm'>
-                                            <i className='fas fa-edit'></i>
+                                            <a href={`./product/${item._id}`}><i className='fas fa-edit'></i></a>
                                         </Button>
 
                                         <Button variant='danger' className='btn-sm'>

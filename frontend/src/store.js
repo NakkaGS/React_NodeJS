@@ -7,16 +7,27 @@ import {    productListReducer,
             productDetailsReducer, 
             productCreateReducer,
             productDeleteReducer,
+            productUpdateReducer,
 
             reviewCreateReducer } from './reducers/productReducers'
 
-import { cartReducer } from './reducers/cartReducers'
+import {    cartReducer } from './reducers/cartReducers'
 
-import { categoryCreateReducer, categoryListReducer } from './reducers/categoryReducers'
+import {    categoryCreateReducer, 
+            categoryListReducer } from './reducers/categoryReducers'
 
-import { userRegisterReducer, userLoginReducer, userUpdateProfileReducer, userDetailsReducer, userListReducer } from './reducers/userReducer'
+import {    userRegisterReducer, 
+            userLoginReducer, 
+            userUpdateProfileReducer, 
+            userDetailsReducer, 
+            userListReducer } from './reducers/userReducer'
 
-import { placeOrderReducer, orderListMyReducer, orderMyReducer, orderListReducer } from './reducers/orderReducers'
+import {    placeOrderReducer, 
+
+            orderListMyReducer, 
+            orderMyReducer, 
+            
+            orderListReducer } from './reducers/orderReducers'
 
 //every time that one of the items on the left is call (in the screen, component), it calls the reducer 
 const reducer = combineReducers({
@@ -26,6 +37,7 @@ const reducer = combineReducers({
     productDetails : productDetailsReducer,
     productCreate : productCreateReducer,
     productDelete : productDeleteReducer,
+    productUpdate :  productUpdateReducer,
 
     reviewCreate : reviewCreateReducer,
     

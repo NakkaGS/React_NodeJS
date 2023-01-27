@@ -49,7 +49,7 @@ function ProfileScreen() {
       /////////
       useEffect(() => {
         if (!userInfo) {
-          history('/login')
+            history('/login')
         } else {
             dispatch(listMyOrders())
 
@@ -61,7 +61,7 @@ function ProfileScreen() {
               setEmail(userInfo?.email)
             }
         }
-      }, [history, dispatch, userInfo, userInfo]);
+      }, [history, dispatch, userInfo]);
 
     const submitHandler = (e) => {
         e.preventDefault();

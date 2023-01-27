@@ -155,4 +155,20 @@ router.post("/productsbycategory", (req,res) => {
     })
 })
 
+//////////////////////////////////////////////////
+//Update User Data
+router.put('/updateproduct/', (req,res) => {
+
+    Product.findByIdAndUpdate(req.body._id , 
+        { name : req.body.name, email: req.body.email }, { new: true } , function(err, docs) {
+
+        if(err){
+            return res.status(400).send({ message : "Not possible to update Profile" }); 
+        } else {
+            return res.send(docs)
+        }
+  
+    })
+})
+
 module.exports = router
