@@ -25,9 +25,9 @@ function ProductUpdateScreen({ match }) {
     let { id } = useParams(match); //get the Product ID
 
     const [name, setName] = useState('')
-    const [price, setPrice] = useState( 0 )
-    const [description, setDescription] = useState( '' )
-    const [countInStock, setCountInStock] = useState( 0 )
+    const [price, setPrice] = useState(0)
+    const [description, setDescription] = useState('')
+    const [countInStock, setCountInStock] = useState(0)
 
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
@@ -44,7 +44,7 @@ function ProductUpdateScreen({ match }) {
         //it is to full fill the field as soon as we load the page
         if (updateSuccess) {
             dispatch({ type: PRODUCT_UPDATE_RESET })
-            history('/admin/productlist')
+            history('/admin/product')
         } else {
             if(!product?.name || product?._id !== Number(id)){
                 dispatch(listProductDetails(id))

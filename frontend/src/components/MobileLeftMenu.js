@@ -5,10 +5,6 @@ import React, { useEffect } from 'react'
 //Redux
 import { useSelector } from 'react-redux'
 
-//React Router Dom
-import { Link } from 'react-router-dom'
-
-
 function MobileLeftMenu() {
 
     const categoryList = useSelector(state => state.categoryList)

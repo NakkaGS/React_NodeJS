@@ -49,7 +49,7 @@ function LoginScreen() {
                 : error ? <Message variant='danger'>{error}</Message>
                 : 
                 <div className="row d-flex justify-content-center">
-                    <div className="col-md-5 card p-3" style={{marginTop:'150px'}}>
+                    <div className="col-md-5 card p-3 my-5">
                         <div className="div">
                             <h4 className='text-center m-3'>Sign In</h4>
                             <form onSubmit={login}>
