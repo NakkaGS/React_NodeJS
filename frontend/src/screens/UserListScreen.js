@@ -69,13 +69,13 @@ function UserListScreen() {
                             <td className='text-center'>{user?.isadmin ? "Yes" : "No" }</td>
                             <td className='center'>
 
-                                <Button variant='light' className='btn-sm'>
-                                    <i className='fas fa-edit'></i>
-                                </Button>
+                            <Button variant='light' className='btn-sm'>
+                                <a href={`./user/${user._id}`}><i className='fas fa-edit'></i></a>
+                            </Button>
 
-                                <Button variant='danger' className='btn-sm'>
-                                    <i className='fas fa-trash'></i>
-                                </Button>
+                            <Button variant='danger' className='btn-sm'>
+                                <i className='fas fa-trash'></i>
+                            </Button>
 
                             </td>   
                         </tr>

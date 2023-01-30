@@ -19,7 +19,8 @@ import {    categoryCreateReducer,
 import {    userRegisterReducer, 
             userLoginReducer, 
             userUpdateProfileReducer, 
-            userDetailsReducer, 
+            userDetailsReducer,
+            userUpdateReducer,
             userListReducer } from './reducers/userReducer'
 
 import {    placeOrderReducer, 
@@ -48,6 +49,7 @@ const reducer = combineReducers({
     userUpdateProfile : userUpdateProfileReducer,
     userDetails : userDetailsReducer,
     userList :  userListReducer,
+    userUpdate : userUpdateReducer,
     
     placeOrder : placeOrderReducer,
     orderListMy : orderListMyReducer, //orders from the logged user

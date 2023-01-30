@@ -46,7 +46,7 @@ router.post("/getproductbyid", (req, res) => {
 
 //////////////////////////////////////////////////
 //Create a product
-router.post("/create",  (req, res) => {
+router.post("/create", (req, res) => {
 
     const {product} = req.body
 
@@ -84,7 +84,7 @@ router.post("/create",  (req, res) => {
 router.post('/addreview',  async (req,res) => {
     const { review , productId , currentUser } = req.body
 
-    const product = await Product.findById({_id : productId})
+    const product = await Product.findById({ _id : productId })
 
     const reviewmodel = {
         name : currentUser?.name,
@@ -110,9 +110,9 @@ router.post('/addreview',  async (req,res) => {
 
 //////////////////////////////////////////////////
 //Delete Product
-router.post("/deleteproductbyid", (req, res) => {
+router.post("/delete", (req, res) => {
 
-    Product.findByIdAndDelete({_id : req.body.productId} , (err , docs)=>{
+    Product.findByIdAndDelete({ _id : req.body.productId } , (err , docs)=>{
 
         if(!err)
         {
@@ -157,13 +157,13 @@ router.post("/productsbycategory", (req,res) => {
 
 //////////////////////////////////////////////////
 //Update User Data
-router.put('/updateproduct/', (req,res) => {
+router.put('/update', (req,res) => {
 
     Product.findByIdAndUpdate(req.body._id , 
-        { name : req.body.name, email: req.body.email }, { new: true } , function(err, docs) {
+        { name : req.body.name, price: req.body.price, description: req.body.description, countInStock: req.body.countInStock }, { new: true } , function(err, docs) {
 
         if(err){
-            return res.status(400).send({ message : "Not possible to update Profile" }); 
+            return res.status(400).send({ message : "Not possible to update Product" }); 
         } else {
             return res.send(docs)
         }

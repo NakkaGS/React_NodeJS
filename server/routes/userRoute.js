@@ -67,10 +67,8 @@ router.post('/login', (req, res) => {
 //////////////////////////////////////////////////
 //Get User Data by ID
 router.post('/getuserbyid', (req, res) => { 
-
     // Find user with requested email 
-    User.findOne({ _id : req.body._id }, function(err, user) { 
-
+    User.findOne({ _id : req.body.userid }, function(err, user) { 
         if(err){
             return res.status(400).send({ message : "User not found" }); 
         } else {
@@ -96,7 +94,7 @@ router.get('/getallusers', (req, res) => {
 
 //////////////////////////////////////////////////
 //Get User Data
-router.post('/profile/', (req,res) => {
+router.post('/profile/update', (req,res) => {
     User.findByIdAndUpdate(req.body._id ,
         { name : req.body.name, email: req.body.email }, function(err, docs) {
 
@@ -111,9 +109,9 @@ router.post('/profile/', (req,res) => {
 
 //////////////////////////////////////////////////
 //Update User Data
-router.put('/profile/update/', (req,res) => {
+router.put('/update/', (req,res) => {
     User.findByIdAndUpdate(req.body._id , 
-        { name : req.body.name, email: req.body.email }, { new: true} , function(err, docs) {
+        { name : req.body.name, email: req.body.email }, { new: true } , function(err, docs) {
 
         if(err){
             return res.status(400).send({ message : "Not possible to update Profile" }); 

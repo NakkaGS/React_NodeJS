@@ -4,9 +4,9 @@ const router = express.Router()
 
 //Models
 const Category = require('../models/categoryModel')
+const Product = require('../models/productModel')
 
 var bodyParser = require('body-parser')
-const Product = require('../models/productModel')
 
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({extended: true}))
@@ -47,6 +47,22 @@ router.get('/getallcategories' , async (req,res) => {
             return res.status(400).json({message: err.message})
         }
     })
+})
+
+//////////////////////////////////////////////////
+//Get User Data
+router.put('/category/update', async (req,res) => {
+
+    Category.findByIdAndUpdate(req.body._id ,
+        { name : req.body.name }, function(err, docs) {
+
+        if(err){
+            return res.status(400).send({ message : "User not found" }); 
+        } else {
+            return res.send(docs)
+        }
+  
+      })
 })
 
 module.exports = router

@@ -259,7 +259,7 @@ export const deleteProduct = (productId) => async (dispatch, getState) => {
         if(!currentUser) {
             console.log('It must be logged')
         } else {
-            const { data } = await axios.post('/api/products/deleteproductbyid', {productId}, config)
+            const { data } = await axios.post('/api/products/delete', {productId}, config)
     
             dispatch({type: PRODUCT_DELETE_SUCCESS})
         }
@@ -294,7 +294,7 @@ export const updateProduct = (product) => async (dispatch, getState) => {
         }
 
         const { data } = await axios.put(
-            `/api/products/updateproduct/`,   
+            `/api/products/update/`,   
             product,
             config
         )

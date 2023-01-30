@@ -118,26 +118,22 @@ export const getUserDetails = (id) => async (dispatch) => { //it is a action
     try {
         dispatch({ type: USER_DETAILS_REQUEST })
 
-
-
         const config = {
             headers: { //It just worked like this for PUT. Axious is in x-www-form-urlencoded
                 "Content-Type": "application/x-www-form-urlencoded",
             }
         }
         
-        const { user } = await axios.post(
+        const { data } = await axios.post(
             '/api/users/getuserbyid', 
             { userid: id },
             config
-        )  
+        )
 
         dispatch({
             type: USER_DETAILS_SUCCESS,
-            payload: user
+            payload: data
         })
-
-        
 
     } catch (error) {
         dispatch({
@@ -207,6 +203,53 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
 
         const { data } = await axios.put(
             `/api/users/profile/update/`,   
+            user,
+            config
+        )
+
+        dispatch({
+            type: USER_UPDATE_PROFILE_SUCCESS,
+            payload: data
+        })
+
+        dispatch({
+            type: USER_LOGIN_SUCCESS,
+            payload: data
+        })
+
+        //itn writes the Data into the localStorage
+        localStorage.setItem('userInfo', JSON.stringify(data))
+
+    } catch (error) {
+        dispatch({
+            type: USER_UPDATE_PROFILE_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+}
+
+//////////////////////////////////////////////
+export const updateUser = (user) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: USER_UPDATE_PROFILE_REQUEST
+        })
+
+        const {
+            userDetails: { userInfo },
+        } = getState()
+
+        const config = {
+            headers: { //It just worked like this for PUT. Axious is in x-www-form-urlencoded
+                "Content-Type": "application/x-www-form-urlencoded",
+                Authorization: `Bearer ${userInfo?.token}`,
+            }
+        }
+
+        const { data } = await axios.put(
+            `/api/users/update/`,   
             user,
             config
         )
