@@ -67,7 +67,7 @@ export const productCategoryReducer = (state = { products:[]}, action ) => {
 }
 
 //////////////////////////////////////////////
-export const productDetailsReducer = (state = {}, action) => {
+export const productDetailsReducer = (state = { product:{} }, action) => {
     switch(action.type){
         case PRODUCT_DETAILS_REQUEST:
             return { loading: true, ...state} //"...state"can only make copies of the original values, and then they can modify the copies.

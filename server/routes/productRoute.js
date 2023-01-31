@@ -32,15 +32,17 @@ router.get("/getallproducts", (req, res) => {
 //Get Product ID by POST using Body
 router.post("/getproductbyid", (req, res) => {
 
-    Product.find({_id : req.body.productid} , (err , docs)=>{
-
+    Product.find({_id : req.body.productid}).
+    populate('category'). // only return the Persons name
+    exec(function (err, docs) {
         if(!err){
-            res.send(docs[0])
+            console.log(docs[0]);
+            return res.send(docs[0]);
         } else {
-            return res.status(400).json({ message: 'something went wrong' });
+            return res.status(400).json({ message: 'Something went wrong' });
         }
 
-    })
+})
   
 });
 
