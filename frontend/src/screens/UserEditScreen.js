@@ -93,8 +93,11 @@ function UserEditScreen({ match }) {
                     <form onSubmit={submitHandler}>
                         <input type="text" placeholder='Name' className='form-control mt-2' value={name}  onChange={e => setName(e.target.value)}/>
                         <input type="text" placeholder='Email' className='form-control mt-2' value={email} onChange={e => setEmail(e.target.value)} />
-                        <input type="checkbox" id='isadmin' placeholder='Admin' className='mt-2' checked={isadmin} onChange={e => setIsAdmin(e.target.value)} />
-                        <label htmlFor="isadmin">Admin</label><br/>
+                        
+                        <label htmlFor="isadmin">
+                            Admin
+                            <input type="checkbox" id='isadmin' placeholder='Admin' className='mt-2' checked={isadmin} onChange={e => setIsAdmin(e.target.value)} />
+                        </label><br/>
 
                         <div className="d-flex align-items-end flex-column">
                             <button type='submit' className='mt-3 light'>Update</button>

@@ -159,17 +159,30 @@ router.post("/productsbycategory", (req,res) => {
 //////////////////////////////////////////////////
 //Update Product Data
 router.put('/update', (req,res) => {
+    
+    Category.find({name : req.body.category}, (err , docs)=>{
+        
+        if(!err && docs[0]){
+            const categoryFound = docs[0]
+            Product.findByIdAndUpdate(req.body._id , 
+                { name : req.body.name, price: req.body.price, description: req.body.description, countInStock: req.body.countInStock, category: docs[0]._id }, { new: true } , function(err, docs) {
+                
+                if(err){
+                    return res.status(400).send({ message : "Not possible to update Product" }); 
+                } else {
+                    categoryFound.products.push([docs._id])
+                    categoryFound.save()  
+                    return res.send(docs)
+                }
+        
+            })
 
-    Product.findByIdAndUpdate(req.body._id , 
-        { name : req.body.name, price: req.body.price, description: req.body.description, countInStock: req.body.countInStock }, { new: true } , function(err, docs) {
-
-        if(err){
-            return res.status(400).send({ message : "Not possible to update Product" }); 
         } else {
-            return res.send(docs)
+            return res.status(400).json({ message: 'something went wrong' });
         }
-  
+
     })
+
 })
 
 module.exports = router

@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 //Actions
 import { createProduct } from "../actions/productActions";
-import { listCategories } from '../actions/categoryActions'
+import { listCategories } from '../actions/categoryActions';
 
 //Bootstrap Components
 import { Form, Button } from "react-bootstrap";
@@ -109,7 +109,7 @@ function ProductCreateScreen() {
                       <Form.Label>Category</Form.Label>
                       <Form.Select
                           required
-                          placeholder="Enter setCategory"
+                          placeholder="Enter Category"
                           value={category}
                           onChange={(e) => setCategory(e.target.value)}
                       >

@@ -12,6 +12,7 @@ import Message from '../components/Message' //to have the Error in the page
 
 //Actions
 import { listProductDetails, updateProduct } from '../actions/productActions'
+import { listCategories } from '../actions/categoryActions'
 
 //Constants
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstants'
@@ -28,6 +29,7 @@ function ProductEditScreen({ match }) {
     const [price, setPrice] = useState(0)
     const [description, setDescription] = useState('')
     const [countInStock, setCountInStock] = useState(0)
+    const [category, setCategory] = useState('Others')
 
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
@@ -37,6 +39,9 @@ function ProductEditScreen({ match }) {
 
     const productUpdate = useSelector((state) => state.productUpdate)
     const { success : updateSuccess } = productUpdate
+
+    const categoryList = useSelector(state => state.categoryList)
+    const {error: errorCategory, loading: loadingCategory, categories} = categoryList 
     
 
     useEffect(() => {
@@ -45,19 +50,24 @@ function ProductEditScreen({ match }) {
         if (userInfo.isadmin === false) {
             history('/login')
         } else {
+            
             if (updateSuccess) {
                 dispatch({ type: PRODUCT_UPDATE_RESET })
                 history('/admin/product')
             } else {
-                if(!product){
+
+                
+                if(!product || !product?.name){
                     dispatch(listProductDetails(id))
+                    dispatch(listCategories())
                 }
     
-                if(name !== product?.name || !product?.name || product?._id !== Number(id)){
+                if(name !== product?.name || product?._id !== Number(id)){
                     setName(product?.name)
                     setPrice(product?.price)
                     setCountInStock(product?.countInStock)
                     setDescription(product?.description)
+                    setCategory(product?.description)
                 }
             }
         }
@@ -72,7 +82,10 @@ function ProductEditScreen({ match }) {
             name: name,
             price: price,
             countInStock: countInStock,
+            category: category
         };
+
+        console.log(productEdited)
 
         dispatch(updateProduct(productEdited));
     }
@@ -87,7 +100,15 @@ function ProductEditScreen({ match }) {
                         <input type="text" placeholder='Name' className='form-control mt-2' value={name} onChange={(e) => setName(e.target.value)} />
                         <input type="number" placeholder='Price' className='form-control mt-2' value={price} onChange={(e) => setPrice(e.target.value)} />
                         <input type="number" placeholder='Count in Stock' className='form-control mt-2' value={countInStock} onChange={(e) => setCountInStock(e.target.value)} />
+                        <select className='form-control mt-2' value={category} onChange={(e) => setCategory(e.target.value)}>
+                            {categories?.map(item=> {
+                                return (
+                                    <option key={item._id}>{item.name}</option>
+                                )
+                            })}
+                        </select>
                         <textarea rows="4" type="text" placeholder='Description' className='form-control mt-2' value={description} onChange={(e) => setDescription(e.target.value)} />
+
 
                         <div className="d-flex align-items-end flex-column">
                             <button type='submit' className='mt-3 light'>Update</button>

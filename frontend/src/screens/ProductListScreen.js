@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 
 //Actions
-import { listProducts } from '../actions/productActions'
+import { listProducts, deleteProduct } from '../actions/productActions'
 
 //Boostrap Components
 import { Button } from 'react-bootstrap'
@@ -34,6 +34,14 @@ function ProductListScreen() {
         }
 
     }, [dispatch, history])
+
+    const deleteProductHandler = (productDelete) => {
+        if (window.confirm('Are you sure you want to delete this user?')){
+            //console.log('DELETE: ', id)
+            dispatch(deleteProduct(productDelete?._id))
+            history('/')
+        }
+      }
 
     return (
         <div className='product-list'>
@@ -68,7 +76,7 @@ function ProductListScreen() {
                             return (
                                 <tr key={item._id}>
                                     <td>{item.name}</td>
-                                    <td className='text-center'>{item.category.name}</td>
+                                    <td className='text-center'>{item?.category?.name}</td>
                                     <td className='text-center'>${item.price}</td>
                                     <td className='text-center'>{item.countInStock} units</td>
                                     <td className='text-center'>{item.rating.toFixed(2)}</td>
@@ -79,7 +87,7 @@ function ProductListScreen() {
                                             <a href={`./product/${item._id}`}><i className='fas fa-edit'></i></a>
                                         </Button>
 
-                                        <Button variant='danger' className='btn-sm'>
+                                        <Button variant='danger' className='btn-sm' onClick={() => deleteProductHandler(item)}>
                                             <i className='fas fa-trash'></i>
                                         </Button>
 
