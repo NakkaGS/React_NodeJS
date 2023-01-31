@@ -67,7 +67,7 @@ function CategoryListScreen() {
                                     <td className='center'>
 
                                         <Button variant='light' className='btn-sm'>
-                                            <i className='fas fa-edit'></i>
+                                            <a href={`./category/${item._id}`}><i className='fas fa-edit'></i></a>
                                         </Button>
 
                                         <Button variant='danger' className='btn-sm'>

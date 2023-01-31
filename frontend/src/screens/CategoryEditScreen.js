@@ -11,10 +11,10 @@ import Loader from '../components/Loader' //to have the Spinner in the page
 import Message from '../components/Message' //to have the Error in the page
 
 //Actions
-import { getUserDetails, updateUser } from '../actions/userActions'
+import { getCategoryDetails } from '../actions/categoryActions'
 
 //Constants
-import { USER_UPDATE_RESET } from '../constants/userConstants'
+import { CATEGORY_UPDATE_RESET } from '../constants/categoryConstants'
 
 function UserEditScreen({ match }) {
 
@@ -25,18 +25,16 @@ function UserEditScreen({ match }) {
     let { id } = useParams(match); //get the Product ID
 
     const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [isadmin, setIsAdmin] = useState(false)
 
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
 
     //it goes to store and call the reducer from 'userRegister'. In this reducer we get the following data (error, loading, userInfo)
-    const userDetails = useSelector((state) => state.userDetails);
-    const { error, loading, userInfo: user } = userDetails;
+    const categoryDetails = useSelector((state) => state.categoryDetails);
+    const { error, loading, category } = categoryDetails;
 
-    const userUpdate = useSelector((state) => state.userUpdate);
-    const { error: errorUpdate, loading: loadingUpdate, success: successUpdate } = userUpdate; //it change the variable name because of the duplicate names
+    const categoryUpdate = useSelector((state) => state.categoryUpdate);
+    const { error: errorUpdate, loading: loadingUpdate, success: successUpdate } = categoryUpdate; //it change the variable name because of the duplicate names
 
     //it is to full fill the field as soon as we load the page
 
@@ -46,42 +44,28 @@ function UserEditScreen({ match }) {
             history('/login')
         } else {
 
+            dispatch(getCategoryDetails(id))
             if(successUpdate){
-                dispatch({type: USER_UPDATE_RESET})
+                dispatch({type: CATEGORY_UPDATE_RESET})
                 history('/admin/userlist')
 
             } else {
     
-                if(!user) {
-                    dispatch(getUserDetails(id))
+                if(!category) {
+                    dispatch(getCategoryDetails(id))
                 }
     
-                if(user?.name !== undefined || user?.name !== name || user?._id === Number(id)){
-                    setName(String(user?.name))
-                    setEmail(user?.email)
-                    setIsAdmin(user?.isadmin)
+                if(category?.name !== undefined || category?.name !== name || category?._id === Number(id)){
+                    setName(String(category?.name))
+
                 }
             }
         }
 
-    }, [user?.name, id, successUpdate, history, dispatch]);
-
-    //Gambiarra to convert 'false' to 'False' because the GET just accept 'False
-    let isAdminBool = 'False'
-
-    if (isadmin === false){
-        isAdminBool = 'False'
-    } else if (isadmin === true){
-        isAdminBool = 'True'
-    }
+    }, [category?.name, id, successUpdate, history, dispatch]);
 
     const submitHandler = (e) => {
         e.preventDefault()
-        dispatch(updateUser({ 
-        '_id': user._id,
-        'name': name,
-        'email': email,
-        'isadmin': isAdminBool}))
     }
 
     return (
@@ -89,12 +73,9 @@ function UserEditScreen({ match }) {
         <div className="row d-flex">
                 
                 <div className="card p-3">
-                    <h2 className='user-title'>Edit - User</h2>
+                    <h2 className='user-title'>Edit - Category</h2>
                     <form onSubmit={submitHandler}>
                         <input type="text" placeholder='Name' className='form-control mt-2' value={name}  onChange={e => setName(e.target.value)}/>
-                        <input type="text" placeholder='Email' className='form-control mt-2' value={email} onChange={e => setEmail(e.target.value)} />
-                        <input type="checkbox" id='isadmin' placeholder='Admin' className='mt-2' checked={isadmin} onChange={e => setIsAdmin(e.target.value)} />
-                        <label htmlFor="isadmin">Admin</label><br/>
 
                         <div className="d-flex align-items-end flex-column">
                             <button type='submit' className='mt-3 light'>Update</button>

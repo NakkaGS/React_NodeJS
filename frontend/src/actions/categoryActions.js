@@ -9,6 +9,15 @@ import {
     CATEGORY_CREATE_SUCCESS,
     CATEGORY_CREATE_FAIL,
 
+    CATEGORY_DETAILS_REQUEST,
+    CATEGORY_DETAILS_SUCCESS,
+    CATEGORY_DETAILS_FAIL,
+
+    CATEGORY_UPDATE_REQUEST,
+    CATEGORY_UPDATE_SUCCESS,
+    CATEGORY_UPDATE_FAIL,
+    CATEGORY_UPDATE_RESET,
+
 } from '../constants/categoryConstants' //it is like enum in C
 
 
@@ -63,6 +72,41 @@ export const createCategory = (categoryCreate) => async(dispatch) => {
     } catch (error) {
         dispatch({
             type: CATEGORY_CREATE_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+}
+
+
+//////////////////////////////////////////////
+export const getCategoryDetails = (id) => async (dispatch) => { //it is a action
+    //console.log(id)
+
+    try {
+        const config = {
+            headers: { //It just worked like this for PUT. Axious is in x-www-form-urlencoded
+                "Content-Type": "application/x-www-form-urlencoded",
+            }
+        }
+
+        dispatch({ type: CATEGORY_DETAILS_REQUEST })
+        
+        const { data } = await axios.post(
+            '/api/categories/getcategorybyid/', 
+            { categoryid: id },
+            config
+        )  
+
+        dispatch({
+            type: CATEGORY_DETAILS_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: CATEGORY_DETAILS_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message,

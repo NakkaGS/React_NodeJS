@@ -90,7 +90,7 @@ function ProductScreen({ match }) {
 
                     <ListGroup.Item>
                       <h3>{product?.name}</h3>
-                      <h6>{product?.category.name}</h6>
+                      <h6>{product?.category?.name}</h6>
                     </ListGroup.Item>
         
                     <ListGroup.Item>

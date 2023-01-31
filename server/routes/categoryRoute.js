@@ -51,9 +51,9 @@ router.get('/getallcategories' , async (req,res) => {
 
 //////////////////////////////////////////////////
 //Get Category by ID
-router.get('/getcategoriesbyid' , async (req,res) => {
+router.post('/getcategorybyid' , async (req,res) => {
 
-    Category.find({_id: req.body._id} , (err, docs) => {
+    Category.find({_id: req.body.categoryid} , (err, docs) => {
 
         if(!err) {
             return res.send(docs[0])
@@ -65,7 +65,7 @@ router.get('/getcategoriesbyid' , async (req,res) => {
 
 //////////////////////////////////////////////////
 //Update Category Data
-router.put('/category/update', async (req,res) => {
+router.put('/update', async (req,res) => {
 
     Category.findByIdAndUpdate(req.body._id ,
         { name : req.body.name }, function(err, docs) {
