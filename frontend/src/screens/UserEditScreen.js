@@ -33,35 +33,38 @@ function UserEditScreen({ match }) {
 
     //it goes to store and call the reducer from 'userRegister'. In this reducer we get the following data (error, loading, userInfo)
     const userDetails = useSelector((state) => state.userDetails);
-    const { error, loading, user } = userDetails;
+    const { error, loading, userInfo: user } = userDetails;
 
     const userUpdate = useSelector((state) => state.userUpdate);
     const { error: errorUpdate, loading: loadingUpdate, success: successUpdate } = userUpdate; //it change the variable name because of the duplicate names
 
     //it is to full fill the field as soon as we load the page
+
     useEffect(() => {
 
-        if(successUpdate){
-            dispatch({type: USER_UPDATE_RESET})
-            history('/admin/userlist')
+        if (userInfo.isadmin === false) {
+            history('/login')
         } else {
-            console.log('If Case')
 
-            if(!user?.name || user?._id !== Number(id)){
-                dispatch(getUserDetails(id))
+            if(successUpdate){
+                dispatch({type: USER_UPDATE_RESET})
+                history('/admin/userlist')
 
-                console.log('Dispatch')
             } else {
-                console.log('Setting')
-                
-                setName(user?.name)
-                setEmail(user?.email)
-                setIsAdmin(user?.isadmin)
+    
+                if(!user) {
+                    dispatch(getUserDetails(id))
+                }
+    
+                if(user?.name !== undefined || user?.name !== name || user?._id === Number(id)){
+                    setName(String(user?.name))
+                    setEmail(user?.email)
+                    setIsAdmin(user?.isadmin)
+                }
             }
         }
 
-    }, [user, id, successUpdate, history, dispatch]);
-
+    }, [user?.name, id, successUpdate, history, dispatch]);
 
     //Gambiarra to convert 'false' to 'False' because the GET just accept 'False
     let isAdminBool = 'False'
@@ -86,12 +89,13 @@ function UserEditScreen({ match }) {
         <div className="row d-flex">
                 
                 <div className="card p-3">
-                    <h2 className='user-title'>Update - User</h2>
+                    <h2 className='user-title'>Edit - User</h2>
                     <form onSubmit={submitHandler}>
-                        <input type="text" placeholder='Name' className='form-control mt-2' value={name} onChange={(e) => setName(e.target.value)} />
-                        <input type="text" placeholder='Email' className='form-control mt-2' value={email} onChange={(e) => setEmail(e.target.value)} />
-                        <input type="checkbox" id='isadmin' placeholder='Admin' className='mt-2' value={isadmin} onChange={(e) => setIsAdmin(e.target.value)} />
+                        <input type="text" placeholder='Name' className='form-control mt-2' value={name}  onChange={e => setName(e.target.value)}/>
+                        <input type="text" placeholder='Email' className='form-control mt-2' value={email} onChange={e => setEmail(e.target.value)} />
+                        <input type="checkbox" id='isadmin' placeholder='Admin' className='mt-2' checked={isadmin} onChange={e => setIsAdmin(e.target.value)} />
                         <label htmlFor="isadmin">Admin</label><br/>
+                        {console.log(isAdminBool)}
 
                         <div className="d-flex align-items-end flex-column">
                             <button type='submit' className='mt-3 light'>Update</button>

@@ -52,6 +52,7 @@ function ProfileScreen() {
             history('/login')
         } else {
             dispatch(listMyOrders())
+            console.log('If');
 
             if(!userInfo || !userInfo.name || userInfo?._id !== userInfo?._id || successUpdate){ //that to get the data
               dispatch({ type: USER_UPDATE_PROFILE_RESET}) //it helps to not get the same profile as in Edit User Profile            

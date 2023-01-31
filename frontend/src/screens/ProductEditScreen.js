@@ -16,7 +16,7 @@ import { listProductDetails, updateProduct } from '../actions/productActions'
 //Constants
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstants'
 
-function ProductUpdateScreen({ match }) {
+function ProductEditScreen({ match }) {
 
     const dispatch = useDispatch()
 
@@ -36,42 +36,45 @@ function ProductUpdateScreen({ match }) {
     const { loading, error, product } = productDetails
 
     const productUpdate = useSelector((state) => state.productUpdate)
-    const { loading: updateLoading, error : updateError, success : updateSuccess } = productUpdate
+    const { success : updateSuccess } = productUpdate
     
 
     useEffect(() => {
 
         //it is to full fill the field as soon as we load the page
-        if (updateSuccess) {
-            dispatch({ type: PRODUCT_UPDATE_RESET })
-            history('/admin/product')
+        if (userInfo.isadmin === false) {
+            history('/login')
         } else {
-            if(!product?.name || product?._id !== Number(id)){
-                dispatch(listProductDetails(id))
-                console.log('Dispatch');
+            if (updateSuccess) {
+                dispatch({ type: PRODUCT_UPDATE_RESET })
+                history('/admin/product')
             } else {
-                console.log('Setting');
-                setName(product?.name)
-                setPrice(product?.price)
-                setCountInStock(product?.countInStock)
-                setDescription(product?.description)
+                if(!product){
+                    dispatch(listProductDetails(id))
+                }
+    
+                if(name !== product?.name || !product?.name || product?._id !== Number(id)){
+                    setName(product?.name)
+                    setPrice(product?.price)
+                    setCountInStock(product?.countInStock)
+                    setDescription(product?.description)
+                }
             }
         }
-        
-    }, [dispatch, updateSuccess, id, history, product]);
 
+    }, [dispatch, updateSuccess, id, history, product?.name]);
 
     const submitHandler = (e) => {
         e.preventDefault();
 
-        const product = {
+        const productEdited = {
             _id: product?._id,
             name: name,
             price: price,
             countInStock: countInStock,
         };
-            
-        dispatch(updateProduct(product));
+
+        dispatch(updateProduct(productEdited));
     }
 
     return (
@@ -79,7 +82,7 @@ function ProductUpdateScreen({ match }) {
         <div className="row d-flex">
                 
                 <div className="card p-3">
-                    <h2 className='user-title'>Update - Product</h2>
+                    <h2 className='user-title'>Edit - Product</h2>
                     <form onSubmit={submitHandler}>
                         <input type="text" placeholder='Name' className='form-control mt-2' value={name} onChange={(e) => setName(e.target.value)} />
                         <input type="number" placeholder='Price' className='form-control mt-2' value={price} onChange={(e) => setPrice(e.target.value)} />
@@ -97,4 +100,4 @@ function ProductUpdateScreen({ match }) {
     )
 }
 
-export default ProductUpdateScreen
+export default ProductEditScreen

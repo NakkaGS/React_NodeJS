@@ -30,7 +30,7 @@ import CategoryCreateScreen from './screens/CategoryCreateScreen'
 import AdminScreen from './screens/AdminScreen';
 import OrdersListScreen from './screens/OrdersListScreen';
 import UserListScreen from './screens/UserListScreen';
-import ProductUpdateScreen from './screens/ProductUpdateScreen';
+import ProductEditScreen from './screens/ProductEditScreen';
 import UserEditScreen from './screens/UserEditScreen'
 
 import MobileMenu from './components/MobileMenu'
@@ -74,7 +74,7 @@ function App() {
 
           <Route path='admin/product' element={<ProductListScreen/>} />
           <Route path='admin/product/create' element={<ProductCreateScreen/>} />
-          <Route path='admin/product/:id' element={<ProductUpdateScreen/>} />
+          <Route path='admin/product/:id' element={<ProductEditScreen/>} />
 
         </Routes>
       </div>
