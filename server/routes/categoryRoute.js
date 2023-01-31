@@ -50,7 +50,21 @@ router.get('/getallcategories' , async (req,res) => {
 })
 
 //////////////////////////////////////////////////
-//Get User Data
+//Get Category by ID
+router.get('/getcategoriesbyid' , async (req,res) => {
+
+    Category.find({_id: req.body._id} , (err, docs) => {
+
+        if(!err) {
+            return res.send(docs[0])
+        } else {
+            return res.status(400).json({message: err.message})
+        }
+    })
+})
+
+//////////////////////////////////////////////////
+//Update Category Data
 router.put('/category/update', async (req,res) => {
 
     Category.findByIdAndUpdate(req.body._id ,

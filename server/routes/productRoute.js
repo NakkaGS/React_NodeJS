@@ -23,8 +23,8 @@ router.get("/getallproducts", (req, res) => {
             } else {
                 return res.status(400).json({ message: 'Something went wrong' });
             }
-
-    })
+        }
+    )
   
 });
 
@@ -33,16 +33,15 @@ router.get("/getallproducts", (req, res) => {
 router.post("/getproductbyid", (req, res) => {
 
     Product.find({_id : req.body.productid}).
-    populate('category'). // only return the Persons name
-    exec(function (err, docs) {
-        if(!err){
-            console.log(docs[0]);
-            return res.send(docs[0]);
-        } else {
-            return res.status(400).json({ message: 'Something went wrong' });
+        populate('category'). // only return the Persons name
+        exec(function (err, docs) {
+            if(!err){
+                return res.send(docs[0]);
+            } else {
+                return res.status(400).json({ message: 'Something went wrong' });
+            }
         }
-
-})
+    )
   
 });
 
@@ -158,7 +157,7 @@ router.post("/productsbycategory", (req,res) => {
 })
 
 //////////////////////////////////////////////////
-//Update User Data
+//Update Product Data
 router.put('/update', (req,res) => {
 
     Product.findByIdAndUpdate(req.body._id , 
