@@ -25,6 +25,9 @@ function ProductListScreen() {
     const userLogin = useSelector(state=> state.userLogin)
     const { userInfo } = userLogin
 
+    const productDelete = useSelector(state => state.productDelete)
+    const {error: errorDelete, loading: loadingDelete, success: successDelete} = productDelete 
+
     useEffect(() => {
 
         if (userInfo?.isadmin === false) {
@@ -33,15 +36,15 @@ function ProductListScreen() {
             dispatch(listProducts())
         }
 
-    }, [dispatch, history])
+    }, [dispatch, history, successDelete])
 
     const deleteProductHandler = (productDelete) => {
-        if (window.confirm('Are you sure you want to delete this user?')){
+        if (window.confirm('Are you sure you want to delete this product?')){
             //console.log('DELETE: ', id)
             dispatch(deleteProduct(productDelete?._id))
             history('/')
         }
-      }
+    }
 
     return (
         <div className='product-list'>

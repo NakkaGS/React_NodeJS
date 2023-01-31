@@ -79,4 +79,20 @@ router.put('/update', async (req,res) => {
       })
 })
 
+//////////////////////////////////////////////////
+//Delete Category
+router.post("/delete", (req, res) => {
+
+    Category.findByIdAndDelete({ _id : req.body.categoryId } , (err , docs)=>{
+
+        if(!err){
+            res.send(docs[0])
+        } else {
+            return res.status(400).json({ message: 'something went wrong' });
+        }
+
+    })
+  
+});
+
 module.exports = router

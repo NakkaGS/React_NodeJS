@@ -16,7 +16,10 @@ import {
     CATEGORY_UPDATE_REQUEST,
     CATEGORY_UPDATE_SUCCESS,
     CATEGORY_UPDATE_FAIL,
-    CATEGORY_UPDATE_RESET,
+
+    CATEGORY_DELETE_REQUEST,
+    CATEGORY_DELETE_SUCCESS,
+    CATEGORY_DELETE_FAIL,
 
 } from '../constants/categoryConstants' //it is like enum in C
 
@@ -148,6 +151,41 @@ export const updateCategory = (category) => async (dispatch, getState) => {
             type: CATEGORY_UPDATE_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
+                : error.message,
+        })
+    }
+}
+
+//////////////////////////////////////////////
+export const deleteCategory = (categoryId) => async (dispatch, getState) => {
+    try {
+
+        dispatch({
+            type: CATEGORY_DELETE_REQUEST
+        })
+    
+        const config = {
+            headers: { //It just worked like this for PUT. Axious is in x-www-form-urlencoded
+                "Content-Type": "application/x-www-form-urlencoded",
+            }
+        }
+    
+        const currentUser = getState().userLogin.userInfo
+
+        if(!currentUser) {
+            console.log('It must be logged')
+        } else {
+            const { data } = await axios.post('/api/categories/delete', {categoryId}, config)
+    
+            dispatch({type: CATEGORY_DELETE_SUCCESS})
+        }
+
+    } catch (error) {
+
+        dispatch({
+            type: CATEGORY_DELETE_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.message.data.detail
                 : error.message,
         })
     }

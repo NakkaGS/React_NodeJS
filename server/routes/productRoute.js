@@ -115,11 +115,9 @@ router.post("/delete", (req, res) => {
 
     Product.findByIdAndDelete({ _id : req.body.productId } , (err , docs)=>{
 
-        if(!err)
-        {
+        if(!err){
             res.send(docs[0])
-        }
-        else{
+        } else {
             return res.status(400).json({ message: 'something went wrong' });
         }
 

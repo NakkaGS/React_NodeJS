@@ -11,7 +11,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 
 //Actions
-import { listCategories } from '../actions/categoryActions'
+import { listCategories, deleteCategory } from '../actions/categoryActions'
 
 function CategoryListScreen() {
 
@@ -25,6 +25,9 @@ function CategoryListScreen() {
     const userLogin = useSelector((state)=> state.userLogin)
     const{ userInfo } = userLogin
 
+    const categoryDelete = useSelector(state => state.categoryDelete)
+    const {error: errorDelete, loading: loadingDelete, success: successDelete} = categoryDelete 
+
     useEffect(() => {
 
         if (!userInfo?.isadmin) {
@@ -33,7 +36,15 @@ function CategoryListScreen() {
             dispatch(listCategories())
         }
         
-    }, [dispatch])
+    }, [dispatch, successDelete])
+
+    const deleteCategoryHandler = (categoryToDelete) => {
+        if (window.confirm('Are you sure you want to delete this user?')){
+            //console.log('DELETE: ', id)
+            dispatch(deleteCategory(categoryToDelete?._id))
+            history('/admin/category')
+        }
+    }
 
     return (
         <div className='category'>
@@ -70,7 +81,7 @@ function CategoryListScreen() {
                                             <a href={`./category/${item._id}`}><i className='fas fa-edit'></i></a>
                                         </Button>
 
-                                        <Button variant='danger' className='btn-sm'>
+                                        <Button variant='danger' className='btn-sm' onClick={() => deleteCategoryHandler(item)}>
                                             <i className='fas fa-trash'></i>
                                         </Button>
                                     </td>   
