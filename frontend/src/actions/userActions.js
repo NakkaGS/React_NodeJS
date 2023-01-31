@@ -264,9 +264,6 @@ export const updateUser = (user) => async (dispatch, getState) => {
             payload: data
         })
 
-        //itn writes the Data into the localStorage
-        localStorage.setItem('userInfo', JSON.stringify(data))
-
     } catch (error) {
         dispatch({
             type: USER_UPDATE_PROFILE_FAIL,

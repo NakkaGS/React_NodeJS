@@ -42,7 +42,7 @@ function CategoryCreateScreen() {
 
         if (successCreate) {
             dispatch({ type: CATEGORY_CREATE_RESET })
-            history('/category')
+            history('/admin/category')
         }
 
         }, [dispatch, successCreate, history]);

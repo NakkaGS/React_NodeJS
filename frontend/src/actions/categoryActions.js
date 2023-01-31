@@ -113,3 +113,42 @@ export const getCategoryDetails = (id) => async (dispatch) => { //it is a action
         })
     }
 }
+
+//////////////////////////////////////////////
+export const updateCategory = (category) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: CATEGORY_UPDATE_REQUEST
+        })
+
+        const {
+            userDetails: { userInfo },
+        } = getState()
+
+        const config = {
+            headers: { //It just worked like this for PUT. Axious is in x-www-form-urlencoded
+                "Content-Type": "application/x-www-form-urlencoded",
+                Authorization: `Bearer ${userInfo?.token}`,
+            }
+        }
+
+        const { data } = await axios.put(
+            `/api/categories/update/`,   
+            category,
+            config
+        )
+
+        dispatch({
+            type: CATEGORY_UPDATE_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: CATEGORY_UPDATE_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+}

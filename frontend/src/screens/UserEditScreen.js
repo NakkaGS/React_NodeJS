@@ -48,7 +48,7 @@ function UserEditScreen({ match }) {
 
             if(successUpdate){
                 dispatch({type: USER_UPDATE_RESET})
-                history('/admin/userlist')
+                history('/admin/users')
 
             } else {
     

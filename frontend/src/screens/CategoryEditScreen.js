@@ -11,7 +11,7 @@ import Loader from '../components/Loader' //to have the Spinner in the page
 import Message from '../components/Message' //to have the Error in the page
 
 //Actions
-import { getCategoryDetails } from '../actions/categoryActions'
+import { getCategoryDetails, updateCategory } from '../actions/categoryActions'
 
 //Constants
 import { CATEGORY_UPDATE_RESET } from '../constants/categoryConstants'
@@ -47,7 +47,7 @@ function UserEditScreen({ match }) {
             dispatch(getCategoryDetails(id))
             if(successUpdate){
                 dispatch({type: CATEGORY_UPDATE_RESET})
-                history('/admin/userlist')
+                history('/admin/categories')
 
             } else {
     
@@ -66,6 +66,10 @@ function UserEditScreen({ match }) {
 
     const submitHandler = (e) => {
         e.preventDefault()
+
+        dispatch(updateCategory({ 
+            '_id': category._id,
+            'name': name,}))
     }
 
     return (
