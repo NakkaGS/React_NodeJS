@@ -67,7 +67,7 @@ function ProductEditScreen({ match }) {
                     setPrice(product?.price)
                     setCountInStock(product?.countInStock)
                     setDescription(product?.description)
-                    setCategory(product?.description)
+                    setCategory(product?.category?.name)
                 }
             }
         }
