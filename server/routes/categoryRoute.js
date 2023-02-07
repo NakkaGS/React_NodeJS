@@ -40,8 +40,8 @@ router.post('/addcategory', (req, res) => {
 router.get('/getallcategories' , async (req,res) => {
 
     Category.find({} , (err, docs) => {
-
         if(!err) {
+            console.log(docs)
             return res.send(docs)
         } else {
             return res.status(400).json({message: err.message})

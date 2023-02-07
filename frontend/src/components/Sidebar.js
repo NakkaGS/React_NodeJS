@@ -11,6 +11,8 @@ import { Link } from 'react-router-dom'
 
 //Components
 import Rating from "../components/Rating";
+import Loader from '../components/Loader' //to have the Spinner in the page
+import Message from '../components/Message' //to have the Error in the page
 
 //Actions
 import { listCategories } from '../actions/categoryActions'
@@ -119,8 +121,12 @@ function Sidebar({productList}) {
                     <div className="showcase-wrapper">
 
                         <div className="showcase-container">
-
-                            {(productList?.length && (productList.map(product => {
+                        {loading ? 
+                        <Loader/> 
+                        : error 
+                            ? <Message variant='danger'>{error}</Message>
+                            : (
+                            productList?.length && (productList.map(product => {
                             
                             return ( 
                             <div className="showcase" key={product._id}>

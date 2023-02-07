@@ -78,13 +78,19 @@ function UserEditScreen({ match }) {
                 
                 <div className="card p-3">
                     <h2 className='user-title'>Edit - Category</h2>
-                    <form onSubmit={submitHandler}>
-                        <input type="text" placeholder='Name' className='form-control mt-2' value={name}  onChange={e => setName(e.target.value)}/>
+                    {loading ?
+                        <Loader/>
+                        : error
+                        ? <Message variant='danger'>{error}</Message>
+                        : (
+                        <form onSubmit={submitHandler}>
+                            <input type="text" placeholder='Name' className='form-control mt-2' value={name}  onChange={e => setName(e.target.value)}/>
 
-                        <div className="d-flex align-items-end flex-column">
-                            <button type='submit' className='mt-3 light'>Update</button>
-                        </div>
-                    </form>
+                            <div className="d-flex align-items-end flex-column">
+                                <button type='submit' className='mt-3 light'>Update</button>
+                            </div>
+                        </form>
+                    )}
                     
                 </div>
         </div>
