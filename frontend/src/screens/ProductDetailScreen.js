@@ -189,9 +189,18 @@ function ProductScreen({ match }) {
                   </Card>
                 </Col>
               </Row>
+
               <Row className="justify-content-center">
                 <Col className="d-flex my-5 justify-content-center flex-wrap col-md-6">
+
+                {loadingReview ?
+                <Loader/>
+                : errorReview
+                  ? <Message variant='danger'>{error}</Message>
+                  : (
                   <Review product={product}/>
+                )}
+
                 </Col>
                 <Col>
                     <table className="table table-striped mt-5">

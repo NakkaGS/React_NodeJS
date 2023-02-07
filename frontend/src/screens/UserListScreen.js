@@ -13,6 +13,10 @@ import { getAllUserDetails } from '../actions/userActions'
 //Boostrap Components
 import { Button } from 'react-bootstrap'
 
+//Components
+import Loader from '../components/Loader' //to have the Spinner in the page
+import Message from '../components/Message' //to have the Error in the page
+
 function UserListScreen() {
   
   const dispatch = useDispatch()
@@ -47,7 +51,6 @@ function UserListScreen() {
             <div className="user-add-btn">
                 <Link to="/admin/user/create" className="btn btn-dark m-3">Add User</Link>
             </div>
-
         </div>
         
         <table className='table '>
@@ -61,26 +64,30 @@ function UserListScreen() {
             </thead>
 
             <tbody>
-                {users?.map(user=> {
-                    return (
-                        <tr key={user._id}>
-                            <td>{user?.name}</td>
-                            <td className='text-center'>{user?.email}</td>
-                            <td className='text-center'>{user?.isadmin ? "Yes" : "No" }</td>
-                            <td className='center'>
+                {loading ? <Loader /> //it is to create the loadin and error view 
+                    : error ? <Message variant='danger'>{error}</Message>
+                    : (!loading && Object.keys(users).length === 0) ? <Message variant='info'>No Users</Message> 
+                    :
+                        (users?.map(user=> {
+                        return (
+                            <tr key={user._id}>
+                                <td>{user?.name}</td>
+                                <td className='text-center'>{user?.email}</td>
+                                <td className='text-center'>{user?.isadmin ? "Yes" : "No" }</td>
+                                <td className='center'>
 
-                            <Button variant='light' className='btn-sm'>
-                                <a href={`./user/${user._id}`}><i className='fas fa-edit'></i></a>
-                            </Button>
+                                <Button variant='light' className='btn-sm'>
+                                    <a href={`./user/${user._id}`}><i className='fas fa-edit'></i></a>
+                                </Button>
 
-                            <Button variant='danger' className='btn-sm'>
-                                <i className='fas fa-trash'></i>
-                            </Button>
+                                <Button variant='danger' className='btn-sm'>
+                                    <i className='fas fa-trash'></i>
+                                </Button>
 
-                            </td>   
-                        </tr>
-                    )
-                })}
+                                </td>   
+                            </tr>
+                        )
+                    }))}
             </tbody>
 
         </table>

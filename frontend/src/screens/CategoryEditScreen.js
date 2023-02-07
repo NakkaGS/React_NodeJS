@@ -47,7 +47,7 @@ function UserEditScreen({ match }) {
             dispatch(getCategoryDetails(id))
             if(successUpdate){
                 dispatch({type: CATEGORY_UPDATE_RESET})
-                history('/admin/categories')
+                history('/admin/category')
 
             } else {
     

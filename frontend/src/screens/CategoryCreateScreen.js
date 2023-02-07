@@ -61,29 +61,36 @@ function CategoryCreateScreen() {
     return (
         <div className="create-category">
             <FormContainer>
+                
                 <h1 className="create-category-title">Create Category</h1>
-        
-                {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
 
-                <Form onSubmit={submitHandler}>
-                    <Form.Group className="mb-2" controlId="name">
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control
-                        required
-                        type="text"
-                        placeholder="Enter Name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    ></Form.Control>
-                    </Form.Group>
+                {loadingCreate ? 
+                    <Loader/> 
+                    : errorCreate 
+                        ? <Message variant='danger'>{errorCreate}</Message>
+                        : (
 
-                    <div className="create-submit-btn">
-                        <Button type="submit" variant="primary">
-                        Create Category
-                        </Button>
-                    </div>
 
-                </Form>
+                        <Form onSubmit={submitHandler}>
+                            <Form.Group className="mb-2" controlId="name">
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control
+                                required
+                                type="text"
+                                placeholder="Enter Name"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            ></Form.Control>
+                            </Form.Group>
+
+                            <div className="create-submit-btn">
+                                <Button type="submit" variant="primary">
+                                Create Category
+                                </Button>
+                            </div>
+
+                        </Form>
+                    )}
         
                 </FormContainer>
   

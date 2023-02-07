@@ -13,6 +13,10 @@ import { listProducts, deleteProduct } from '../actions/productActions'
 //Boostrap Components
 import { Button } from 'react-bootstrap'
 
+//Components
+import Loader from '../components/Loader' //to have the Spinner in the page
+import Message from '../components/Message' //to have the Error in the page
+
 function ProductListScreen() {
 
     const dispatch = useDispatch()
@@ -57,8 +61,6 @@ function ProductListScreen() {
                     <div className="product-add-btn">
                         <Link to="/admin/product/create" className="btn btn-dark m-3">Add Product</Link>
                     </div>
-
-                    
                 </div>
                 
                 <table className='table '>
@@ -75,7 +77,11 @@ function ProductListScreen() {
                     </thead>
 
                     <tbody>
-                        {products?.map(item=> {
+                    {loading ? <Loader /> //it is to create the loadin and error view 
+                        : error ? <Message variant='danger'>{error}</Message>
+                        : (!loading && Object.keys(productList.products).length === 0) ? <Message variant='info'>No Products</Message> 
+                        :
+                        (products?.map(item=> {
                             return (
                                 <tr key={item._id}>
                                     <td>{item.name}</td>
@@ -97,7 +103,7 @@ function ProductListScreen() {
                                     </td>   
                                 </tr>
                             )
-                        })}
+                        }))}
                     </tbody>
 
                 </table>

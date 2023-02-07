@@ -63,7 +63,6 @@ function OrdersListScreen() {
                         </thead>
 
                         <tbody>
-                            {console.log(orders)}
                         {loading ? <Loader /> //it is to create the loadin and error view 
                             : error ? <Message variant='danger'>{error}</Message>
                             : 

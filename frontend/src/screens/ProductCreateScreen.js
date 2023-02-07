@@ -37,7 +37,7 @@ function ProductCreateScreen() {
   const { loading: loadingCreate, error: errorCreate, success: successCreate } = productCreate
 
   const categoryList = useSelector(state => state.categoryList)
-  const {error, loading, categories} = categoryList 
+  const { categories } = categoryList 
 
   const userLogin = useSelector((state)=> state.userLogin)
   const{ userInfo } = userLogin

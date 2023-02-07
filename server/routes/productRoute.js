@@ -157,9 +157,9 @@ router.post("/productsbycategory", (req,res) => {
 //////////////////////////////////////////////////
 //Update Product Data
 router.put('/update', (req,res) => {
-    
+    console.log(req.body)
     Category.find({name : req.body.category}, (err , docs)=>{
-        
+
         if(!err && docs[0]){
             const categoryFound = docs[0]
             Product.findByIdAndUpdate(req.body._id , 

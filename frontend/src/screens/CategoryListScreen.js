@@ -13,6 +13,10 @@ import { Button } from 'react-bootstrap'
 //Actions
 import { listCategories, deleteCategory } from '../actions/categoryActions'
 
+//Components
+import Loader from '../components/Loader' //to have the Spinner in the page
+import Message from '../components/Message' //to have the Error in the page
+
 function CategoryListScreen() {
 
     const dispatch = useDispatch()
@@ -70,7 +74,11 @@ function CategoryListScreen() {
                     </thead>
 
                     <tbody>
-                        {categories?.map(item=> {
+                        {loading ? <Loader /> //it is to create the loadin and error view 
+                        : error ? <Message variant='danger'>{error}</Message>
+                        : (!loading && Object.keys(categories).length === 0) ? <Message variant='info'>No Users</Message> 
+                        :
+                            (categories?.map(item=> {
                             return (
                                 <tr key={item._id}>
                                     <td>{item.name}</td>
@@ -87,7 +95,7 @@ function CategoryListScreen() {
                                     </td>   
                                 </tr>
                             )
-                        })}
+                        }))}
                     </tbody>
 
                 </table>

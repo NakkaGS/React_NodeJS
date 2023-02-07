@@ -71,7 +71,6 @@ function MyOrderDetailScreen({ match }) {
                   </div>
                 </div>
 
-
               </div>
               <div className="detail-shipping">
                 <pre>
