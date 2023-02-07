@@ -175,7 +175,7 @@ router.put('/update', (req,res) => {
             })
 
         } else {
-            return res.status(400).json({ message: 'something went wrong' });
+            return res.status(400).json({ message: 'Something went Wrong' });
         }
 
     })

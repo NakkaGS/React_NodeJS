@@ -42,7 +42,6 @@ function ProductEditScreen({ match }) {
 
     const categoryList = useSelector(state => state.categoryList)
     const {error: errorCategory, loading: loadingCategory, categories} = categoryList 
-    
 
     useEffect(() => {
 
@@ -84,8 +83,6 @@ function ProductEditScreen({ match }) {
             countInStock: countInStock,
             category: category
         };
-
-        console.log(productEdited)
 
         dispatch(updateProduct(productEdited));
     }
