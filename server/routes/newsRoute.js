@@ -8,7 +8,7 @@ router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: true }))
 
 // Define the API endpoint you want to consume
-const apiUrl = 'https://jsonplaceholder.typicode.com/posts/1';
+const apiUrl = `https://newsapi.org/v2/top-headlines?category=technology&country=us&pageSize=10&apiKey=`+ process.env.REACT_APP_NEWS_API_KEY;
 
 // Define a route to fetch and send data from the API to the frontend
 router.get('/getnews', async (req, res) => {
