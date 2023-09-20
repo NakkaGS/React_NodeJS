@@ -14,6 +14,7 @@ var userRoute = require('./routes/userRoute')
 var orderRoute = require('./routes/orderRoute')
 var categoryRoute = require('./routes/categoryRoute')
 var newsRoute = require('./routes/newsRoute')
+var weatherRoute = require('./routes/weatherRoute')
 
 const path = require('path');
 
@@ -26,6 +27,7 @@ app.use('/api/users/', userRoute, cors())
 app.use('/api/orders/', orderRoute, cors())
 app.use('/api/categories/', categoryRoute, cors())
 app.use('/api/news/', newsRoute, cors())
+app.use('/api/weather/', weatherRoute, cors())
 
 //This is for the production part
 if(process.env.NODE_ENV === 'production')
