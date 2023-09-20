@@ -12,7 +12,7 @@ const currentWeatherUrl = `https://api.weatherapi.com/v1/current.json?key=` + pr
 const forecastWeatherUrl = `https://api.weatherapi.com/v1/current.json?key=` + process.env.REACT_APP_WEATHER_API_KEY + '&days=3&aqi=no&alerts=no&q=';
 
 // Define a route to fetch and send data from the API to the frontend
-router.get('/getcurrentweather', async (req, res) => {
+router.post('/getcurrentweather', async (req, res) => {
   try {
     const currentWeatherUrlComplete = currentWeatherUrl + req.body.city;
     const response = await axios.get(currentWeatherUrlComplete);
@@ -29,7 +29,7 @@ router.get('/getcurrentweather', async (req, res) => {
 });
 
 // Define a route to fetch and send data from the API to the frontend
-router.get('/getforecastweather', async (req, res) => {
+router.post('/getforecastweather', async (req, res) => {
   try {
     const forecastWeatherUrlComplete = forecastWeatherUrl + req.body.city;
     const response = await axios.get(forecastWeatherUrlComplete);
