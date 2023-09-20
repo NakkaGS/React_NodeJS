@@ -15,6 +15,7 @@ const forecastWeatherUrl = `https://api.weatherapi.com/v1/current.json?key=` + p
 router.post('/getcurrentweather', async (req, res) => {
   try {
     const currentWeatherUrlComplete = currentWeatherUrl + req.body.city;
+
     const response = await axios.get(currentWeatherUrlComplete);
     const apiData = response.data;
 
