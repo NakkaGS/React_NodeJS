@@ -14,7 +14,7 @@ const forecastWeatherUrl = `https://api.weatherapi.com/v1/current.json?key=` + p
 // Define a route to fetch and send data from the API to the frontend
 router.get('/getcurrentweather', async (req, res) => {
   try {
-    const response = await axios.get(currentWeatherUrl + `&q=` {req.body.city} + `&aqi=no`);
+    const response = await axios.get(currentWeatherUrl + '&q=' {req.body.city} + '&aqi=no');
     const apiData = response.data;
 
     // You can process the data here if needed
@@ -30,7 +30,7 @@ router.get('/getcurrentweather', async (req, res) => {
 // Define a route to fetch and send data from the API to the frontend
 router.get('/getforecastweather', async (req, res) => {
   try {
-    const response = await axios.get(forecastWeatherUrl + `&q=` {req.body.city} + `&days=3&aqi=no&alerts=no`);
+    const response = await axios.get(forecastWeatherUrl + '&q=' {req.body.city} + '&days=3&aqi=no&alerts=no');
     const apiData = response.data;
 
     // You can process the data here if needed
