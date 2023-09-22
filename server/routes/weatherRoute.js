@@ -9,7 +9,7 @@ router.use(bodyParser.urlencoded({ extended: true }))
 
 // Define the API endpoint you want to consume
 const currentWeatherUrl = `https://api.weatherapi.com/v1/current.json?key=` + process.env.REACT_APP_WEATHER_API_KEY + '&aqi=no&q=';
-const forecastWeatherUrl = `https://api.weatherapi.com/v1/current.json?key=` + process.env.REACT_APP_WEATHER_API_KEY + '&days=3&aqi=no&alerts=no&q=';
+const forecastWeatherUrl = `https://api.weatherapi.com/v1/forecast.json?key=` + process.env.REACT_APP_WEATHER_API_KEY + '&days=3&aqi=no&alerts=no&q=';
 
 // Define a route to fetch and send data from the API to the frontend
 router.post('/getcurrentweather', async (req, res) => {
