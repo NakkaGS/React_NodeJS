@@ -51,6 +51,6 @@ const germanVerbSchema = mongoose.Schema({
 
 })
 
-const GermanVerb = mongoose.model('GermanVerb' , germanVerbSchema)
+const GermanVerb = mongoose.model('germanverbs' , germanVerbSchema)
 
 module.exports = GermanVerb
