@@ -56,7 +56,7 @@ app.use('/api/orders/', orderRoute, enableCORS)
 app.use('/api/categories/', categoryRoute, enableCORS)
 app.use('/api/news/', newsRoute, allowOnlyFromAllowedWebsite)
 app.use('/api/weather/', weatherRoute, allowOnlyFromAllowedWebsite)
-app.use('/api/germanverb/', germanVerbRoute, allowOnlyFromAllowedWebsite)
+app.use('/api/germanverb/', germanVerbRoute, enableCORS)
 
 //This is for the production part
 if(process.env.NODE_ENV === 'production')
