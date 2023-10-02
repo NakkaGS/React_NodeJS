@@ -22,14 +22,32 @@ const path = require('path');
 app.use(express.json());
 app.use(cors())
 
+// Define the allowed website
+const allowedWebsite = 'https://nakkags.github.io/MyDashboard/';
+
+// Middleware to check the origin header
+const allowOnlyFromAllowedWebsite = (req, res, next) => {
+  const origin = req.get('Origin');
+  if (origin === allowedWebsite) {
+    // If the request comes from the allowed website, set appropriate headers
+    res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next(); // Continue with the request
+  } else {
+    // If the request is not from the allowed website, return an error
+    res.status(403).json({ error: 'Access denied' });
+  }
+};
+
 //Create Route
 app.use('/api/products/' , productsRoute, cors())
 app.use('/api/users/', userRoute, cors())
 app.use('/api/orders/', orderRoute, cors())
 app.use('/api/categories/', categoryRoute, cors())
-app.use('/api/news/', newsRoute, cors())
-app.use('/api/weather/', weatherRoute, cors())
-app.use('/api/germanverb/', germanVerbRoute, cors())
+app.use('/api/news/', newsRoute, allowOnlyFromAllowedWebsite)
+app.use('/api/weather/', weatherRoute, allowOnlyFromAllowedWebsite)
+app.use('/api/germanverb/', germanVerbRoute, allowOnlyFromAllowedWebsite)
 
 //This is for the production part
 if(process.env.NODE_ENV === 'production')
