@@ -40,11 +40,20 @@ const allowOnlyFromAllowedWebsite = (req, res, next) => {
   }
 };
 
+// Middleware to enable CORS for specific routes
+const enableCORS = (req, res, next) => {
+    // Set CORS headers to allow requests from any origin
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next(); // Continue with the request
+  };
+
 //Create Route
-app.use('/api/products/' , productsRoute, cors())
-app.use('/api/users/', userRoute, cors())
-app.use('/api/orders/', orderRoute, cors())
-app.use('/api/categories/', categoryRoute, cors())
+app.use('/api/products/' , productsRoute, enableCORS)
+app.use('/api/users/', userRoute, enableCORS)
+app.use('/api/orders/', orderRoute, enableCORS)
+app.use('/api/categories/', categoryRoute, enableCORS)
 app.use('/api/news/', newsRoute, allowOnlyFromAllowedWebsite)
 app.use('/api/weather/', weatherRoute, allowOnlyFromAllowedWebsite)
 app.use('/api/germanverb/', germanVerbRoute, allowOnlyFromAllowedWebsite)
