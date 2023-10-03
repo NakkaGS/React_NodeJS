@@ -46,8 +46,6 @@ router.post('/pons-dictionary', async (req, res) => {
 
         const { germanVerb } = req.body; // Get the query and language from the request body
 
-        console.log(germanVerb)
-
         const response = await axios.get("https://api.pons.com/v1/dictionary", {
         params: {
             q: germanVerb,
@@ -58,9 +56,10 @@ router.post('/pons-dictionary', async (req, res) => {
         }
         });
 
-        var translation = response.data[0].hits[0].roms[0].arabs[0].translations[0].target
+        var data = response.data
+        var transition = data[0].hits[0].roms[0].arabs[0].translations[0].target
 
-        res.json({ translation })
+        res.json({ transition })
 
     } catch (error) {
         console.error(error);
