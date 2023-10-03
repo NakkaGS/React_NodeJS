@@ -37,11 +37,11 @@ router.get("/germanverbbyid", (req, res) => {
 router.get('/pons-dictionary', async (req, res) => {
     try {
 
-        const { germanverb } = req.body; // Get the query and language from the request body
+        const { germanVerb } = req.body; // Get the query and language from the request body
 
         const response = await axios.get("https://api.pons.com/v1/dictionary", {
         params: {
-            q: germanverb,
+            q: germanVerb,
             l: "deen"
         },
         headers: {
