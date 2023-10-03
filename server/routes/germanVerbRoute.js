@@ -10,10 +10,8 @@ var bodyParser = require('body-parser')
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: true }))
 
-let db;
-
 //////////////////////////////////////////////////
-//Get Product ID by POST using Body
+//Get a random german verb
 router.get("/germanverbbyid", (req, res) => {
 
     GermanVerb.aggregate([{ $sample: { size: 1 } }], (err, randomItems) => {
@@ -30,7 +28,30 @@ router.get("/germanverbbyid", (req, res) => {
         res.json(randomItem);
         });
 
-      
 });
+
+// Define a route to proxy the PONS API request
+router.post('/pons-dictionary', async (req, res) => {
+    try {
+
+        const { germanverb } = req.body; // Get the query and language from the request body
+
+        const response = await axios.post("https://api.pons.com/v1/dictionary", {
+        params: {
+            germanverb,
+            l: "dees"
+        },
+        headers: {
+            'X-Secret': process.env.PONS_API
+        }
+        });
+
+        res.json(response.data);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to fetch data' });
+    }
+  });
 
 module.exports = router
