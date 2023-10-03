@@ -27,17 +27,26 @@ router.get("/germanverbbyid", (req, res) => {
         if (!randomItem) {
             return res.status(404).json({ message: 'No items found' });
         }
+
+        var Infinitive = randomItem.Infinitive
+        var Prasens_ich = randomItem.Prasens_ich
+        var Prasens_du = randomItem.Prasens_du
+        var Prasens_er_sie_es = randomItem.Prasens_er_sie_es
+        var Partizip_II = randomItem.Partizip_II
+        var Hilfsverb = randomItem.Hilfsverb
     
-        res.json(randomItem);
+        res.json({Infinitive, Prasens_ich, Prasens_du, Prasens_er_sie_es, Partizip_II, Hilfsverb});
         });
 
 });
 
 // Define a route to proxy the PONS API request
-router.get('/pons-dictionary', async (req, res) => {
+router.post('/pons-dictionary', async (req, res) => {
     try {
 
         const { germanVerb } = req.body; // Get the query and language from the request body
+
+        console.log(germanVerb)
 
         const response = await axios.get("https://api.pons.com/v1/dictionary", {
         params: {
@@ -49,7 +58,9 @@ router.get('/pons-dictionary', async (req, res) => {
         }
         });
 
-        res.json(response.data);
+        var translation = response.data[0].hits[0].roms[0].arabs[0].translations[0].target
+
+        res.json({ translation })
 
     } catch (error) {
         console.error(error);

@@ -21,7 +21,15 @@ router.post('/getcurrentweather', async (req, res) => {
 
     // You can process the data here if needed
     // For example, you might filter or transform it
-    res.json(apiData);
+    //res.json(apiData);
+
+    var city = apiData.location.name
+    var country = apiData.location.country
+    var actualTemperature = apiData.current.temp_c
+    var iconWeather = apiData.current.condition.icon
+    var textWeather = apiData.current.condition.text
+
+    res.json({city, country, actualTemperature, iconWeather, textWeather});
 
   } catch (error) {
     console.error('Error:', error);
@@ -38,7 +46,33 @@ router.post('/getforecastweather', async (req, res) => {
 
     // You can process the data here if needed
     // For example, you might filter or transform it
-    res.json(apiData);
+    //res.json(apiData);
+
+    var city = apiData.location.name
+    var country = apiData.location.country
+    var actualTemperature = apiData.current.temp_c
+    var iconWeatherCurrent = apiData.current.condition.icon
+    var textWeatherCurrent = apiData.current.condition.text
+
+    var dateWeather_1 = apiData.forecast.forecastday[0].date
+    var maxTempC_1 = apiData.forecast.forecastday[0].day.maxtemp_c
+    var minTempC_1 = apiData.forecast?.forecastday[0].day.mintemp_c
+    var iconWeather_1 = apiData.forecast.forecastday[0].day.condition.icon
+    var textWeather_1 = apiData.forecast.forecastday[0].day.condition.text
+
+    var dateWeather_2 = apiData.forecast.forecastday[1].date
+    var maxTempC_2 = apiData.forecast.forecastday[1].day.maxtemp_c
+    var minTempC_2 = apiData.forecast?.forecastday[1].day.mintemp_c
+    var iconWeather_2 = apiData.forecast.forecastday[1].day.condition.icon
+    var textWeather_2 = apiData.forecast.forecastday[1].day.condition.text
+
+    var dateWeather_3 = apiData.forecast.forecastday[2].date
+    var maxTempC_3 = apiData.forecast.forecastday[2].day.maxtemp_c
+    var minTempC_3 = apiData.forecast?.forecastday[2].day.mintemp_c
+    var iconWeather_3 = apiData.forecast.forecastday[2].day.condition.icon
+    var textWeather_3 = apiData.forecast.forecastday[2].day.condition.text
+
+    res.json({city, country, actualTemperature, iconWeatherCurrent, textWeatherCurrent, dateWeather_1, maxTempC_1, minTempC_1, iconWeather_1, textWeather_1, dateWeather_2, maxTempC_2, minTempC_2, iconWeather_2, textWeather_2, dateWeather_3, maxTempC_3, minTempC_3, iconWeather_3, textWeather_3});
 
   } catch (error) {
     console.error('Error:', error);
