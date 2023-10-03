@@ -2,6 +2,9 @@
 const express = require("express");
 const router = express.Router();
 
+//axios
+const axios = require('axios');
+
 //Models
 const GermanVerb = require('../models/germanVerbsModel')
 
@@ -31,15 +34,15 @@ router.get("/germanverbbyid", (req, res) => {
 });
 
 // Define a route to proxy the PONS API request
-router.post('/pons-dictionary', async (req, res) => {
+router.get('/pons-dictionary', async (req, res) => {
     try {
 
         const { germanverb } = req.body; // Get the query and language from the request body
 
-        const response = await axios.post("https://api.pons.com/v1/dictionary", {
+        const response = await axios.get("https://api.pons.com/v1/dictionary", {
         params: {
-            germanverb,
-            l: "dees"
+            q: germanverb,
+            l: "deen"
         },
         headers: {
             'X-Secret': process.env.PONS_API
