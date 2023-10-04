@@ -48,11 +48,11 @@ router.get("/germanverbbyid", async (req, res) => {
             }
             });
         
-                var data = response.data
-                
-                var Transition = data[0].hits[0].roms[0].arabs[0].translations[0].target
+            var data = response.data
             
-                res.json({Infinitive, Prasens_ich, Prasens_du, Prasens_er_sie_es, Partizip_II, Hilfsverb, Transition});
+            var Translation = data[0].hits[0].roms[0].arabs[0].translations[0].target
+        
+            res.json({Infinitive, Prasens_ich, Prasens_du, Prasens_er_sie_es, Partizip_II, Hilfsverb, Translation});
         });
     } catch (error) {
         console.error(error);
